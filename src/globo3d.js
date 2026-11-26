@@ -1,17 +1,17 @@
-// Globo: el mundo conectado, en 3D (three.js). Guardado sin usar desde el 25/11/2026: la portada volvió al
-// territorio de hilos (portada3d.js). Para ponerlo otra vez: importar montarGlobo3D, agregar un
-// <canvas class="g-hero-3d"> a la portada y llamar montarGlobo3D($(".g-hero"), $(".g-hero-3d"), { quieto }).
+// Globo: el mundo conectado, en 3D (three.js). Es la portada desde el 26/11/2026, con una composición
+// partida: el texto a la izquierda y el planeta grande ocupando todo el lado derecho, con su parte baja
+// detrás de la fila de los tres ejes de servicio (index.html, home.css). En pantallas verticales el
+// globo va debajo del texto.
 //
 // Qué se ve (sobrio, a propósito)
-//   · Un globo de noche, centrado en América: océano casi negro, continentes en azul acero y costas
-//     finas de luz celeste que se apagan hacia el borde. Las fronteras, apenas. Los contornos son de
-//     Natural Earth (dominio público), simplificados en mundo-datos.js (scripts/build-mundo.mjs).
+//   · Un globo de noche: océano casi negro, continentes en azul acero y costas finas de luz celeste
+//     que se apagan hacia el borde. Las fronteras, apenas. Los contornos son de Natural Earth (dominio
+//     público), simplificados en mundo-datos.js (scripts/build-mundo.mjs).
 //   · Luces de ciudad, cálidas y quietas.
 //   · Arcos de datos entre ciudades: primero desde Lima (el nodo de oro) hacia la región y el mundo;
 //     después, una red que une América con Europa, África y Asia. Cada arco, una vez trazado, lo
 //     recorre cada tanto una corriente lenta: la misma idea que los hilos que llegan al chip (templo3d.js).
-//   · Una atmósfera fina alrededor del globo, más clara del lado de la luz (arriba a la izquierda,
-//     el lado del texto).
+//   · Una atmósfera fina alrededor del globo, más clara del lado de la luz.
 // Se arma y se desarma
 //   · El globo está hecho de teselas. Al cargar llegan una a una, de sur a norte, girando desde
 //     afuera; después se encienden las luces, se trazan los arcos de Lima y luego la red.
@@ -19,7 +19,13 @@
 //     teselas se sueltan (de norte a sur); al volver a subir, el globo se arma de nuevo. Es un solo
 //     reloj de armado (uArmado) que al cargar avanza con el tiempo y el scroll hace retroceder.
 // Cómo se mueve
-//   · No rueda: se mece apenas alrededor de América y se inclina un poco hacia el puntero.
+//   · Sin tocarlo: gira solo, lento, de oeste a este (es el mundo entero, no solo América), flota
+//     unos píxeles arriba y abajo y su eje respira apenas.
+//   · Se arrastra con el mouse o el dedo (en táctiles, solo de lado, para no robarle el scroll a la
+//     página) y al soltarlo sigue con inercia. La inclinación vuelve sola a su sitio.
+//   · Un clic (o un toque) sobre el planeta lanza una onda dorada desde ese punto: enciende costas,
+//     fronteras y luces a su paso; el globo late apenas y gira un poco hacia donde se tocó.
+//   · La cámara se corre apenas hacia el puntero.
 // El lienzo, el resplandor, el fundido de los bordes y el cuidado del equipo (pausa cuando no se
 // ve, resolución según lo que aguante) están en lienzo3d.js, en modo "cubre": el cuerpo del globo
 // tapa las estrellas del fondo. Sin WebGL queda el fondo de la portada.
@@ -43,14 +49,24 @@ const RED_DESDE = 3.4; // la red entre continentes
 const TRAZO = 1.3; // lo que tarda en trazarse cada arco
 const RECORRIDO = 0.62; // parte del alto de la portada que hay que bajar para desarmarlo todo
 const CELDA = 5; // grados por lado de cada tesela
-// El globo no rueda: se mece apenas alrededor de América.
-const VAIVEN = 0.11; // radianes
-const VAIVEN_PERIODO = 46; // segundos
-// Lo que queda de frente. En horizontal, América, con Lima algo abajo del centro. En vertical el
-// globo asoma abajo como un horizonte y se mira más al sur, para que Lima quede en la curva.
-const VISTA = { lat: -4, lon: -72 };
-const VISTA_VERTICAL = { lat: -30, lon: -74 };
-const LUZ = new THREE.Vector3(-0.62, 0.5, 0.6).normalize(); // arriba a la izquierda: el lado del texto
+// Giro e interacción
+const GIRO_AUTO = 0.05; // rad/s: una vuelta cada ~2 min
+// Vida propia, sin tocarlo: flota apenas (sube y baja) y su eje respira un poco.
+const FLOTA = 0.006; // parte del alto de la portada
+const FLOTA_PERIODO = 9; // s
+const RESPIRA = 0.035; // rad de inclinación
+const RESPIRA_PERIODO = 14; // s
+const FRENO = 2.4; // cuánto frena la inercia al soltarlo (1/s)
+const INCLINA_MAX = 0.55; // rad que se puede inclinar arrastrando
+const ONDAS = 3; // ondas a la vez
+const ONDA_VEL = 0.62; // rad/s sobre la superficie
+const ONDA_DURA = 3.2; // s
+const ORO_GLSL = "vec3(1.0, 0.7, 0.28)";
+// Lo que queda de frente al cargar: el globo asoma abajo como un horizonte y se mira hacia el sur,
+// para que América (y Lima, el nodo de oro) quede en la parte que se ve. Después gira.
+const VISTA = { lat: -12, lon: -66 };
+const VISTA_VERTICAL = { lat: -30, lon: -72 };
+const LUZ = new THREE.Vector3(-0.55, 0.5, 0.65).normalize(); // arriba a la izquierda: el lado del texto
 const LUZ_GLSL = `const vec3 LUZ = vec3(${LUZ.toArray().map((n) => n.toFixed(4)).join(", ")});`;
 const f2 = (n) => n.toFixed(2);
 
@@ -492,6 +508,28 @@ const TESELA = /* glsl */ `
   }
 `;
 
+// Ondas: anillos que salen del punto tocado y se abren sobre la esfera (p: dirección local, unitaria).
+// uOndas[i] = (dirección local del punto tocado, segundo en que se tocó).
+const ONDA_GLSL = /* glsl */ `
+  uniform vec4 uOndas[${ONDAS}];
+  uniform float uTime;
+  float onda(vec3 p) {
+    float s = 0.0;
+    for (int i = 0; i < ${ONDAS}; i++) {
+      vec4 o = uOndas[i];
+      float e = uTime - o.w;
+      if (e < 0.0 || e > ${f2(ONDA_DURA)}) continue;
+      float k = e / ${f2(ONDA_DURA)};
+      float ang = acos(clamp(dot(p, o.xyz), -1.0, 1.0));
+      float d = (ang - ${f2(ONDA_VEL)} * e) / (0.028 + 0.07 * k);
+      float anillo = exp(-d * d) * (1.0 - k) * (1.0 - k);
+      float chispa = exp(-ang * ang / 0.0018) * exp(-e * 2.2); // el destello en el punto tocado
+      s += anillo + chispa * 1.6;
+    }
+    return s;
+  }
+`;
+
 // Cuerpo del globo: océano casi negro, tierra en azul acero, luz suave y atmósfera en el borde.
 // Es lo único opaco: tapa el fondo y, con su profundidad, esconde lo que queda detrás del globo.
 const GLOBO_VS = /* glsl */ `
@@ -517,6 +555,7 @@ const GLOBO_VS = /* glsl */ `
 `;
 const GLOBO_FS = /* glsl */ `
   uniform sampler2D uTierra;
+  ${ONDA_GLSL}
   varying vec3 vLocal;
   varying vec3 vMundo;
   varying vec3 vNormal;
@@ -547,6 +586,8 @@ const GLOBO_FS = /* glsl */ `
     vec2 b = smoothstep(vec2(0.0), max(fwidth(vCelda) * 1.3, vec2(1e-4)), g);
     c = mix(c, vec3(0.03, 0.065, 0.14), viaja * 0.75);
     c += vec3(0.2, 0.42, 0.8) * (1.0 - b.x * b.y) * 0.55 * viaja;
+    // La onda: un velo dorado que se abre, más fuerte sobre la tierra.
+    c += ${ORO_GLSL} * onda(p) * (0.2 + 0.28 * tierra) * vK;
     gl_FragColor = vec4(c, 1.0);
   }
 `;
@@ -555,6 +596,8 @@ const GLOBO_FS = /* glsl */ `
 // con su tesela.
 const LINEAS_VS = /* glsl */ `
   ${TESELA}
+  ${ONDA_GLSL}
+  varying float vOnda;
   varying float vCara;
   varying float vLuz;
   varying float vK;
@@ -568,16 +611,20 @@ const LINEAS_VS = /* glsl */ `
     vCara = dot(N, normalize(cameraPosition - w0.xyz));
     vLuz = max(dot(N, LUZ), 0.0);
     vK = k;
+    vOnda = onda(normalize(position));
     gl_Position = projectionMatrix * viewMatrix * (modelMatrix * vec4(p, 1.0));
   }
 `;
 const lineasFS = ([r, g, b], fuerza) => /* glsl */ `
+  varying float vOnda;
   varying float vCara;
   varying float vLuz;
   varying float vK;
   void main() {
     float limbo = smoothstep(0.0, 0.45, vCara);
     vec3 c = vec3(${r.toFixed(3)}, ${g.toFixed(3)}, ${b.toFixed(3)}) * ${fuerza.toFixed(3)};
+    // Al pasar la onda, la línea se vuelve oro.
+    c = mix(c, ${ORO_GLSL} * 1.15, clamp(vOnda, 0.0, 1.0));
     gl_FragColor = vec4(c * (0.25 + 0.75 * limbo) * (0.6 + 0.5 * vLuz) * smoothstep(0.15, 0.8, vK), 1.0);
   }
 `;
@@ -589,13 +636,15 @@ const LUCES_VS = /* glsl */ `
   uniform float uArmado;
   uniform float uDist;
   uniform float uPunto;
+  ${ONDA_GLSL}
   varying float vB;
   void main() {
     vec4 w = modelMatrix * vec4(position, 1.0);
     float cara = dot(normalize(w.xyz), normalize(cameraPosition - w.xyz));
     vec4 mv = viewMatrix * w;
-    vB = aLuz.y * smoothstep(aLuz.z, aLuz.z + 0.6, uArmado) * smoothstep(0.05, 0.35, cara);
-    gl_PointSize = max(aLuz.x * uPx * uPunto * uDist / -mv.z, 1.0);
+    float o = min(onda(normalize(position)), 1.5);
+    vB = aLuz.y * (1.0 + 2.2 * o) * smoothstep(aLuz.z, aLuz.z + 0.6, uArmado) * smoothstep(0.05, 0.35, cara);
+    gl_PointSize = max(aLuz.x * (1.0 + 0.7 * o) * uPx * uPunto * uDist / -mv.z, 1.0);
     gl_Position = projectionMatrix * mv;
   }
 `;
@@ -721,23 +770,25 @@ const HALO_FS = /* glsl */ `
   }
 `;
 
-// Fundido de la portada: se apaga hacia el texto (a la izquierda; en vertical, una franja tenue
-// detrás del texto) y hacia el borde de abajo, donde empieza la sección siguiente.
+// Fundido de la portada: el globo se apaga detrás del texto (una caja de bordes suaves), baja un poco
+// detrás de la fila de los ejes y se funde con el borde de abajo, donde empieza la sección siguiente.
 const FUNDIDO = /* glsl */ `
-  uniform vec3 uTexto;     // borde derecho, borde inferior y borde superior del texto, de 0 a 1
-  uniform float uVertical; // 1 en pantallas verticales
+  uniform vec4 uTexto;  // caja del texto: izquierda, derecha, arriba, abajo (0…1, y desde arriba)
+  uniform float uTira;  // borde de arriba de la fila de ejes (0…1, desde arriba)
   float fundido(vec2 uv) {
     float y = 1.0 - uv.y;
-    float franja = smoothstep(uTexto.z - 0.07, uTexto.z + 0.03, y) * (1.0 - smoothstep(uTexto.y - 0.03, uTexto.y + 0.07, y));
-    float f = uVertical > 0.5 ? mix(1.0, 0.5, franja) : mix(0.22, 1.0, smoothstep(uTexto.x - 0.12, uTexto.x + 0.16, uv.x));
-    return f * smoothstep(0.0, uVertical > 0.5 ? 0.08 : 0.15, uv.y);
+    float enX = smoothstep(uTexto.x - 0.1, uTexto.x + 0.04, uv.x) * (1.0 - smoothstep(uTexto.y - 0.04, uTexto.y + 0.1, uv.x));
+    float enY = smoothstep(uTexto.z - 0.08, uTexto.z + 0.02, y) * (1.0 - smoothstep(uTexto.w - 0.03, uTexto.w + 0.07, y));
+    float f = mix(1.0, 0.38, enX * enY);
+    f *= mix(1.0, 0.6, smoothstep(uTira - 0.01, uTira + 0.1, y));
+    return f * smoothstep(0.0, 0.06, uv.y);
   }
 `;
 
 /* ───────── Montaje ───────── */
 
 export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
-  seccion.classList.add("g-con-globo"); // en vertical el texto sube y deja sitio al globo (home.css)
+  seccion.classList.add("g-con-globo");
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(FOV, 1, 0.5, 10);
   camera.position.set(0, 0, 3.4);
@@ -749,8 +800,9 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
     uDist: { value: 2.4 }, // distancia de la cámara a la cara del globo: a esa distancia los puntos miden lo indicado
     uPunto: { value: 1 }, // escala de los puntos según el tamaño del globo en pantalla
     uTierra: { value: null },
+    uOndas: { value: Array.from({ length: ONDAS }, () => new THREE.Vector4(0, 0, 1, -1e3)) },
   };
-  const uFundido = { uTexto: { value: new THREE.Vector3(0.44, 0.75, 0.25) }, uVertical: { value: 0 } };
+  const uFundido = { uTexto: { value: new THREE.Vector4(0.25, 0.75, 0.15, 0.5) }, uTira: { value: 0.86 } };
 
   /* El mundo */
   const costas = decodificar(COSTAS);
@@ -785,19 +837,21 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
   scene.add(globo, halo);
 
   /* Medidas: sitio que ocupa el texto y, según eso y la forma de la pantalla, la composición. */
-  const comp = { d: 3.4 };
+  const comp = { d: 3.4, radioPx: 400, offset: null };
   let vista = VISTA;
   let medida = null;
   function alMedir(w, h) {
     medida = [w, h];
-    // Qué sitio ocupa el texto (las letras en sí, no sus cajas): de ahí sale el fundido.
+    // Qué sitio ocupa el texto (las letras en sí, no sus cajas): de ahí salen el fundido y el globo.
     const caja = seccion.getBoundingClientRect();
     const rango = document.createRange();
+    let izquierda = w;
     let derecha = 0;
     let abajo = 0;
     let arriba = h;
     const sumar = (r) => {
       if (!r.width) return;
+      izquierda = Math.min(izquierda, r.left - caja.left);
       derecha = Math.max(derecha, r.right - caja.left);
       abajo = Math.max(abajo, r.bottom - caja.top);
       arriba = Math.min(arriba, r.top - caja.top);
@@ -809,23 +863,36 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
       sumar(rango.getBoundingClientRect());
     }
     seccion.querySelectorAll(".g-acciones > *").forEach((el) => sumar(el.getBoundingClientRect()));
-    if (derecha) uFundido.uTexto.value.set(Math.min(derecha / w, 0.6), abajo / h, arriba / h);
+    if (derecha) uFundido.uTexto.value.set(izquierda / w, derecha / w, arriba / h, abajo / h);
+    const tira = seccion.querySelector(".g-hero-ejes");
+    const tiraArriba = tira ? (tira.getBoundingClientRect().top - caja.top) / h : 1;
+    uFundido.uTira.value = tiraArriba;
 
-    // Horizontal: el globo a la derecha, grande, cortado por abajo. Vertical: asoma bajo el texto,
-    // algo más ancho que la pantalla; se ve su mitad de arriba.
+    // Horizontal: el globo ocupa el lado derecho, centrado en el alto libre entre la barra y
+    // la fila de ejes, sin pisar el texto (puede salirse un poco por la derecha). Vertical: va debajo
+    // del texto, entero de lado a lado, con la parte de abajo detrás de la fila de ejes.
+    const textoAbajo = derecha ? abajo / h : 0.5;
     const vertical = w <= 900 || w / h < 0.9;
     let c;
     if (vertical) {
-      const radio = Math.min((0.75 * w) / h, 0.42);
-      c = { cx: 0.5, cy: THREE.MathUtils.clamp(uFundido.uTexto.value.y + 0.05, 0.5, 0.72) + radio, radio };
-    } else c = { cx: 0.755, cy: 0.63, radio: Math.min(0.56, (0.34 * w) / h) };
+      const radio = Math.min((0.336 * w) / h, 0.24);
+      c = { cx: 0.5, cy: textoAbajo + 0.035 + radio, radio };
+    } else {
+      // Entre la barra y la fila de ejes, con aire arriba y abajo.
+      const barra = (document.getElementById("bar")?.offsetHeight ?? 0.08 * h) / h;
+      const radio = Math.min(0.376, (0.216 * w) / h, (tiraArriba - barra) / 2 - 0.03);
+      const textoDerecha = derecha ? derecha / w : 0.45;
+      const cx = THREE.MathUtils.clamp(textoDerecha + (radio * h) / w + 0.02, 0.7, 0.8);
+      c = { cx, cy: (barra + tiraArriba) / 2, radio };
+    }
     vista = vertical ? VISTA_VERTICAL : VISTA;
-    uFundido.uVertical.value = vertical ? 1 : 0;
     comp.d = 1 / (c.radio * 2 * TAN) + 0.2;
+    comp.radioPx = c.radio * h;
     // El globo queda en el eje de la cámara (redondo) y la vista se corre para ponerlo en su sitio.
     camera.near = Math.max(0.1, comp.d * 0.9 - 1.45);
     camera.far = comp.d + 1.45;
-    camera.setViewOffset(w, h, (0.5 - c.cx) * w, (0.5 - c.cy) * h, w, h);
+    comp.offset = [w, h, (0.5 - c.cx) * w, (0.5 - c.cy) * h];
+    camera.setViewOffset(w, h, comp.offset[2], comp.offset[3], w, h);
     u.uDist.value = comp.d - 1;
     u.uPunto.value = THREE.MathUtils.clamp(Math.sqrt((c.radio * h) / 440), 0.8, 1.3);
   }
@@ -841,24 +908,105 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
   document.fonts?.ready.then(remedir);
   setTimeout(remedir, 1600);
 
+  /* Giro: el propio (lento), el del arrastre y la inercia. yaw gira sobre el eje de los polos;
+     pitch inclina hacia adelante o atrás y vuelve solo a cero. */
+  const giro = { yaw: 0, pitch: 0, vy: 0, vp: 0 };
+  // Latido al tocarlo: un resorte sobre la escala.
+  const latido = { s: 0, v: 0 };
+  let ahora = 0; // segundos de escena (los de las ondas)
+  let bajada = 0; // cuánto se bajó (0 arriba … 1 desarmado), suavizado
+
   /* Puntero: la cámara se corre apenas hacia él y el globo parece inclinarse. */
   const puntero = { x: 0, y: 0, dentro: false, sx: 0, sy: 0 };
+  let arrastre = null;
   if (!quieto) {
+    const rayo = new THREE.Raycaster();
+    const esfera = new THREE.Sphere(new THREE.Vector3(), 1);
+    const ndc = new THREE.Vector2();
+    const centro = new THREE.Vector3();
+    // Dónde toca el puntero al globo (en el mundo), o null si cae fuera.
+    const tocar = (e) => {
+      const r = canvas.getBoundingClientRect();
+      if (!r.width) return null;
+      ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, 1 - ((e.clientY - r.top) / r.height) * 2);
+      rayo.setFromCamera(ndc, camera);
+      esfera.radius = globo.scale.x;
+      return rayo.ray.intersectSphere(esfera, new THREE.Vector3());
+    };
+    const sobreControl = (e) => e.target.closest?.("a, button, input, textarea, select, .g-hero-ejes");
+    let siguiente = 0;
+    function lanzarOnda(punto) {
+      // La onda sale de ese punto del globo (en sus coordenadas, para que gire con él).
+      const local = globo.worldToLocal(punto.clone()).normalize();
+      u.uOndas.value[siguiente].set(local.x, local.y, local.z, ahora);
+      siguiente = (siguiente + 1) % ONDAS;
+      // El globo gira un poco hacia donde se tocó y late.
+      centro.set(0, 0, 0).project(camera);
+      const p = punto.clone().project(camera);
+      const r = canvas.getBoundingClientRect();
+      const nx = ((p.x - centro.x) * r.width) / 2 / comp.radioPx;
+      const ny = ((p.y - centro.y) * r.height) / 2 / comp.radioPx;
+      giro.vy -= nx * 0.55;
+      giro.vp += ny * 0.4;
+      latido.v -= 0.32;
+    }
+
+    seccion.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0 || sobreControl(e) || bajada > 0.5) return;
+      const punto = tocar(e);
+      if (!punto) return;
+      if (e.pointerType === "mouse") e.preventDefault(); // sin seleccionar texto al arrastrar
+      arrastre = { id: e.pointerId, x: e.clientX, y: e.clientY, t: performance.now(), movido: 0, punto, tactil: e.pointerType !== "mouse" };
+      giro.vy = 0;
+      giro.vp = 0;
+      seccion.setPointerCapture?.(e.pointerId);
+      seccion.classList.add("g-arrastrando");
+    });
     seccion.addEventListener("pointermove", (e) => {
+      if (arrastre && e.pointerId === arrastre.id) {
+        const dx = e.clientX - arrastre.x;
+        const dy = arrastre.tactil ? 0 : e.clientY - arrastre.y;
+        const t = performance.now();
+        const dt = Math.max((t - arrastre.t) / 1000, 1 / 240);
+        arrastre.movido += Math.abs(dx) + Math.abs(dy);
+        const ay = dx / comp.radioPx;
+        const ap = dy / comp.radioPx;
+        giro.yaw += ay;
+        giro.pitch = THREE.MathUtils.clamp(giro.pitch + ap, -INCLINA_MAX, INCLINA_MAX);
+        // Velocidad para la inercia, suavizada.
+        giro.vy += (THREE.MathUtils.clamp(ay / dt, -4, 4) - giro.vy) * 0.5;
+        giro.vp += (THREE.MathUtils.clamp(ap / dt, -3, 3) - giro.vp) * 0.5;
+        Object.assign(arrastre, { x: e.clientX, y: e.clientY, t });
+        return;
+      }
       if (e.pointerType === "touch") return;
       const r = seccion.getBoundingClientRect();
       puntero.x = ((e.clientX - r.left) / r.width) * 2 - 1;
       puntero.y = 1 - ((e.clientY - r.top) / r.height) * 2;
       puntero.dentro = true;
+      seccion.classList.toggle("g-sobre-globo", !sobreControl(e) && bajada < 0.5 && !!tocar(e));
     });
-    seccion.addEventListener("pointerleave", () => (puntero.dentro = false));
+    const soltar = (e, cancelado) => {
+      if (!arrastre || e.pointerId !== arrastre.id) return;
+      if (!cancelado && arrastre.movido < 6) lanzarOnda(arrastre.punto);
+      // Si se quedó quieto antes de soltar, no hay inercia.
+      else if (performance.now() - arrastre.t > 90) giro.vy = giro.vp = 0;
+      arrastre = null;
+      seccion.classList.remove("g-arrastrando");
+    };
+    seccion.addEventListener("pointerup", (e) => soltar(e, false));
+    seccion.addEventListener("pointercancel", (e) => soltar(e, true));
+    seccion.addEventListener("pointerleave", () => {
+      puntero.dentro = false;
+      seccion.classList.remove("g-sobre-globo");
+    });
   }
 
   /* Animación */
   const suave = (x) => x * x * (3 - 2 * x);
-  let bajada = 0; // cuánto se bajó (0 arriba … 1 desarmado), suavizado
   function alAnimar(t, dt) {
     u.uTime.value = t;
+    ahora = t;
     // El scroll: cuánto se fue la portada hacia arriba. Se suaviza para que la rueda del mouse no
     // lo haga a saltos.
     if (!quieto) {
@@ -873,22 +1021,47 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
     u.uArmado.value = reloj;
     u.uHalo.value = suave(THREE.MathUtils.clamp((reloj - 0.8) / 1.4, 0, 1));
 
-    // No rueda: llega con un giro corto, se mece apenas y, al desarmarse, gira un poco.
+    // Giro: llega con un giro corto, después gira solo, y el arrastre y la inercia se le suman.
     const llega = quieto ? 1 : 1 - Math.pow(1 - Math.min(t / LLEGA, 1), 3);
-    const giro = quieto ? 0 : -(1 - llega) * 0.3 + VAIVEN * Math.sin((t / VAIVEN_PERIODO) * Math.PI * 2) + bajada * 0.2;
-    globo.rotation.set(vista.lat * D2R, -vista.lon * D2R + giro, 0);
+    if (!quieto && !arrastre) {
+      const freno = Math.exp(-dt * FRENO);
+      giro.yaw += (GIRO_AUTO * llega + giro.vy) * dt;
+      giro.pitch = THREE.MathUtils.clamp(giro.pitch + giro.vp * dt, -INCLINA_MAX, INCLINA_MAX);
+      giro.vy *= freno;
+      giro.vp *= freno;
+      giro.pitch *= Math.exp(-dt * 0.9); // la inclinación vuelve sola
+    }
+    const entrada = quieto ? 0 : -(1 - llega) * 0.3 + bajada * 0.2;
+    const respira = quieto ? 0 : RESPIRA * Math.sin((t / RESPIRA_PERIODO) * Math.PI * 2);
+    globo.rotation.set(vista.lat * D2R + giro.pitch + respira, -vista.lon * D2R + entrada + giro.yaw, 0);
+    // Flota: la vista sube y baja unos píxeles.
+    if (!quieto && comp.offset) {
+      const [w, h, ox, oy] = comp.offset;
+      camera.setViewOffset(w, h, ox, oy + Math.sin((t / FLOTA_PERIODO) * Math.PI * 2) * FLOTA * h, w, h);
+    }
+
+    // Latido (resorte amortiguado).
+    if (dt) {
+      latido.v += (-140 * latido.s - 10 * latido.v) * dt;
+      latido.s += latido.v * dt;
+    }
+    const escala = 1 + latido.s;
+    globo.scale.setScalar(escala);
+    halo.scale.setScalar(escala);
 
     const sigue = 1 - Math.exp(-dt * 3);
-    puntero.sx += ((puntero.dentro ? puntero.x : 0) - puntero.sx) * sigue;
-    puntero.sy += ((puntero.dentro ? puntero.y : 0) - puntero.sy) * sigue;
+    const mira = puntero.dentro && !arrastre;
+    puntero.sx += ((mira ? puntero.x : 0) - puntero.sx) * sigue;
+    puntero.sy += ((mira ? puntero.y : 0) - puntero.sy) * sigue;
     const d = comp.d * (0.9 + 0.1 * llega);
-    const ay = puntero.sx * 0.07;
-    const ax = puntero.sy * 0.05;
+    const ay = puntero.sx * 0.05;
+    const ax = puntero.sy * 0.035;
     camera.position.set(Math.sin(ay) * Math.cos(ax) * d, Math.sin(ax) * d, Math.cos(ay) * Math.cos(ax) * d);
     camera.lookAt(0, 0, 0);
     camera.updateMatrixWorld();
   }
 
+  if (import.meta.env?.DEV) window.__globo = { globo, giro, u, comp }; // solo en desarrollo, para pruebas
   const lienzo = crearLienzo3D({
     canvas,
     marco: seccion,

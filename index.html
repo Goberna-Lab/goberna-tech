@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body class="g">
-    <!-- Página según el mockup de Adobe XD (20/11/2026). 3D en la portada, en "Conocimiento que acompaña" (src/templo3d.js)
-         y en el legado (src/legado3d.js), y el territorio de hilos de la portada (src/portada3d.js);
-         el globo (src/globo3d.js) quedó guardado sin usar;
+    <!-- Página según el mockup de Adobe XD (20/11/2026). 3D en la portada (el mundo, src/globo3d.js) y en el legado
+         (src/legado3d.js). Quedaron guardados sin usar el chip que construye el edificio (src/templo3d.js), el
+         territorio de hilos (src/portada3d.js) y el mapa del Perú (src/portada-mapa.js);
          la versión anterior, con la escena 3D y las demostraciones, quedó en index-3d.html. -->
     <a class="skip" href="#nosotros">Saltar al contenido</a>
 
@@ -74,22 +74,14 @@
     </div>
 
     <main id="home">
-      <!-- 1. Portada -->
+      <!-- 1. Portada: composición centrada (referencia: el hero de vercel.com) con el mundo en 3D (src/globo3d.js).
+           El globo se arrastra para girarlo y un clic lanza una onda dorada desde ese punto.
+           Quedó guardado sin usar el mapa de América Latina con foco en el Perú (src/portada-mapa.js). -->
       <section class="g-hero" id="inicio">
-        <!-- La foto de América Latina del hero del Foro de Estado, con foco en el Perú y la red de Lima a las capitales de región (src/portada-mapa.js).
-             Quedaron guardados sin usar, con un <canvas class="g-hero-3d">: el Perú en hilos de luz (src/peru3d.js),
-             el territorio de montañas (src/portada3d.js) y el globo (src/globo3d.js). -->
-        <div class="g-hero-mapa" aria-hidden="true">
-          <div class="g-hero-deriva">
-            <svg class="g-hero-red" viewBox="0 0 1920 949" preserveAspectRatio="xMaxYMid slice">
-              <image href="/img/hero-mapa.webp" x="-111" y="0" width="2142" height="949" preserveAspectRatio="none" />
-              <g class="g-red"></g>
-            </svg>
-          </div>
-        </div>
-        <div class="g-hero-brillo" aria-hidden="true"><img src="/img/hero-brillo.webp" alt="" width="1688" height="1004" /></div>
+        <canvas class="g-hero-3d" aria-hidden="true"></canvas>
+        <div class="g-hero-guias" aria-hidden="true"></div>
         <div class="g-wrap g-hero-in">
-          <p class="g-kicker">Inteligencia estratégica</p>
+          <p class="g-hero-chip"><span aria-hidden="true"></span>Inteligencia estratégica</p>
           <h1><span>Goberna</span> <span>Tech</span></h1>
           <p class="g-hero-p">Estrategia, tecnología y consultoría política.</p>
           <div class="g-acciones">
@@ -97,7 +89,11 @@
             <a class="g-btn g-btn-linea" href="#contacto">Agenda una reunión</a>
           </div>
         </div>
-        <a class="g-desliza" href="#nosotros">Desliza para explorar<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6l7 6 7-6M5 13l7 6 7-6"/></svg></a>
+        <nav class="g-hero-ejes" aria-label="Nuestros servicios">
+          <a href="#eje-gobierno"><strong>Gobierno y gestión</strong><span>Estrategias para una gestión moderna, eficiente y orientada a resultados.</span></a>
+          <a href="#eje-escuela"><strong>Escuela y formación</strong><span>Formamos líderes preparados para los desafíos del gobierno.</span></a>
+          <a href="#eje-electoral"><strong>Estrategia electoral</strong><span>Inteligencia electoral, encuestas y campañas integrales.</span></a>
+        </nav>
       </section>
 
       <!-- 2. Conocimiento que acompaña -->
@@ -114,8 +110,26 @@
               </p>
               <a class="g-btn g-btn-oro" href="#servicios">Quiero saber más</a>
             </div>
-            <!-- Un chip que construye el edificio, en 3D (src/templo3d.js). -->
-            <div class="g-saber-3d" data-parallax="56" aria-hidden="true"><canvas></canvas></div>
+            <!-- Los cuatro niveles de gobierno en una pirámide de placas, unidas por el hilo dorado del acompañamiento
+                 (src/niveles.js). Reemplaza al chip que construye el edificio (src/templo3d.js, guardado sin usar). -->
+            <figure class="g-niveles" aria-labelledby="g-niveles-t">
+              <figcaption class="g-niv-cab" id="g-niveles-t">Acompañamos a todos los niveles de gobierno</figcaption>
+              <div class="g-niv-cuerpo">
+                <div class="g-niv-pila" aria-hidden="true">
+                  <span class="g-niv-hilo"></span>
+                  <span class="g-niv-placa" style="--i: 0; --k: 0.5; --n: 1"></span>
+                  <span class="g-niv-placa" style="--i: 1; --k: 0.67; --n: 4"></span>
+                  <span class="g-niv-placa" style="--i: 2; --k: 0.84; --n: 7"></span>
+                  <span class="g-niv-placa" style="--i: 3; --k: 1; --n: 11"></span>
+                </div>
+                <ol class="g-niv-lista">
+                  <li><b>Nacional</b><span>Congresistas, ministros y candidatos presidenciales</span><small>1 gobierno nacional</small></li>
+                  <li><b>Regional</b><span>Gobernadores, consejeros y candidatos regionales</span><small>25 gobiernos regionales</small></li>
+                  <li><b>Provincial</b><span>Alcaldes, regidores y candidatos provinciales</span><small>196 municipalidades provinciales</small></li>
+                  <li><b>Distrital</b><span>Alcaldes, regidores y candidatos distritales</span><small>+1 800 municipalidades distritales</small></li>
+                </ol>
+              </div>
+            </figure>
           </div>
         </div>
       </section>

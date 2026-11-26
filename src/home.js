@@ -8,13 +8,14 @@ import "@fontsource/catamaran/latin-600.css";
 import "@fontsource/catamaran/latin-700.css";
 import "@fontsource/catamaran/latin-800.css";
 import "@fontsource/space-mono/latin-400.css";
+import "@fontsource/montserrat/latin-700.css"; // título de la portada
 import "./modulos.css";
 import "./home.css";
 import { MODULOS } from "./modulos/index.js";
 import { FAMILIAS, familiaDe } from "./modulos/familias.js";
 import { ponerEsquemas, activarExploradores, sinMovimiento, revelar, beneficios } from "./modulos/comun.js";
-import { montarPortadaMapa } from "./portada-mapa.js";
-import { montarTemplo3D } from "./templo3d.js";
+import { montarGlobo3D } from "./globo3d.js";
+import { montarNiveles } from "./niveles.js";
 import { montarLegado3D } from "./legado3d.js";
 import { montarCursor } from "./cursor.js";
 import { montarCredo } from "./credo.js";
@@ -97,19 +98,13 @@ function abrirServicio(hash) {
 /* ---------- Escenas 3D (con "reducir movimiento" quedan quietas) ---------- */
 // Se montan cuando el navegador queda libre: primero se pinta el texto.
 const cuandoLibre = (f) => (window.requestIdleCallback ? requestIdleCallback(f, { timeout: 700 }) : setTimeout(f, 80));
-// La portada lleva el mapa de América Latina del Foro de Estado (portada-mapa.js). Quedaron guardados, sin usar y
-// con un lienzo .g-hero-3d: el Perú en hilos de luz (peru3d.js, montarPeru3D), el territorio de montañas genéricas
-// (portada3d.js, montarPortada3D) y el globo (globo3d.js, montarGlobo3D).
-montarPortadaMapa($(".g-hero"), { quieto: sinMovimiento });
-// El chip que construye el edificio se monta recién cuando su sección se acerca a la pantalla.
-new IntersectionObserver(
-  ([en], obs) => {
-    if (!en.isIntersecting) return;
-    obs.disconnect();
-    cuandoLibre(() => montarTemplo3D($(".g-saber"), $(".g-saber-3d"), $(".g-saber-3d canvas"), { quieto: sinMovimiento }));
-  },
-  { rootMargin: "700px 0px" },
-).observe($(".g-saber-3d"));
+// La portada lleva el mundo en 3D (globo3d.js): se arrastra para girarlo y un clic lanza una onda dorada.
+// Quedaron guardados sin usar: el mapa de América Latina con foco en el Perú (portada-mapa.js, montarPortadaMapa),
+// el Perú en hilos de luz (peru3d.js) y el territorio de montañas (portada3d.js).
+montarGlobo3D($(".g-hero"), $(".g-hero-3d"), { quieto: sinMovimiento });
+// "Conocimiento que acompaña": los niveles de gobierno (niveles.js). El chip que construye el edificio
+// (templo3d.js, montarTemplo3D) quedó guardado sin usar.
+montarNiveles($(".g-niveles"), { quieto: sinMovimiento });
 // Las tres etapas de "Tu legado permanece", igual: se montan al acercarse.
 new IntersectionObserver(
   ([en], obs) => {
@@ -135,7 +130,7 @@ if (!sinMovimiento) {
     },
     { rootMargin: "0px 0px -12% 0px" },
   );
-  const grupos = [".g-hero-in > *", ".g-saber .g-kicker", ".g-titulo", ".g-credo-t", ".g-saber-txt > *", ".g-prem h3", ".g-prem p", ".g-pasos", ".g-prem .g-btn", ".g-blog-cab", ".g-post"];
+  const grupos = [".g-hero-in > *", ".g-saber .g-kicker", ".g-titulo", ".g-credo-t", ".g-saber-txt > *", ".g-niveles", ".g-prem h3", ".g-prem p", ".g-pasos", ".g-prem .g-btn", ".g-blog-cab", ".g-post"];
   for (const sel of grupos) {
     paginas.home.querySelectorAll(sel).forEach((el, i) => {
       el.classList.add("g-rev");

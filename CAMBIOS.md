@@ -1,5 +1,55 @@
 # Cambios
 
+## "Conocimiento que acompaña": los niveles de gobierno reemplazan al chip del capitolio (26/11/2026)
+
+Pedido: quitar el capitolio sobre el chip (3D) y poner algo relevante en su lugar.
+
+- **Por qué no otra pieza 3D**: era la cuarta escena WebGL de la página (globo, capitolio, legado); competía con el
+  globo de la portada, pesaba y no decía nada concreto. El texto de la sección promete asesoría "a políticos y
+  autoridades de **todos los niveles de gobierno**": eso es lo que se muestra.
+- **Qué se ve** (`index.html`, `src/niveles.js`, `src/home.css`): una pirámide de cuatro placas isométricas de
+  vidrio (Nacional, Regional, Provincial y Distrital), de la más chica arriba a la más grande abajo, con la grilla
+  cada vez más fina (el territorio que se fragmenta). Las atraviesa un hilo dorado (el acompañamiento) con un pulso
+  que baja. Al lado de cada placa, su etiqueta: a quién se acompaña en ese nivel y cuántos gobiernos hay.
+- **Movimiento**: los niveles se encienden solos, uno cada 3,2 s, mientras la figura está en pantalla; el nivel
+  encendido sube un poco y se vuelve dorado. Al pasar el mouse por una etiqueta o una placa se enciende esa.
+  Con "reducir movimiento" no hay recorrido ni pulso.
+- Es HTML y CSS (se lee, se indexa y no carga three.js para esta sección).
+- **Cifras a confirmar con Goberna**: 1 gobierno nacional, 25 gobiernos regionales, 196 municipalidades provinciales
+  y "+1 800" municipalidades distritales.
+- **Guardado sin usar**: el chip que construye el edificio (`src/templo3d.js`).
+- `goberna-tech.html` regenerado.
+
+## La portada pasa a un hero centrado con el mundo en 3D interactivo (26/11/2026)
+
+Pedido: rediseñar el hero tomando como referencia el de vercel.com, sin perder la paleta de Goberna, y que el mapa
+no sea solo el Perú sino el mundo: un globo al que se le pueda hacer clic y se mueva sutilmente con un efecto.
+
+- **Composición** (`index.html`, `src/home.css`, "1. Portada"): rótulo en píldora dorada con un punto que late,
+  el nombre, la frase y los dos botones. Unas guías verticales finas enmarcan la columna y
+  abajo va la fila de los tres ejes (Gobierno y gestión, Escuela y formación, Estrategia electoral) en vidrio oscuro,
+  con cruces doradas en las esquinas; cada eje lleva a su pestaña de Servicios. Se fue "Desliza para explorar".
+- **Portada partida**: el texto a la izquierda y el mundo a la derecha. El nombre va en **Montserrat Bold**
+  (`@fontsource/montserrat`, local), en dos renglones: "Goberna" blanco y "Tech" dorado. En pantallas verticales
+  el texto va arriba y el globo debajo.
+- **El mundo** (`src/globo3d.js`, que estaba guardado sin usar): entero, en el lado derecho, centrado en el alto
+  libre entre la barra y la fila de ejes, con aire arriba y abajo, sin pisar el texto. Se arma por teselas al cargar y se desarma con el scroll, como antes.
+  Arranca mirando a América con Lima, el nodo de oro, a la vista.
+- **Se mueve solo, sutil**: gira de oeste a este (una vuelta cada ~2 min), flota unos píxeles arriba y abajo
+  (ciclo de 9 s) y su eje respira apenas (14 s). La cámara se corre un poco hacia el puntero.
+- **Interacción**:
+  - **Arrastrar** gira el globo (con el mouse, en cualquier dirección; en táctiles, solo de lado para no robarle el
+    scroll a la página) y al soltarlo sigue con inercia. La inclinación vuelve sola.
+  - **Clic o toque** sobre el planeta: sale una onda dorada desde ese punto que tiñe de oro costas, fronteras y luces
+    a su paso; el globo late apenas y gira un poco hacia donde se tocó. Hasta tres ondas a la vez.
+  - Sobre el globo, el aro del puntero propio se vuelve punteado (sin puntero propio, la mano de arrastrar).
+- **Fundido**: el globo se apaga detrás del texto (caja medida sobre las letras y los botones) y detrás de la fila de
+  ejes, y se funde abajo con la sección siguiente.
+- Con "reducir movimiento" el globo queda quieto y armado, sin interacción ni pista.
+- **Guardado sin usar**: la foto de América Latina con foco en el Perú (`src/portada-mapa.js`; su CSS sigue en
+  `home.css`).
+- `goberna-tech.html` regenerado.
+
 ## La portada pasa a la foto de América Latina del Foro de Estado, con foco en el Perú (25/11/2026)
 
 Pedido: usar en el hero de Goberna Tech el mismo mapa de la landing del Foro de Estado (`Foro-estado2`), pero
