@@ -27,7 +27,7 @@ document.documentElement.classList.add("js");
 $("#year").textContent = new Date().getFullYear();
 
 const bar = $("#bar");
-const paginas = { home: $("#home"), servicios: $("#nuestros-servicios"), nosotros: $("#quienes-somos"), munitech: $("#munitech"), plataformas: $("#plataformas"), contacto: $("#contacto"), modulo: $("#modulo") };
+const paginas = { home: $("#home"), servicios: $("#nuestros-servicios"), nosotros: $("#quienes-somos"), munitech: $("#munitech"), plataformas: $("#plataformas"), contacto: $("#contacto"), articulo: $("#ganaste-ahora-que"), modulo: $("#modulo") };
 const modulo = paginas.modulo;
 const TITULO = document.title;
 let soltar = null; // limpieza del módulo abierto (relojes, observadores)
@@ -189,6 +189,13 @@ function ruta() {
   }
   if (hash === "#munitech" || hash === "#plataformas" || hash === "#contacto") {
     mostrar(hash.slice(1));
+    scrollTo({ top: 0, behavior: "instant" });
+    return;
+  }
+  // Artículo del blog: su propia página.
+  if (hash === "#ganaste-ahora-que") {
+    mostrar("articulo");
+    document.title = `${paginas.articulo.querySelector("h1").textContent} | Goberna Tech`;
     scrollTo({ top: 0, behavior: "instant" });
     return;
   }

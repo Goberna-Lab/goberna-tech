@@ -735,95 +735,6 @@ body.g {
   mask-image: linear-gradient(to bottom, transparent, #000 35%);
 }
 
-/* Fila de los tres ejes: vidrio oscuro por delante del globo, con cruces doradas en las esquinas. */
-.g-hero-ejes {
-  position: relative;
-  width: calc(min(100%, 1920px) - 2 * var(--g-lado));
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(to bottom, rgba(3, 7, 22, 0.35), rgba(3, 7, 22, 0.8));
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  animation: g-ejes-entran 0.9s 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-
-@keyframes g-ejes-entran {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-}
-
-.g-hero-ejes::before,
-.g-hero-ejes::after {
-  content: "";
-  position: absolute;
-  top: -6px;
-  width: 11px;
-  height: 11px;
-  background:
-    linear-gradient(var(--g-oro), var(--g-oro)) center / 100% 1px no-repeat,
-    linear-gradient(var(--g-oro), var(--g-oro)) center / 1px 100% no-repeat;
-}
-
-.g-hero-ejes::before {
-  left: -6px;
-}
-
-.g-hero-ejes::after {
-  right: -6px;
-}
-
-.g-hero-ejes a {
-  display: grid;
-  align-content: start;
-  gap: 8px;
-  padding: clamp(18px, 1.8vw, 32px) clamp(18px, 2vw, 36px) clamp(22px, 3.4vh, 42px);
-  color: #fff;
-  text-decoration: none;
-  transition: background 0.3s ease;
-}
-
-.g-hero-ejes a + a {
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.g-hero-ejes strong {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font: 700 clamp(0.95rem, 1.05vw, 1.25rem) / 1.2 var(--sans);
-}
-
-.g-hero-ejes strong::after {
-  content: "→";
-  color: rgba(223, 165, 46, 0.7);
-  font-weight: 400;
-  transition: translate 0.3s ease, color 0.3s ease;
-}
-
-.g-hero-ejes span {
-  color: rgba(214, 222, 236, 0.62);
-  font-size: clamp(0.86rem, 0.9vw, 1.04rem);
-  line-height: 1.45;
-}
-
-.g-hero-ejes a:hover {
-  background: rgba(223, 165, 46, 0.05);
-}
-
-.g-hero-ejes a:hover strong::after {
-  translate: 5px 0;
-  color: var(--g-oro);
-}
-
-.g-hero-ejes a:focus-visible {
-  outline: 2px solid var(--g-oro);
-  outline-offset: -2px;
-}
-
 /* El globo se arrastra: mano con el cursor del sistema; con el puntero propio, el aro se vuelve punteado. */
 .g-hero.g-sobre-globo {
   cursor: grab;
@@ -839,31 +750,6 @@ body:has(.g-hero.g-sobre-globo) .g-cursor:not(.encima) .g-cursor-aro,
 body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   stroke: var(--g-oro);
   stroke-dasharray: 4 5;
-}
-
-@media (max-width: 900px) {
-  .g-hero-ejes {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .g-hero-ejes a {
-    padding: 13px 18px;
-  }
-
-  .g-hero-ejes a + a {
-    border-left: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .g-hero-ejes span {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .g-hero-ejes {
-    animation: none;
-  }
 }
 
 /* ───────── 2. Conocimiento que acompaña ───────── */
@@ -2037,6 +1923,251 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   display: block;
   font-weight: 600;
   color: #2a3247;
+}
+
+/* Tarjeta de un artículo publicado: toda la tarjeta es el enlace (el del título se estira). */
+.g-post:has(h3 a) {
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.g-post h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.g-post h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.g-post:has(h3 a):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(12, 20, 38, 0.2);
+}
+
+.g-post:has(h3 a:focus-visible) {
+  outline: 2px solid var(--g-oro);
+  outline-offset: 3px;
+}
+
+.g-post h3 a:focus-visible {
+  outline: none;
+}
+
+/* Portada sin foto: el dato del artículo sobre la noche de la marca. */
+.g-post-portada {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  aspect-ratio: 341 / 184;
+  padding: 0 clamp(16px, 1.8vw, 34px);
+  overflow: hidden;
+  background:
+    radial-gradient(70% 90% at 92% 10%, rgba(223, 165, 46, 0.2), transparent 70%),
+    radial-gradient(60% 80% at 10% 100%, rgba(var(--g-azul-b), 0.45), transparent 70%),
+    var(--g-noche);
+  color: #fff;
+}
+
+.g-pp-k {
+  font: 400 clamp(0.6rem, 0.62vw, 0.76rem) / 1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--g-oro);
+}
+
+.g-post-portada strong {
+  margin-top: clamp(4px, 0.5vw, 10px);
+  font: 700 clamp(2.4rem, 3.6vw, 4.4rem) / 1 var(--sans);
+  letter-spacing: -0.02em;
+}
+
+.g-pp-t {
+  max-width: 18em;
+  margin-top: 4px;
+  font-size: clamp(0.72rem, 0.78vw, 0.95rem);
+  line-height: 1.3;
+  color: rgba(228, 233, 242, 0.75);
+}
+
+.g-pp-barra {
+  display: flex;
+  gap: 3px;
+  height: 6px;
+  margin-top: clamp(10px, 1.1vw, 20px);
+}
+
+.g-pp-barra i {
+  flex: var(--v) 1 0;
+  border-radius: 3px;
+  background: rgba(228, 233, 242, 0.3);
+}
+
+.g-pp-barra i:first-child {
+  background: var(--g-oro);
+}
+
+/* ───────── Artículo del blog (página aparte) ───────── */
+
+.g-art-in {
+  max-width: calc(46rem + 2 * var(--g-lado));
+}
+
+.g-art-ruta {
+  display: flex;
+  gap: 10px;
+  font: 400 0.78rem / 1 var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(228, 233, 242, 0.55);
+}
+
+.g-art-ruta a {
+  color: var(--g-oro);
+  text-decoration: none;
+}
+
+.g-art-ruta a:hover {
+  text-decoration: underline;
+}
+
+.g-art h1 {
+  margin-top: clamp(18px, 1.8vw, 30px);
+  font-size: clamp(2rem, 3.6vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.g-art-bajada {
+  margin-top: clamp(14px, 1.4vw, 22px);
+  font-size: clamp(1.15rem, 1.45vw, 1.5rem);
+  line-height: 1.35;
+  color: var(--g-oro);
+}
+
+.g-art .g-post-meta {
+  margin-top: clamp(18px, 1.8vw, 28px);
+  padding-bottom: clamp(22px, 2.2vw, 36px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.82rem;
+  color: rgba(228, 233, 242, 0.6);
+}
+
+.g-art .g-post-meta b {
+  color: #fff;
+}
+
+.g-art-cuerpo {
+  margin-top: clamp(26px, 2.6vw, 44px);
+  color: #dfe4ee;
+  font-size: clamp(1.05rem, 1.1vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.g-art-cuerpo p + p {
+  margin-top: 1.1em;
+}
+
+.g-art-cuerpo h2 {
+  margin: 1.9em 0 0.7em;
+  color: #fff;
+  font-size: clamp(1.3rem, 1.7vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+/* El dato de la encuesta, como gráfico. */
+.g-art-dato {
+  margin: 1.8em 0;
+  padding: clamp(18px, 1.8vw, 28px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.g-art-dato figcaption {
+  color: #fff;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.g-art-barra {
+  display: flex;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.g-art-barra span {
+  flex: var(--v) 1 0;
+  min-width: 0;
+  padding: 10px 12px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: rgba(228, 233, 242, 0.14);
+  font-size: 0.9rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.g-art-barra span:first-child {
+  background: var(--g-oro);
+  color: var(--g-tinta);
+}
+
+.g-art-barra span:last-child {
+  padding-inline: 0;
+  text-indent: -999px;
+}
+
+.g-art-barra b {
+  font-size: 1.1rem;
+}
+
+.g-art-dato p {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(228, 233, 242, 0.55);
+}
+
+.g-art-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 28px;
+  margin-top: clamp(40px, 4vw, 64px);
+  padding: clamp(22px, 2.2vw, 36px);
+  border-left: 3px solid var(--g-oro);
+  background: rgba(223, 165, 46, 0.06);
+}
+
+.g-art-cta p {
+  max-width: 24em;
+  font-size: clamp(1.05rem, 1.25vw, 1.3rem);
+  line-height: 1.4;
+  color: #dfe4ee;
+}
+
+.g-art-cta strong {
+  color: #fff;
+}
+
+.g-art-volver {
+  display: inline-block;
+  margin-top: clamp(28px, 2.8vw, 44px);
+  color: var(--g-oro);
+  text-decoration: none;
+}
+
+.g-art-volver:hover {
+  text-decoration: underline;
 }
 
 /* ───────── Pie ───────── */

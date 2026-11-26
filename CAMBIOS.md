@@ -1,5 +1,26 @@
 # Cambios
 
+## Primer artículo del blog: "Ganaste, ¿ahora qué?" (26/11/2026)
+
+Pedido: publicar el primer artículo con el texto del documento de Google Docs "Ganaste, ¿ahora qué?".
+
+- **Texto**: la versión redactada del final del documento (título, bajada y cuatro secciones). El resto del documento
+  (copys para anuncios, carrusel y un CV) no es parte del artículo y no se usó. Único cambio al texto: "la
+  presidente" → "la presidenta", como dice el mismo artículo más abajo.
+- **Página** (`index.html`, `#ganaste-ahora-que`; ruta en `src/home.js`): ruta Blog / Comunicación política, título,
+  bajada, cuerpo de lectura, el dato de la encuesta como gráfico (51% No · 44% Sí · 5% No sabe, con la fuente) y un
+  cierre "Cotiza tu estrategia digital" que lleva a contacto. "Volver al blog" regresa a la sección.
+- **Tarjeta** (primera del blog): toda la tarjeta abre el artículo. La portada es el dato del artículo (51%) sobre el
+  fondo de la marca, sin foto: las imágenes del proyecto no iban con el tema (la anterior era de inteligencia
+  artificial) y una foto de la presidenta o de medios necesitaría derechos.
+- Las otras dos tarjetas siguen siendo de muestra.
+
+## La portada pierde la fila de los tres ejes (26/11/2026)
+
+- Se quitó del hero la fila "Gobierno y gestión / Escuela y formación / Estrategia electoral" (`index.html`,
+  `src/home.css`). Los ejes siguen en el menú y en su sección. El globo (`src/globo3d.js`) ya contemplaba que la fila
+  no estuviera y ahora usa todo el alto.
+
 ## La página de servicios, según el diseño de la interna en Adobe XD (26/11/2026)
 
 Pedido: trabajar las internas con el contenido del prototipo de Adobe XD ("GOBERNA-TECH-1920X1080", pantalla 2 de 2).
