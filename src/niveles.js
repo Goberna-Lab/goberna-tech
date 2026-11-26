@@ -1,7 +1,7 @@
-// "Conocimiento que acompaña": los cuatro niveles de gobierno (nacional, regional, provincial y distrital) en una
+// "Conocimiento que acompaña": los cuatro niveles de gobierno (internacional, nacional, regional y local) en una
 // pirámide de placas isométricas, una por nivel, con la grilla cada vez más fina hacia abajo (el territorio que se
 // fragmenta). Un hilo dorado las atraviesa: el acompañamiento. Cada placa tiene al lado su etiqueta: quién es
-// atendido en ese nivel y cuántos gobiernos hay. El dibujo y el movimiento son CSS (home.css, "2. Conocimiento").
+// atendido en ese nivel y su escala. El dibujo y el movimiento son CSS (home.css, "2. Conocimiento").
 //
 // Aquí solo se elige qué nivel está encendido: se recorren solos, uno cada RITMO ms, mientras la figura está en
 // pantalla; al pasar el mouse (o el dedo) por una etiqueta o una placa se enciende esa y el recorrido se detiene

@@ -3,21 +3,25 @@
 // detrás de la fila de los tres ejes de servicio (index.html, home.css). En pantallas verticales el
 // globo va debajo del texto.
 //
-// Qué se ve (sobrio, a propósito)
-//   · Un globo de noche: océano casi negro, continentes en azul acero y costas finas de luz celeste
-//     que se apagan hacia el borde. Las fronteras, apenas. Los contornos son de Natural Earth (dominio
-//     público), simplificados en mundo-datos.js (scripts/build-mundo.mjs).
-//   · Luces de ciudad, cálidas y quietas.
-//   · Arcos de datos entre ciudades: primero desde Lima (el nodo de oro) hacia la región y el mundo;
-//     después, una red que une América con Europa, África y Asia. Cada arco, una vez trazado, lo
-//     recorre cada tanto una corriente lenta: la misma idea que los hilos que llegan al chip (templo3d.js).
-//   · Una atmósfera fina alrededor del globo, más clara del lado de la luz.
-// Se arma y se desarma
-//   · El globo está hecho de teselas. Al cargar llegan una a una, de sur a norte, girando desde
-//     afuera; después se encienden las luces, se trazan los arcos de Lima y luego la red.
-//   · Con el scroll todo eso va hacia atrás: al bajar se apagan los arcos y las luces y las
-//     teselas se sueltan (de norte a sur); al volver a subir, el globo se arma de nuevo. Es un solo
-//     reloj de armado (uArmado) que al cargar avanza con el tiempo y el scroll hace retroceder.
+// Qué se ve: un globo de puntos con una red mundial viva
+//   · Una esfera azul noche con luz: más clara arriba a la izquierda (el lado del texto), en sombra
+//     suave abajo a la derecha, con un brillo leve sobre el agua y una atmósfera fina en el borde. Es
+//     más clara que el fondo de la página: se lee como un volumen, no como un hueco.
+//   · Los continentes, en puntos (semitono) blanco azulados, más brillantes del lado de la luz. Cada
+//     tanto un barrido de luz los recorre y enciende los puntos a su paso. Las costas, apenas
+//     insinuadas; sin fronteras. Natural Earth (dominio público), en mundo-datos.js.
+//   · La red mundial: arcos dorados entre capitales de todos los continentes. Cada uno aparece (se
+//     traza), lo recorre un cometa de luz y se borra, desfasado de los demás: siempre hay actividad.
+//     Los arcos se apagan al llegar al borde del globo (no asoman por la silueta).
+//   · Los nodos de la red (las ciudades) laten: un anillo dorado que se abre.
+//   · Dos órbitas finas alrededor del globo, cada una con un satélite de luz que deja estela.
+//   · Luces de ciudad, cálidas y tenues.
+// Aparece y se va
+//   · Al cargar se enciende y crece apenas; después se encienden las luces, los nodos y la red.
+//   · Con el scroll va hacia atrás: al bajar se apagan los arcos y las luces y el globo se desvanece;
+//     al volver a subir, vuelve. Es un solo reloj de armado (uArmado) que al cargar avanza con el
+//     tiempo y el scroll hace retroceder. (Hasta el 26/11/2026 se armaba por teselas que volaban: se
+//     veía como una falla; la geometría en teselas sigue, quieta.)
 // Cómo se mueve
 //   · Sin tocarlo: gira solo, lento, de oeste a este (es el mundo entero, no solo América), flota
 //     unos píxeles arriba y abajo y su eje respira apenas.
@@ -32,7 +36,7 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { crearLienzo3D, sumaDeLuz } from "./lienzo3d.js";
-import { Q, COSTAS, FRONTERAS } from "./mundo-datos.js";
+import { Q, COSTAS } from "./mundo-datos.js";
 
 /* ───────── Medidas y tiempos ───────── */
 const FOV = 30;
@@ -41,11 +45,8 @@ const D2R = Math.PI / 180;
 const LLEGA = 3.6; // segundos de la llegada de la cámara
 const VELOCIDAD = 0.34; // de la corriente, en radios del globo por segundo
 // Reloj de armado (en segundos al cargar): cuándo llega cada cosa.
-const TESELAS_LLEGAN = 1.3; // lapso en que van saliendo las teselas
-const VUELO = 0.9; // lo que tarda cada tesela en llegar
 const LUCES_DESDE = 2.25; // las luces, cuando ya están todas las teselas
-const LIMA_DESDE = 2.4; // los arcos de Lima
-const RED_DESDE = 3.4; // la red entre continentes
+const LIMA_DESDE = 2.4; // la red mundial
 const TRAZO = 1.3; // lo que tarda en trazarse cada arco
 const RECORRIDO = 0.62; // parte del alto de la portada que hay que bajar para desarmarlo todo
 const CELDA = 5; // grados por lado de cada tesela
@@ -62,10 +63,16 @@ const ONDAS = 3; // ondas a la vez
 const ONDA_VEL = 0.62; // rad/s sobre la superficie
 const ONDA_DURA = 3.2; // s
 const ORO_GLSL = "vec3(1.0, 0.7, 0.28)";
-// Lo que queda de frente al cargar: el globo asoma abajo como un horizonte y se mira hacia el sur,
-// para que América (y Lima, el nodo de oro) quede en la parte que se ve. Después gira.
-const VISTA = { lat: -12, lon: -66 };
-const VISTA_VERTICAL = { lat: -30, lon: -72 };
+// Lo que queda de frente al cargar: el Atlántico, con América, Europa y África a la vista. Después gira.
+const VISTA = { lat: 12, lon: -38 };
+const VISTA_VERTICAL = { lat: 6, lon: -48 };
+// La red mundial: cada arco aparece, lo recorre un cometa y se borra, en un ciclo de CICLO s (± azar).
+const CICLO = 8.5;
+// Las órbitas: [radio, inclinación en x, inclinación en z (rad), vueltas del satélite por segundo, fase].
+const ORBITAS = [
+  [1.24, 1.15, 0.38, 0.045, 0],
+  [1.36, 1.32, -0.62, -0.03, 0.5],
+];
 const LUZ = new THREE.Vector3(-0.55, 0.5, 0.65).normalize(); // arriba a la izquierda: el lado del texto
 const LUZ_GLSL = `const vec3 LUZ = vec3(${LUZ.toArray().map((n) => n.toFixed(4)).join(", ")});`;
 const f2 = (n) => n.toFixed(2);
@@ -186,23 +193,34 @@ const CIUDADES = [
   ["Perth", -31.95, 115.86, 0.4],
   ["Auckland", -36.85, 174.76, 0.5],
 ];
-// Desde Lima hacia la región y el mundo (en este orden se trazan), y la red: América con Europa,
-// África y Asia, y entre sus grandes ciudades. Todo cae en la cara del globo que se ve.
-const DESDE_LIMA = ["Bogotá", "Ciudad de México", "Miami", "Washington", "Madrid", "Buenos Aires", "São Paulo", "Santiago", "Panamá", "Nueva York"];
+// La red mundial: capitales de todos los continentes, unidas de a pares (en este orden aparecen al cargar).
 const RED = [
+  ["Lima", "Bogotá"],
   ["Nueva York", "Londres"],
-  ["Miami", "Madrid"],
-  ["São Paulo", "Lisboa"],
-  ["Ciudad de México", "Los Ángeles"],
-  ["Lagos", "São Paulo"],
-  ["Los Ángeles", "Tokio"],
+  ["Lima", "São Paulo"],
+  ["Madrid", "París"],
+  ["Dubái", "Bombay"],
+  ["Lima", "Ciudad de México"],
+  ["Lagos", "Londres"],
+  ["Singapur", "Tokio"],
   ["Bogotá", "Miami"],
-  ["Buenos Aires", "Madrid"],
-  ["Nueva York", "Ciudad de México"],
-  ["San Francisco", "Shanghái"],
-  ["São Paulo", "Miami"],
-  ["Toronto", "Houston"],
-  ["Buenos Aires", "Santiago"],
+  ["São Paulo", "Madrid"],
+  ["Nairobi", "Dubái"],
+  ["Lima", "Santiago"],
+  ["Miami", "Nueva York"],
+  ["Londres", "Dubái"],
+  ["Bombay", "Singapur"],
+  ["Buenos Aires", "São Paulo"],
+  ["París", "Moscú"],
+  ["Singapur", "Sídney"],
+  ["Ciudad de México", "Los Ángeles"],
+  ["São Paulo", "Johannesburgo"],
+  ["Moscú", "Pekín"],
+  ["Nueva York", "Madrid"],
+  ["Johannesburgo", "Nairobi"],
+  ["Pekín", "Tokio"],
+  ["El Cairo", "Estambul"],
+  ["Tokio", "Los Ángeles"],
 ];
 
 /* ───────── Datos del mundo ───────── */
@@ -332,8 +350,8 @@ function segmentos(lineas, r) {
   return g;
 }
 
-// Mapa de la tierra firme (blanco) en proyección equirectangular: tiñe los continentes del globo
-// y dice dónde puede haber luces.
+// Mapa de la tierra firme (canal rojo) en proyección equirectangular: dice dónde van los puntos de los
+// continentes y dónde puede haber luces.
 function mascaraTierra(costas, w, h) {
   const lienzo = document.createElement("canvas");
   lienzo.width = w;
@@ -341,7 +359,7 @@ function mascaraTierra(costas, w, h) {
   const g = lienzo.getContext("2d");
   g.fillStyle = "#000";
   g.fillRect(0, 0, w, h);
-  g.fillStyle = "#fff";
+  g.fillStyle = "#f00";
   g.beginPath();
   for (const l of costas) {
     for (let k = 0; k < l.length; k += 2) {
@@ -423,25 +441,21 @@ function lucesDeCiudad(esTierra) {
 function redDeDatos() {
   const azar = azarCon(11);
   const ciudad = new Map(CIUDADES.map(([n, la, lo, w]) => [n, { la, lo, w }]));
-  const pares = [...DESDE_LIMA.map((n, i) => ["Lima", n, LIMA_DESDE + i * 0.16, i % 2 ? -1 : 1]), ...RED.map(([a, b], i) => [a, b, RED_DESDE + i * 0.1, 0])];
   const tubos = [];
-  const nodos = new Map(); // nombre → { aparece, tam, oro }
-  const nodo = (n, aparece, tam, oro) => {
-    const antes = nodos.get(n);
-    nodos.set(n, { aparece: Math.min(aparece, antes?.aparece ?? 1e9), tam: Math.max(tam, antes?.tam ?? 0), oro: oro || antes?.oro || 0 });
-  };
+  const nodos = new Map(); // nombre → { aparece, fase }
   let fin = 0;
-  for (const [a, b, inicio, lima] of pares) {
+  RED.forEach(([a, b], i) => {
     const ca = ciudad.get(a);
     const cb = ciudad.get(b);
-    if (!ca || !cb) continue;
+    if (!ca || !cb) return;
+    const inicio = LIMA_DESDE + i * 0.07; // al cargar aparecen de a uno
     const A = enEsfera(ca.la, ca.lo);
     const B = enEsfera(cb.la, cb.lo);
     const ang = A.angleTo(B);
-    const alto = 0.04 + (0.3 * ang) / Math.PI;
+    const alto = 0.03 + (0.2 * ang) / Math.PI;
     const puntos = [];
-    for (let i = 0; i <= 48; i++) {
-      const s = i / 48;
+    for (let k = 0; k <= 64; k++) {
+      const s = k / 64;
       const p = new THREE.Vector3()
         .addScaledVector(A, Math.sin((1 - s) * ang))
         .addScaledVector(B, Math.sin(s * ang))
@@ -450,33 +464,47 @@ function redDeDatos() {
     }
     const curva = new THREE.CatmullRomCurve3(puntos);
     const largo = curva.getLength();
-    const tubo = new THREE.TubeGeometry(curva, 96, lima ? 0.0034 : 0.0024, 6, false);
+    const tubo = new THREE.TubeGeometry(curva, 128, 0.0032, 6, false);
     const n = tubo.attributes.position.count;
-    const arco = [0.6 + azar() * 2.4, 1.8 + azar() * 3.2, inicio, lima]; // retraso de la 1.ª corriente, pausa, inicio, Lima (1 sale, -1 llega, 0 otro)
+    // Fase en el ciclo (s), duración del ciclo (s), cuándo aparece (reloj de armado), sentido (1 o -1).
+    const arco = [azar() * CICLO, CICLO * (0.8 + 0.45 * azar()), inicio, azar() < 0.5 ? 1 : -1];
     const aArco = new Float32Array(n * 4);
-    for (let i = 0; i < n; i++) aArco.set(arco, i * 4);
+    for (let k = 0; k < n; k++) aArco.set(arco, k * 4);
     tubo.setAttribute("aArco", new THREE.BufferAttribute(aArco, 4));
     tubo.setAttribute("aLargo", new THREE.BufferAttribute(new Float32Array(n).fill(largo), 1));
     tubos.push(tubo);
-    nodo(a, inicio, a === "Lima" ? 30 : lima ? 18 : 15, a === "Lima" ? 1 : 0);
-    nodo(b, inicio + TRAZO * 0.85, lima ? 18 : 15, 0);
-    fin = Math.max(fin, inicio + TRAZO);
-  }
+    for (const c of [a, b]) if (!nodos.has(c)) nodos.set(c, { aparece: inicio, fase: azar() });
+    fin = Math.max(fin, inicio + 0.7);
+  });
   const pos = [];
   const datos = [];
   const v = new THREE.Vector3();
-  for (const [n, { aparece, tam, oro }] of nodos) {
+  for (const [n, { aparece, fase }] of nodos) {
     const c = ciudad.get(n);
-    const cuando = n === "Lima" ? LUCES_DESDE : aparece;
     enEsfera(c.la, c.lo, 1.003, v);
     pos.push(v.x, v.y, v.z);
-    datos.push(tam, oro, cuando);
-    fin = Math.max(fin, cuando + 0.7);
+    datos.push(26 + 10 * c.w, fase, aparece);
   }
   const geoNodos = new THREE.BufferGeometry();
   geoNodos.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
   geoNodos.setAttribute("aNodo", new THREE.Float32BufferAttribute(datos, 3));
   return { arcos: mergeGeometries(tubos), nodos: geoNodos, fin: fin + 0.05 };
+}
+
+// Órbitas: un anillo de puntos (para la línea) con su posición 0…1 a lo largo de la vuelta.
+function orbita(radio) {
+  const N = 360;
+  const pos = new Float32Array(N * 3);
+  const s = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    const a = (i / N) * Math.PI * 2;
+    pos.set([Math.cos(a) * radio, 0, Math.sin(a) * radio], i * 3);
+    s[i] = i / N;
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  g.setAttribute("aS", new THREE.BufferAttribute(s, 1));
+  return g;
 }
 
 /* ───────── Shaders ───────── */
@@ -486,9 +514,9 @@ function redDeDatos() {
 const TESELA = /* glsl */ `
   uniform float uArmado;
   attribute vec4 aTesela; // centro de la tesela (sobre la esfera) y su azar
+  // Las teselas ya no viajan: siempre en su sitio (el globo aparece con uVela).
   float enSitio(vec4 t) {
-    float orden = 0.55 * (t.y * 0.5 + 0.5) + 0.45 * t.w;
-    return clamp((uArmado - ${f2(TESELAS_LLEGAN)} * orden) / ${f2(VUELO)}, 0.0, 1.0);
+    return 1.0;
   }
   vec3 girar(vec3 v, vec3 eje, float a) {
     float c = cos(a);
@@ -555,6 +583,7 @@ const GLOBO_VS = /* glsl */ `
 `;
 const GLOBO_FS = /* glsl */ `
   uniform sampler2D uTierra;
+  uniform float uVela;
   ${ONDA_GLSL}
   varying vec3 vLocal;
   varying vec3 vMundo;
@@ -562,33 +591,51 @@ const GLOBO_FS = /* glsl */ `
   varying vec2 vCelda;
   varying float vK;
   ${LUZ_GLSL}
-  const vec3 OCEANO = vec3(0.004, 0.011, 0.028);
-  const vec3 TIERRA = vec3(0.021, 0.055, 0.095);
+  const vec3 MAR_SOMBRA = vec3(0.008, 0.015, 0.036);
+  const vec3 MAR_LUZ = vec3(0.030, 0.052, 0.108);
+  const vec3 PUNTO = vec3(0.62, 0.78, 1.0);
+  const vec3 ORO = ${ORO_GLSL};
+  const float PASO = 1.35; // grados entre puntos
   void main() {
     vec3 p = normalize(vLocal);
     float lon = length(p.xz) > 1e-5 ? atan(p.x, p.z) : 0.0;
     float lat = asin(clamp(p.y, -1.0, 1.0));
-    float tierra = texture2D(uTierra, vec2(lon * 0.1591549 + 0.5, lat * 0.3183099 + 0.5)).r;
     vec3 N = normalize(vNormal);
     vec3 V = normalize(cameraPosition - vMundo);
     float cara = clamp(dot(N, V), 0.0, 1.0);
-    float luz = clamp(dot(N, LUZ), 0.0, 1.0);
-    vec3 c = mix(OCEANO, TIERRA, tierra) * (0.45 + 1.1 * luz);
-    // El agua devuelve apenas la luz.
-    c += vec3(0.02, 0.045, 0.1) * pow(max(dot(N, normalize(LUZ + V)), 0.0), 60.0) * (1.0 - tierra);
+    float l = smoothstep(-0.35, 0.95, dot(N, LUZ)); // luz con un terminador suave
+    vec3 c = mix(MAR_SOMBRA, MAR_LUZ, l);
+    // Un brillo leve sobre el agua.
+    c += vec3(0.04, 0.06, 0.11) * pow(max(dot(N, normalize(LUZ + V)), 0.0), 36.0);
+
+    // Puntos: una grilla en latitud y longitud con el mismo paso sobre la esfera (en cada fila caben
+    // menos hacia los polos). Cada punto mira la máscara en su centro: se enciende entero o no.
+    float latD = degrees(lat);
+    float lonD = degrees(lon);
+    float fila = floor((latD + 90.0) / PASO);
+    float latC = -90.0 + (fila + 0.5) * PASO;
+    float n = max(1.0, floor(360.0 * cos(radians(latC)) / PASO));
+    float col = floor((lonD + 180.0) / 360.0 * n);
+    float lonC = -180.0 + (col + 0.5) * 360.0 / n;
+    vec4 m = texture2D(uTierra, vec2(lonC / 360.0 + 0.5, latC / 180.0 + 0.5));
+    float d = length(vec2(latD - latC, (lonD - lonC) * cos(lat)));
+    float r = PASO * 0.27;
+    float aa = max(fwidth(d), 1e-4);
+    float punto = (1.0 - smoothstep(r - aa, r + aa, d)) * step(0.5, m.r);
+    // Barrido: una franja de luz que recorre los continentes (en longitud) y enciende los puntos.
+    float franja = fract(lon / 6.2831853 + 0.5 - uTime * 0.032) - 0.5;
+    float barrido = exp(-franja * franja * 260.0);
+    vec3 tono = mix(PUNTO, vec3(1.0, 0.86, 0.6), barrido * 0.5) * (0.16 + 0.6 * l) * (1.0 + 1.4 * barrido);
+    // La onda del clic enciende los puntos en oro a su paso y tiñe apenas el agua.
+    float o = clamp(onda(p), 0.0, 1.5);
+    tono = mix(tono, ORO * 1.25, clamp(o, 0.0, 1.0));
+    c += ORO * o * 0.06;
+    c = mix(c, tono, punto * (0.55 + 0.45 * smoothstep(0.0, 0.35, cara)));
+
     // Atmósfera en el borde, más clara del lado de la luz.
     float borde = 1.0 - cara;
-    c += vec3(0.05, 0.11, 0.25) * borde * borde * borde * (0.3 + 0.7 * luz);
-    // Mientras una tesela viaja es un vidrio azul tenue (no un hueco negro) y su contorno se
-    // enciende apenas: se ve que el globo va por piezas.
-    float viaja = 4.0 * vK * (1.0 - vK);
-    vec2 g = min(vCelda, 1.0 - vCelda);
-    vec2 b = smoothstep(vec2(0.0), max(fwidth(vCelda) * 1.3, vec2(1e-4)), g);
-    c = mix(c, vec3(0.03, 0.065, 0.14), viaja * 0.75);
-    c += vec3(0.2, 0.42, 0.8) * (1.0 - b.x * b.y) * 0.55 * viaja;
-    // La onda: un velo dorado que se abre, más fuerte sobre la tierra.
-    c += ${ORO_GLSL} * onda(p) * (0.2 + 0.28 * tierra) * vK;
-    gl_FragColor = vec4(c, 1.0);
+    c += vec3(0.06, 0.12, 0.27) * borde * borde * borde * (0.25 + 0.75 * l);
+    gl_FragColor = vec4(c * uVela, uVela);
   }
 `;
 
@@ -616,6 +663,7 @@ const LINEAS_VS = /* glsl */ `
   }
 `;
 const lineasFS = ([r, g, b], fuerza) => /* glsl */ `
+  uniform float uVela;
   varying float vOnda;
   varying float vCara;
   varying float vLuz;
@@ -625,7 +673,7 @@ const lineasFS = ([r, g, b], fuerza) => /* glsl */ `
     vec3 c = vec3(${r.toFixed(3)}, ${g.toFixed(3)}, ${b.toFixed(3)}) * ${fuerza.toFixed(3)};
     // Al pasar la onda, la línea se vuelve oro.
     c = mix(c, ${ORO_GLSL} * 1.15, clamp(vOnda, 0.0, 1.0));
-    gl_FragColor = vec4(c * (0.25 + 0.75 * limbo) * (0.6 + 0.5 * vLuz) * smoothstep(0.15, 0.8, vK), 1.0);
+    gl_FragColor = vec4(c * (0.25 + 0.75 * limbo) * (0.6 + 0.5 * vLuz) * smoothstep(0.15, 0.8, vK) * uVela, 1.0);
   }
 `;
 
@@ -653,60 +701,65 @@ const LUCES_FS = /* glsl */ `
   void main() {
     float r = length(gl_PointCoord - 0.5) * 2.0;
     float a = 1.0 - smoothstep(0.2, 1.0, r);
-    gl_FragColor = vec4(vec3(1.0, 0.79, 0.5) * vB * a * a, 1.0);
+    gl_FragColor = vec4(vec3(1.0, 0.79, 0.5) * vB * a * a * 0.6, 1.0); // tenues: los puntos ya dibujan la tierra
   }
 `;
 
 // Nodos de la red: un núcleo nítido con un halo suave. Lima, en oro.
 const NODOS_VS = /* glsl */ `
-  attribute vec3 aNodo; // tamaño (px de pantalla), oro (0 o 1), momento en que aparece
+  attribute vec3 aNodo; // tamaño (px de pantalla), fase del latido (0…1), momento en que aparece
   uniform float uPx;
   uniform float uArmado;
   uniform float uDist;
   uniform float uPunto;
   varying float vB;
-  varying float vOro;
+  varying float vFase;
   void main() {
     vec4 w = modelMatrix * vec4(position, 1.0);
     float cara = dot(normalize(w.xyz), normalize(cameraPosition - w.xyz));
     vec4 mv = viewMatrix * w;
     float k = clamp((uArmado - aNodo.z) / 0.7, 0.0, 1.0);
     vB = k * k * (3.0 - 2.0 * k) * smoothstep(0.0, 0.3, cara);
-    vOro = aNodo.y;
+    vFase = aNodo.y;
     gl_PointSize = aNodo.x * uPx * uPunto * uDist / -mv.z;
     gl_Position = projectionMatrix * mv;
   }
 `;
+// Un núcleo dorado con halo y un anillo que se abre y se apaga, una y otra vez.
 const NODOS_FS = /* glsl */ `
+  uniform float uTime;
   varying float vB;
-  varying float vOro;
+  varying float vFase;
   void main() {
     float r = length(gl_PointCoord - 0.5) * 2.0;
-    float nucleo = 1.0 - smoothstep(0.1, 0.19, r);
-    float halo = exp(-r * r * 10.0) * 0.42;
-    vec3 c = mix(vec3(0.62, 0.84, 1.0), vec3(1.0, 0.75, 0.36), vOro);
-    gl_FragColor = vec4(c * (nucleo * 1.15 + halo) * vB, 1.0);
+    float nucleo = 1.0 - smoothstep(0.07, 0.13, r);
+    float halo = exp(-r * r * 22.0) * 0.55;
+    float t = fract(uTime * 0.42 + vFase);
+    float d = (r - (0.12 + 0.8 * t)) / 0.045;
+    float anillo = exp(-d * d) * (1.0 - t) * 0.75;
+    gl_FragColor = vec4(vec3(1.0, 0.76, 0.38) * (nucleo * 1.2 + halo + anillo) * vB, 1.0);
   }
 `;
 
-// Arcos de datos: se trazan (y con el scroll se destrazan) según el reloj de armado, con la punta
-// encendida. Enteros, cada tanto los recorre una corriente (en tiempo real): cabeza clara y cola que
-// se apaga. En los de Lima la corriente va y viene (unos salen, otros llegan: Lima reúne los datos)
-// y llevan un dejo de oro junto a Lima.
+// Arcos de la red mundial. Cada uno, en su ciclo: se traza con la punta encendida (0–28 %), lo recorre
+// un cometa de luz (30–75 %), se borra desde el origen (75–95 %) y queda apagado un momento. El sentido
+// cambia de un arco a otro. Se apagan al llegar al borde del globo (no asoman por la silueta).
 const ARCOS_VS = /* glsl */ `
-  attribute vec4 aArco;   // retraso de la primera corriente (s), pausa entre corrientes (s), inicio, Lima (1: la corriente sale, -1: llega, 0: otro)
+  attribute vec4 aArco;   // fase (s), ciclo (s), cuándo aparece (reloj de armado), sentido (1 o -1)
   attribute float aLargo; // largo del arco
   varying float vS;
   varying vec4 vArco;
   varying float vLargo;
   varying float vCara;
+  varying float vFrente;
   void main() {
-    vS = uv.x;
+    vS = aArco.w > 0.0 ? uv.x : 1.0 - uv.x;
     vArco = aArco;
     vLargo = aLargo;
     vec4 w = modelMatrix * vec4(position, 1.0);
     vec3 N = normalize(mat3(modelMatrix) * normal);
     vCara = abs(dot(N, normalize(cameraPosition - w.xyz)));
+    vFrente = dot(normalize(w.xyz), normalize(cameraPosition));
     gl_Position = projectionMatrix * viewMatrix * w;
   }
 `;
@@ -717,32 +770,50 @@ const ARCOS_FS = /* glsl */ `
   varying vec4 vArco;
   varying float vLargo;
   varying float vCara;
-  const vec3 AZUL = vec3(0.38, 0.6, 0.92);
-  const vec3 CABEZA = vec3(0.78, 0.9, 1.0);
-  const vec3 ORO = vec3(1.0, 0.74, 0.36);
+  varying float vFrente;
+  const vec3 APAGADO = vec3(0.86, 0.6, 0.26);
+  const vec3 CABEZA = vec3(1.0, 0.93, 0.78);
   void main() {
-    float edad = uArmado - vArco.z;
-    if (edad <= 0.0) discard;
-    float lima = abs(vArco.w);
-    float d = vS * vLargo; // distancia desde el origen
-    float dc = vArco.w < 0.0 ? vLargo - d : d; // ídem, en el sentido de la corriente
-    // Trazo
-    float k = clamp(edad / ${f2(TRAZO)}, 0.0, 1.0);
-    float falta = d - (1.0 - (1.0 - k) * (1.0 - k) * (1.0 - k)) * vLargo; // > 0: aún sin trazar
-    if (falta > 0.004) discard;
-    float punta = exp(min(falta, 0.0) / 0.07) * (1.0 - smoothstep(0.75, 1.0, k));
-    // Corriente
-    float desde = uTime - vArco.z - ${f2(TRAZO)} - vArco.x;
-    float ciclo = vLargo / ${VELOCIDAD.toFixed(3)} + vArco.y;
-    float cabeza = mod(max(desde, 0.0), ciclo) * ${VELOCIDAD.toFixed(3)};
-    float tras = cabeza - dc; // > 0: detrás de la cabeza
-    float cola = (tras >= 0.0 ? exp(-tras / 0.15) : exp(tras / 0.008)) * (1.0 - smoothstep(0.3, 0.45, tras));
-    cola *= step(0.0, desde) * smoothstep(0.96, 1.0, k);
+    float vida = smoothstep(vArco.z, vArco.z + 0.8, uArmado);
+    float frente = smoothstep(-0.02, 0.28, vFrente);
+    if (vida <= 0.0 || frente <= 0.0) discard;
+    float k = fract((uTime + vArco.x) / vArco.y);
+    float traza = 1.0 - pow(1.0 - smoothstep(0.0, 0.28, k), 3.0);
+    float borra = smoothstep(0.75, 0.95, k);
+    if (vS > traza + 0.002 || vS < borra) discard;
+    float punta = exp(-(traza - vS) * vLargo / 0.05) * (1.0 - smoothstep(0.24, 0.3, k));
+    float kc = clamp((k - 0.3) / 0.45, 0.0, 1.0);
+    float tras = (kc - vS) * vLargo; // > 0: detrás de la cabeza del cometa
+    float cola = (tras >= 0.0 ? exp(-tras / 0.13) : exp(tras / 0.01)) * step(0.3, k) * (1.0 - step(0.75, k));
     float brillo = clamp(punta + cola, 0.0, 1.0);
-    vec3 col = mix(AZUL, CABEZA, brillo * 0.85);
-    col = mix(col, ORO, lima * exp(-d / 0.12) * 0.7);
-    float I = mix(0.15, 0.27, lima) + 1.2 * punta + 0.9 * cola;
-    gl_FragColor = vec4(col * I * (0.55 + 0.45 * vCara), 1.0);
+    vec3 col = mix(APAGADO, CABEZA, brillo * 0.85);
+    float I = 0.2 + 1.3 * punta + 1.1 * cola;
+    gl_FragColor = vec4(col * I * (0.55 + 0.45 * vCara) * vida * frente, 1.0);
+  }
+`;
+
+// Órbitas: una línea tenue con un satélite de luz que la recorre y deja estela. Detrás del globo, el
+// cuerpo la tapa (prueba de profundidad).
+const ORBITA_VS = /* glsl */ `
+  attribute float aS;
+  varying float vS;
+  void main() {
+    vS = aS;
+    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+  }
+`;
+const ORBITA_FS = /* glsl */ `
+  uniform float uTime;
+  uniform float uVela;
+  uniform float uVel;
+  uniform float uFase;
+  varying float vS;
+  void main() {
+    float cabeza = fract(uTime * uVel + uFase);
+    float tras = fract((uVel >= 0.0 ? cabeza - vS : vS - cabeza)); // 0 en el satélite, crece hacia atrás
+    float estela = exp(-tras * 16.0);
+    vec3 c = mix(vec3(0.34, 0.52, 0.92), vec3(1.0, 0.86, 0.58), estela);
+    gl_FragColor = vec4(c * (0.09 + 1.2 * estela * estela) * uVela, 1.0);
   }
 `;
 
@@ -800,6 +871,7 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
     uDist: { value: 2.4 }, // distancia de la cámara a la cara del globo: a esa distancia los puntos miden lo indicado
     uPunto: { value: 1 }, // escala de los puntos según el tamaño del globo en pantalla
     uTierra: { value: null },
+    uVela: { value: 0 }, // 0 … 1: el globo aparece (al cargar) y se desvanece (al bajar)
     uOndas: { value: Array.from({ length: ONDAS }, () => new THREE.Vector4(0, 0, 1, -1e3)) },
   };
   const uFundido = { uTexto: { value: new THREE.Vector4(0.25, 0.75, 0.15, 0.5) }, uTira: { value: 0.86 } };
@@ -820,8 +892,7 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
   const globo = new THREE.Group();
   const piezas = [
     new THREE.Mesh(cuerpoEnTeselas(), material(GLOBO_VS, GLOBO_FS)),
-    new THREE.LineSegments(segmentos(decodificar(FRONTERAS), 1.0012), material(LINEAS_VS, lineasFS([0.4, 0.6, 0.9], 0.18), luzSumada)),
-    new THREE.LineSegments(segmentos(costas, 1.0016), material(LINEAS_VS, lineasFS([0.46, 0.72, 0.96], 0.58), luzSumada)),
+    new THREE.LineSegments(segmentos(costas, 1.0016), material(LINEAS_VS, lineasFS([0.46, 0.72, 0.96], 0.2), luzSumada)),
     new THREE.Points(lucesDeCiudad(lectorDeTierra(mascara)), material(LUCES_VS, LUCES_FS, luzSumada)),
     new THREE.Mesh(red.arcos, material(ARCOS_VS, ARCOS_FS, luzSumada)),
     new THREE.Points(red.nodos, material(NODOS_VS, NODOS_FS, luzSumada)),
@@ -834,7 +905,19 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
   const halo = new THREE.Mesh(new THREE.SphereGeometry(1.3, 96, 48), material(HALO_VS, HALO_FS, { side: THREE.BackSide, ...luzSumada }));
   halo.frustumCulled = false;
   halo.renderOrder = piezas.length;
-  scene.add(globo, halo);
+  // Órbitas: inclinadas, giran solas (no con el globo).
+  const orbitas = new THREE.Group();
+  for (const [radio, ix, iz, vel, fase] of ORBITAS) {
+    const o = new THREE.LineLoop(
+      orbita(radio),
+      new THREE.ShaderMaterial({ uniforms: { ...u, uVel: { value: vel }, uFase: { value: fase } }, vertexShader: ORBITA_VS, fragmentShader: ORBITA_FS, ...luzSumada }),
+    );
+    o.rotation.set(ix, 0, iz);
+    o.frustumCulled = false;
+    o.renderOrder = piezas.length + 1;
+    orbitas.add(o);
+  }
+  scene.add(globo, halo, orbitas);
 
   /* Medidas: sitio que ocupa el texto y, según eso y la forma de la pantalla, la composición. */
   const comp = { d: 3.4, radioPx: 400, offset: null };
@@ -1002,6 +1085,8 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
       puntero.dentro = false;
       seccion.classList.remove("g-sobre-globo");
     });
+    // Al bajar con la rueda el globo se va sin que el mouse se mueva: deja de estar "sobre el globo".
+    addEventListener("scroll", () => !arrastre && seccion.classList.remove("g-sobre-globo"), { passive: true });
   }
 
   /* Animación */
@@ -1022,6 +1107,7 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
     const reloj = quieto ? armado : Math.min(t, porScroll);
     u.uArmado.value = reloj;
     u.uHalo.value = suave(THREE.MathUtils.clamp((reloj - 0.8) / 1.4, 0, 1));
+    u.uVela.value = suave(THREE.MathUtils.clamp((reloj - 0.05) / 1.1, 0, 1));
 
     // Giro: llega con un giro corto, después gira solo, y el arrastre y la inercia se le suman.
     const llega = quieto ? 1 : 1 - Math.pow(1 - Math.min(t / LLEGA, 1), 3);
@@ -1047,9 +1133,11 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
       latido.v += (-140 * latido.s - 10 * latido.v) * dt;
       latido.s += latido.v * dt;
     }
-    const escala = 1 + latido.s;
+    const escala = (1 + latido.s) * (0.94 + 0.06 * u.uVela.value); // crece apenas al aparecer
     globo.scale.setScalar(escala);
     halo.scale.setScalar(escala);
+    orbitas.scale.setScalar(escala);
+    orbitas.rotation.y = t * 0.02;
 
     const sigue = 1 - Math.exp(-dt * 3);
     const mira = puntero.dentro && !arrastre;

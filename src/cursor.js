@@ -1,4 +1,6 @@
-// Puntero propio de Goberna Tech (inspirado en los cursores con filtro de Codrops):
+// Puntero propio de Goberna Tech (inspirado en los cursores con filtro de Codrops). Desde el 26/11/2026 se ve
+// solo sobre el mundo 3D de la portada (para arrastrarlo y tocarlo); en el resto de la página va el puntero del
+// sistema. Qué se muestra y dónde lo decide home.css ("Puntero propio").
 //   · Un punto dorado pegado al puntero (se mueve en el mismo evento del mouse, con la posición
 //     que el navegador predice para el cuadro siguiente) y un aro dorado fino que lo sigue con
 //     un retraso corto.

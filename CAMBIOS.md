@@ -1,5 +1,80 @@
 # Cambios
 
+## Montserrat Bold en todos los títulos (26/11/2026)
+
+Pedido: usar Montserrat Bold (antes solo estaba en el título de la portada y en algunos títulos nuevos).
+
+- `src/home.css`, "Tipografía de títulos" (al final): todos los títulos del sitio (h1–h4, títulos de sección, de
+  tarjetas, de las páginas internas y de cada plataforma, las pestañas de servicios y los nombres de las
+  plataformas) van en Montserrat 700. Catamaran queda para el texto corrido; los antetítulos dentro de un título
+  ("Tu legado", "Media Training") siguen en Catamaran. Auditado en todas las páginas: ningún título visible quedó
+  en otra fuente.
+- Ajuste: en el celular, cada nivel de gobierno tiene más alto (los textos nuevos, más largos, se pisaban a 360 px).
+
+## Servicios, a su página; Servicios premium, en una sola franja (26/11/2026)
+
+Pedido: el detalle de servicios (pestañas y carrusel) debe ir a una página interna; Servicios premium puede
+reducirse a una sola franja para que el inicio no sea tan largo.
+
+- **Página de servicios** `#nuestros-servicios` (`index.html`, `src/home.js`, `src/home.css`): "Cómo te
+  acompañamos", una línea de presentación, las pestañas con el carrusel de cada eje y una invitación a agendar una
+  reunión. En el inicio quedan las tres tarjetas de ejes; su "Ver servicios" (y los ejes del menú, "Editorial" y
+  "Cursos") abren la página en la pestaña del eje y traen el servicio a la vista. "Servicios" del menú y del pie
+  lleva a la página.
+- **Servicios premium**: una franja con el título y dos tarjetas horizontales lado a lado (imagen a un costado,
+  rótulo, título, una línea, y en el legado sus tres etapas en una línea), con la acción como enlace dorado. En
+  pantallas medianas, una debajo de la otra; en el celular, la imagen arriba. Se quitó la escena 3D de las etapas
+  del legado (`src/legado3d.js`, guardado sin usar): una escena WebGL menos.
+- El inicio pasó de 6.756 px a 4.388 px de alto en escritorio (−35 %).
+- Arreglo: con pestañas, los paneles 2.º y 3.º ya no arrastran el margen del panel anterior (dejaba un hueco).
+
+## El mundo 3D, rediseñado: globo de puntos con una red mundial viva (26/11/2026)
+
+Pedido: el globo se veía extraño y poco agradable; que sea más llamativo y que no se enfoque solo en el Perú.
+
+- **Diagnóstico**: cuerpo casi negro (más oscuro que el fondo: parecía un agujero recortado), sin luz ni volumen,
+  demasiadas líneas (costas, fronteras, arcos rectos y otros que se salían de la silueta) y un armado por teselas
+  voladoras que se veía como una falla.
+- **Ahora** (`src/globo3d.js`):
+  - Esfera azul noche con luz (clara arriba a la izquierda, sombra suave), brillo leve sobre el agua y atmósfera
+    en el borde.
+  - Continentes en puntos (semitono); un barrido de luz los recorre cada tanto. Costas apenas; sin fronteras.
+  - Red mundial: 26 arcos dorados entre capitales de los cinco continentes. Cada uno se traza, lo recorre un
+    cometa de luz y se borra, desfasado de los demás. Se apagan al llegar al borde del globo.
+  - Nodos (ciudades de la red) dorados que laten con un anillo que se abre.
+  - Dos órbitas finas, inclinadas, cada una con un satélite de luz que deja estela.
+  - Sin foco en el Perú: Lima es un nodo más. La vista inicial mira al Atlántico.
+  - Aparece encendiéndose y creciendo apenas (sin teselas); al bajar se desvanece. Se mantienen el giro, el
+    arrastre con inercia y la onda dorada del clic (ahora enciende los puntos).
+
+## "Conocimiento que acompaña": niveles de gobierno para cualquier país (26/11/2026)
+
+Pedido: "Nacional, regional y provincial lo reduce mucho a Perú".
+
+- Los niveles pasan a **Internacional** (organismos multilaterales, cooperación y redes de gobiernos), **Nacional**
+  (presidencias, ministerios, parlamentos y candidaturas), **Regional** (gobernaciones, estados, provincias y
+  regiones) y **Local** (alcaldías, concejos municipales y candidaturas locales). Fuera las cifras del Perú; en su
+  lugar, la escala de cada nivel. El rótulo dice "Acompañamos a todos los niveles de gobierno, en cualquier país".
+
+## Misión y visión, en la página de Nosotros (26/11/2026)
+
+Pedido: que misión y visión vayan a la página interna de Nosotros.
+
+- Nueva página `#quienes-somos` (`index.html`, `src/home.js`, `src/home.css`): rótulo "Nosotros", título
+  "Quiénes somos", la presentación, las tarjetas de misión y visión y una invitación a agendar una reunión.
+- "Nosotros" y "Quiénes somos" (menú, menú del celular y pie) y el botón "Conoce Goberna Tech" llevan ahí;
+  "Misión" y "Visión" abren la página y bajan a su tarjeta. El inicio ya no las tiene.
+
+## El puntero dorado, solo sobre el mundo 3D (26/11/2026)
+
+Pedido: que el puntero propio (aro dorado con punto) se vea solo dentro del mundo 3D; fuera, no.
+
+- **Antes**: el puntero propio reemplazaba al del sistema en toda la página.
+- **Ahora** (`src/home.css`, "Puntero propio"; `src/globo3d.js`): aparece solo con el mouse sobre el globo de la
+  portada (o mientras se arrastra), punteado para indicar que se puede girar; en el resto de la página vuelve el
+  puntero normal del sistema. Al bajar con la rueda sin mover el mouse, el globo deja de contar como "debajo"
+  y el puntero propio se apaga. `src/cursor.js` no cambia de lógica (solo su comentario).
+
 ## Servicios: cada eje, un carrusel (26/11/2026)
 
 Pedido: un carrusel mejor para las tarjetas de servicios.

@@ -18,7 +18,6 @@ import { montarGlobo3D } from "./globo3d.js";
 import { montarRedFondo } from "./red-fondo.js";
 import { montarNiveles } from "./niveles.js";
 import { montarCarrusel } from "./carrusel.js";
-import { montarLegado3D } from "./legado3d.js";
 import { montarCursor } from "./cursor.js";
 import { montarCredo } from "./credo.js";
 import { montarEfectos } from "./efectos.js";
@@ -28,7 +27,7 @@ document.documentElement.classList.add("js");
 $("#year").textContent = new Date().getFullYear();
 
 const bar = $("#bar");
-const paginas = { home: $("#home"), munitech: $("#munitech"), plataformas: $("#plataformas"), contacto: $("#contacto"), modulo: $("#modulo") };
+const paginas = { home: $("#home"), servicios: $("#nuestros-servicios"), nosotros: $("#quienes-somos"), munitech: $("#munitech"), plataformas: $("#plataformas"), contacto: $("#contacto"), modulo: $("#modulo") };
 const modulo = paginas.modulo;
 const TITULO = document.title;
 let soltar = null; // limpieza del módulo abierto (relojes, observadores)
@@ -89,13 +88,16 @@ pestanas.forEach((t, i) => {
 elegirEje(pestanas[0]);
 // Cada eje, un carrusel de tarjetas (carrusel.js).
 document.querySelectorAll(".g-svc-panel").forEach((p) => montarCarrusel(p, { quieto: sinMovimiento }));
-// Un enlace a un eje (#eje-gobierno) o a un servicio (#editorial) abre su pestaña antes de bajar hasta él.
+// Un enlace a un eje (#eje-gobierno) o a un servicio (#editorial) abre la página de servicios en su pestaña y
+// baja hasta él (si es un servicio, además lo trae a la vista dentro del carrusel).
 function abrirServicio(hash) {
   const el = hash.length > 1 && document.getElementById(hash.slice(1));
   const panel = el?.closest?.(".g-svc-panel");
   if (!panel) return false;
+  const venia = paginas.servicios.hidden;
+  mostrar("servicios");
   elegirEje($("#" + panel.getAttribute("aria-labelledby")));
-  requestAnimationFrame(() => el.scrollIntoView({ behavior: sinMovimiento ? "instant" : "smooth" }));
+  requestAnimationFrame(() => el.scrollIntoView({ behavior: venia || sinMovimiento ? "instant" : "smooth", block: el === panel ? "start" : "center", inline: "start" }));
   return true;
 }
 
@@ -111,15 +113,7 @@ montarRedFondo($(".g-hero"), $(".g-hero-red-fondo"), { quieto: sinMovimiento });
 // "Conocimiento que acompaña": los niveles de gobierno (niveles.js). El chip que construye el edificio
 // (templo3d.js, montarTemplo3D) quedó guardado sin usar.
 montarNiveles($(".g-niveles"), { quieto: sinMovimiento });
-// Las tres etapas de "Tu legado permanece", igual: se montan al acercarse.
-new IntersectionObserver(
-  ([en], obs) => {
-    if (!en.isIntersecting) return;
-    obs.disconnect();
-    cuandoLibre(() => montarLegado3D($(".g-premium .g-prem"), $(".g-legado-3d"), $(".g-legado-3d canvas"), $(".g-premium .g-pasos"), { quieto: sinMovimiento }));
-  },
-  { rootMargin: "700px 0px" },
-).observe($(".g-legado-3d"));
+// Las etapas del legado en 3D (legado3d.js, montarLegado3D) quedaron guardadas sin usar: Servicios premium es una franja.
 
 /* ---------- Movimiento (solo si el dispositivo no pide reducirlo) ---------- */
 if (!sinMovimiento) {
@@ -136,7 +130,7 @@ if (!sinMovimiento) {
     },
     { rootMargin: "0px 0px -12% 0px" },
   );
-  const grupos = [".g-hero-in > *", ".g-saber .g-kicker", ".g-titulo", ".g-credo-t", ".g-saber-txt > *", ".g-niveles", ".g-prem h3", ".g-prem p", ".g-pasos", ".g-prem .g-btn", ".g-blog-cab", ".g-post"];
+  const grupos = [".g-hero-in > *", ".g-saber .g-kicker", ".g-titulo", ".g-credo-t", ".g-saber-txt > *", ".g-niveles", ".g-prem-cab", ".g-premc", ".g-blog-cab", ".g-post"];
   for (const sel of grupos) {
     paginas.home.querySelectorAll(sel).forEach((el, i) => {
       el.classList.add("g-rev");
@@ -145,7 +139,7 @@ if (!sinMovimiento) {
     });
   }
   // Las fotos se revelan (desenfocadas y oscuras → nítidas), una tras otra.
-  paginas.home.querySelectorAll(".g-prem-foto, .g-post > img").forEach((el, i) => {
+  paginas.home.querySelectorAll(".g-premc-img, .g-post > img").forEach((el, i) => {
     el.classList.add("g-unveil");
     el.style.setProperty("--d", `${(i % 3) * 140}ms`);
     entra.observe(el);
@@ -202,6 +196,19 @@ function ruta() {
     modulo.innerHTML = "";
   }
   document.title = TITULO;
+  // Nosotros: su página; Misión y Visión bajan a su tarjeta.
+  if (hash === "#quienes-somos" || hash === "#mision" || hash === "#vision") {
+    mostrar("nosotros");
+    const destino = hash !== "#quienes-somos" && document.getElementById(hash.slice(1));
+    requestAnimationFrame(() => (destino ? destino.scrollIntoView({ behavior: "instant", block: "center" }) : scrollTo({ top: 0, behavior: "instant" })));
+    return;
+  }
+  if (abrirServicio(hash)) return;
+  if (hash === "#nuestros-servicios") {
+    mostrar("servicios");
+    scrollTo({ top: 0, behavior: "instant" });
+    return;
+  }
   if (hash === "#munitech" || hash === "#plataformas" || hash === "#contacto") {
     mostrar(hash.slice(1));
     scrollTo({ top: 0, behavior: "instant" });
@@ -209,7 +216,6 @@ function ruta() {
   }
   const venia = paginas.home.hidden;
   mostrar("home");
-  if (abrirServicio(hash)) return;
   // Al volver de otra página, el salto al ancla se hace a mano (la sección estaba oculta).
   if (venia) {
     const destino = hash.length > 1 && document.getElementById(hash.slice(1));
@@ -220,7 +226,7 @@ addEventListener("hashchange", ruta);
 // Volver a pulsar un enlace a un servicio ya abierto no cambia el hash: se abre a mano.
 document.addEventListener("click", (e) => {
   const a = e.target.closest('a[href^="#"]');
-  if (a && !paginas.home.hidden && location.hash === a.getAttribute("href") && abrirServicio(location.hash)) e.preventDefault();
+  if (a && location.hash === a.getAttribute("href") && abrirServicio(location.hash)) e.preventDefault();
 });
 
 // Dentro de una plataforma, un enlace a una de sus propias secciones baja hasta ella sin cambiar

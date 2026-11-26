@@ -25,6 +25,7 @@ export function montarCarrusel(panel, { quieto = false } = {}) {
   cab.className = "g-car-cab";
   const intro = panel.querySelector(".g-svc-intro");
   if (intro) cab.append(intro);
+  else cab.classList.add("g-car-sin-intro");
   const nav = document.createElement("div");
   nav.className = "g-car-nav";
   nav.innerHTML = `

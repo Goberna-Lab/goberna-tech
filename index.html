@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body class="g">
-    <!-- Página según el mockup de Adobe XD (20/11/2026). 3D en la portada (el mundo, src/globo3d.js) y en el legado
-         (src/legado3d.js). Quedaron guardados sin usar el chip que construye el edificio (src/templo3d.js), el
+    <!-- Página según el mockup de Adobe XD (20/11/2026). 3D en la portada (el mundo, src/globo3d.js). Las etapas del
+         legado en 3D (src/legado3d.js) quedaron guardadas sin usar. Quedaron guardados sin usar el chip que construye el edificio (src/templo3d.js), el
          territorio de hilos (src/portada3d.js) y el mapa del Perú (src/portada-mapa.js);
          la versión anterior, con la escena 3D y las demostraciones, quedó en index-3d.html. -->
     <a class="skip" href="#nosotros">Saltar al contenido</a>
@@ -26,15 +26,15 @@
         </a>
         <nav class="g-nav" aria-label="Secciones">
           <div class="g-nav-grupo">
-            <a href="#nosotros">Nosotros</a>
+            <a href="#quienes-somos">Nosotros</a>
             <div class="g-sub">
-              <a href="#nosotros">Quiénes somos</a>
+              <a href="#quienes-somos">Quiénes somos</a>
               <a href="#mision">Misión</a>
               <a href="#vision">Visión</a>
             </div>
           </div>
           <div class="g-nav-grupo">
-            <a href="#servicios">Servicios</a>
+            <a href="#nuestros-servicios">Servicios</a>
             <div class="g-sub">
               <a href="#eje-gobierno">Gobierno y gestión</a>
               <a href="#eje-escuela">Escuela y formación</a>
@@ -53,13 +53,13 @@
     <!-- Menú a pantalla completa (teléfono y tableta) -->
     <div class="g-menu" id="g-menu" hidden>
       <nav aria-label="Menú completo">
-        <a href="#nosotros">Nosotros</a>
+        <a href="#quienes-somos">Nosotros</a>
         <div class="g-menu-sub">
-          <a href="#nosotros">Quiénes somos</a>
+          <a href="#quienes-somos">Quiénes somos</a>
           <a href="#mision">Misión</a>
           <a href="#vision">Visión</a>
         </div>
-        <a href="#servicios">Servicios</a>
+        <a href="#nuestros-servicios">Servicios</a>
         <div class="g-menu-sub">
           <a href="#eje-gobierno">Gobierno y gestión</a>
           <a href="#eje-escuela">Escuela y formación</a>
@@ -85,7 +85,7 @@
           <h1><span>Goberna</span> <span>Tech</span></h1>
           <p class="g-hero-p">Estrategia, tecnología y consultoría política.</p>
           <div class="g-acciones">
-            <a class="g-btn g-btn-oro" href="#nosotros">Conoce Goberna Tech</a>
+            <a class="g-btn g-btn-oro" href="#quienes-somos">Conoce Goberna Tech</a>
             <a class="g-btn g-btn-linea" href="#contacto">Agenda una reunión</a>
           </div>
         </div>
@@ -110,10 +110,11 @@
               </p>
               <a class="g-btn g-btn-oro" href="#servicios">Quiero saber más</a>
             </div>
-            <!-- Los cuatro niveles de gobierno en una pirámide de placas, unidas por el hilo dorado del acompañamiento
+            <!-- Los cuatro niveles de gobierno (internacional, nacional, regional y local: valen para cualquier país) en una
+                 pirámide de placas, unidas por el hilo dorado del acompañamiento
                  (src/niveles.js). Reemplaza al chip que construye el edificio (src/templo3d.js, guardado sin usar). -->
             <figure class="g-niveles" aria-labelledby="g-niveles-t">
-              <figcaption class="g-niv-cab" id="g-niveles-t">Acompañamos a todos los niveles de gobierno</figcaption>
+              <figcaption class="g-niv-cab" id="g-niveles-t">Acompañamos a todos los niveles de gobierno, en cualquier país</figcaption>
               <div class="g-niv-cuerpo">
                 <div class="g-niv-pila" aria-hidden="true">
                   <span class="g-niv-hilo"></span>
@@ -123,37 +124,14 @@
                   <span class="g-niv-placa" style="--i: 3; --k: 1; --n: 11"></span>
                 </div>
                 <ol class="g-niv-lista">
-                  <li><b>Nacional</b><span>Congresistas, ministros y candidatos presidenciales</span><small>1 gobierno nacional</small></li>
-                  <li><b>Regional</b><span>Gobernadores, consejeros y candidatos regionales</span><small>25 gobiernos regionales</small></li>
-                  <li><b>Provincial</b><span>Alcaldes, regidores y candidatos provinciales</span><small>196 municipalidades provinciales</small></li>
-                  <li><b>Distrital</b><span>Alcaldes, regidores y candidatos distritales</span><small>+1 800 municipalidades distritales</small></li>
+                  <li><b>Internacional</b><span>Organismos multilaterales, cooperación y redes de gobiernos</span><small>Escala global</small></li>
+                  <li><b>Nacional</b><span>Presidencias, ministerios, parlamentos y candidaturas</span><small>Gobiernos centrales</small></li>
+                  <li><b>Regional</b><span>Gobernaciones, estados, provincias y regiones</span><small>Gobiernos intermedios</small></li>
+                  <li><b>Local</b><span>Alcaldías, concejos municipales y candidaturas locales</span><small>Gobiernos locales</small></li>
                 </ol>
               </div>
             </figure>
           </div>
-        </div>
-      </section>
-
-      <!-- Misión y visión: texto oficial del documento "GOBERNA TECH - Información". Las frases se encienden
-           palabra por palabra al bajar (src/credo.js). -->
-      <section class="g-credo" id="credo" aria-labelledby="g-credo-cab">
-        <div class="g-wrap">
-          <p class="g-kicker g-credo-cab" id="g-credo-cab">Nuestro propósito</p>
-          <article class="g-credo-b" id="mision" data-credo>
-            <h2 class="g-credo-t">Misión</h2>
-            <p class="g-credo-txt">
-              Acompañar a políticos, autoridades e instituciones en el fortalecimiento de su liderazgo y gestión,
-              integrando estrategia, tecnología y conocimiento especializado para
-              <em>generar resultados de alto impacto que trasciendan.</em>
-            </p>
-          </article>
-          <article class="g-credo-b" id="vision" data-credo>
-            <h2 class="g-credo-t">Visión</h2>
-            <p class="g-credo-txt">
-              Impulsar una nueva generación de autoridades, líderes y organizaciones políticas capaces de transformar
-              sus desafíos en oportunidades mediante el uso de tecnología y estrategia.
-            </p>
-          </article>
         </div>
       </section>
 
@@ -187,6 +165,100 @@
               <a class="g-btn g-btn-oro" href="#eje-electoral">Ver servicios</a>
             </article>
           </div>
+        </div>
+      </section>
+
+      <!-- 4. Servicios premium: una sola franja con los dos servicios lado a lado (hasta el 26/11/2026 eran dos bloques
+           grandes, uno con las etapas del legado en 3D, src/legado3d.js, guardado sin usar). -->
+      <section class="g-premium" id="premium">
+        <div class="g-wrap">
+          <div class="g-prem-cab">
+            <p class="g-kicker">Exclusivos</p>
+            <h2>Servicios <em>premium</em></h2>
+          </div>
+          <div class="g-prem-franja">
+            <article class="g-premc">
+              <figure class="g-premc-img g-premc-legado">
+                <img src="/img/m-legado.webp" alt="" width="1600" height="720" loading="lazy" />
+              </figure>
+              <div class="g-premc-txt">
+                <p class="g-premc-rot">Para autoridades y exautoridades</p>
+                <h3><span>Tu legado</span> Permanece</h3>
+                <p>Preservamos, documentamos y proyectamos los resultados de tu gestión, consolidando tu trayectoria y tu legado público.</p>
+                <ol class="g-premc-pasos" aria-label="Etapas"><li>Gestión</li><li>Trayectoria</li><li>Legado</li></ol>
+                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Servicios premium: Legado">Conoce el servicio</a></div>
+              </div>
+            </article>
+            <article class="g-premc">
+              <figure class="g-premc-img">
+                <img src="/img/media-training.webp" alt="Ponente con micrófono durante una conferencia, frente a la pantalla del escenario" width="1200" height="1282" loading="lazy" />
+              </figure>
+              <div class="g-premc-txt">
+                <p class="g-premc-rot">Miami, Estados Unidos</p>
+                <h3><span>Media Training</span> Presidencial</h3>
+                <p>Preparación exclusiva en comunicación, oratoria, entrevistas y manejo de medios para candidatos presidenciales y líderes de alto nivel, adaptada a cada perfil.</p>
+                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Servicios premium: Media Training Presidencial">Conoce el servicio</a></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Blog. Las tres entradas son las del mockup: todavía no tienen artículo. -->
+      <section class="g-blog" id="blog">
+        <div class="g-wrap">
+          <div class="g-blog-cab">
+            <div>
+              <h2>Blog</h2>
+              <p>
+                Explora artículos de opinión, análisis de actualidad y contenidos especializados en
+                gobierno, política, innovación y liderazgo.
+              </p>
+            </div>
+            <a class="g-btn g-btn-linea-oro" href="#blog" data-pendiente>Ver todo</a>
+          </div>
+          <div class="g-posts">
+            <article class="g-post">
+              <img src="/img/k-blog-1.webp" alt="" width="682" height="368" loading="lazy" />
+              <div>
+                <h3>Inteligencia artificial en la gestión pública</h3>
+                <p class="g-post-meta"><img src="/isotipo.svg" alt="" width="20" height="20" /><span><b>Goberna Tech</b>Tecnología</span></p>
+              </div>
+            </article>
+            <article class="g-post">
+              <img src="/img/k-blog-2.webp" alt="" width="682" height="368" loading="lazy" />
+              <div>
+                <h3>Gobierno digital: hacia una nueva era</h3>
+                <p class="g-post-meta"><img src="/isotipo.svg" alt="" width="20" height="20" /><span><b>Goberna Tech</b>Tecnología</span></p>
+              </div>
+            </article>
+            <article class="g-post">
+              <img src="/img/k-blog-3.webp" alt="" width="682" height="368" loading="lazy" />
+              <div>
+                <h3>Datos e inteligencia para decisiones estratégicas</h3>
+                <p class="g-post-meta"><img src="/isotipo.svg" alt="" width="20" height="20" /><span><b>Goberna Tech</b>Tecnología</span></p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <!-- La cúpula asoma sobre el pie: esta es la parte que queda sobre el fondo claro. -->
+        <div class="g-cupula g-cupula-a" aria-hidden="true"><img src="/img/k-cupula.webp" alt="" width="624" height="586" loading="lazy" /></div>
+      </section>
+    </main>
+
+    <!-- Munitech (Edición Perú): noticias, artículos y normas para la gestión municipal, según el documento
+         "GOBERNA TECH - Información". Las tres secciones esperan su contenido: cuando lo haya, reemplazar cada
+         .g-mt-vacio por la lista de entradas. -->
+    <!-- Servicios: página aparte (#nuestros-servicios). Un enlace a un eje (#eje-gobierno) o a un servicio (#editorial)
+         la abre en su pestaña. Estuvo en el inicio hasta el 26/11/2026; allá quedaron las tres tarjetas de ejes. -->
+    <main id="nuestros-servicios" class="g-pag g-svcp" hidden>
+      <div class="g-wrap">
+        <p class="g-kicker">Servicios</p>
+        <h1 class="g-titulo g-izq">Cómo te <em>acompañamos</em></h1>
+        <p class="g-pag-p">
+          Doce servicios en tres ejes: gobierno y gestión, escuela y formación, y estrategia electoral. Elige un eje y
+          recorre sus servicios.
+        </p>
         <!-- Los 12 servicios, por eje (texto del documento "GOBERNA TECH - Información"). Con JavaScript se ven como
              pestañas (src/home.js) y cada eje como un carrusel (src/carrusel.js); sin él, uno debajo del otro. -->
         <div class="g-svc" id="servicios-detalle">
@@ -322,96 +394,56 @@
             </ol>
           </div>
         </div>
+        <div class="g-nos-cta">
+          <p>¿Qué necesita tu gestión o tu campaña?</p>
+          <a class="g-btn g-btn-oro" href="#contacto">Agenda una reunión</a>
         </div>
-      </section>
-
-      <!-- 4. Servicios premium -->
-      <section class="g-premium" id="premium">
-        <div class="g-wrap">
-          <h2 class="g-titulo">Servicios <em>premium</em></h2>
-          <article class="g-prem">
-            <!-- Las tres etapas (Gestión, Trayectoria, Legado) en 3D (src/legado3d.js). -->
-            <div class="g-legado-3d" data-parallax="44" aria-hidden="true"><canvas></canvas></div>
-            <div>
-              <h3><span>Tu legado</span> Permanece</h3>
-              <p>
-                Servicio exclusivo para autoridades y exautoridades que buscan preservar, documentar y
-                proyectar los resultados de su gestión, consolidando su trayectoria y legado público.
-              </p>
-              <ol class="g-pasos">
-                <li>Gestión</li>
-                <li>Trayectoria</li>
-                <li>Legado</li>
-              </ol>
-              <a class="g-btn g-btn-oro" href="#contacto" data-interes="Servicios premium: Legado">Conoce el servicio</a>
-            </div>
-          </article>
-        </div>
-        <article class="g-prem g-prem-inv">
-          <div class="g-wrap">
-            <div>
-              <h3><span>Media Training</span> Presidencial</h3>
-              <p>
-                Programa exclusivo de preparación en comunicación, oratoria, entrevistas y manejo de
-                medios, diseñado para candidatos presidenciales y líderes políticos de alto nivel. El
-                programa ofrece una experiencia adaptada al perfil y a las necesidades de cada
-                participante.
-              </p>
-              <p class="g-lugar">Miami, Estados Unidos.</p>
-              <a class="g-btn g-btn-oro" href="#contacto" data-interes="Servicios premium: Media Training Presidencial">Conoce el servicio</a>
-            </div>
-            <figure class="g-prem-foto" data-parallax="44">
-              <img src="/img/media-training.webp" alt="Ponente con micrófono durante una conferencia, frente a la pantalla del escenario" width="1200" height="1282" loading="lazy" />
-            </figure>
-          </div>
-        </article>
-      </section>
-
-      <!-- 5. Blog. Las tres entradas son las del mockup: todavía no tienen artículo. -->
-      <section class="g-blog" id="blog">
-        <div class="g-wrap">
-          <div class="g-blog-cab">
-            <div>
-              <h2>Blog</h2>
-              <p>
-                Explora artículos de opinión, análisis de actualidad y contenidos especializados en
-                gobierno, política, innovación y liderazgo.
-              </p>
-            </div>
-            <a class="g-btn g-btn-linea-oro" href="#blog" data-pendiente>Ver todo</a>
-          </div>
-          <div class="g-posts">
-            <article class="g-post">
-              <img src="/img/k-blog-1.webp" alt="" width="682" height="368" loading="lazy" />
-              <div>
-                <h3>Inteligencia artificial en la gestión pública</h3>
-                <p class="g-post-meta"><img src="/isotipo.svg" alt="" width="20" height="20" /><span><b>Goberna Tech</b>Tecnología</span></p>
-              </div>
-            </article>
-            <article class="g-post">
-              <img src="/img/k-blog-2.webp" alt="" width="682" height="368" loading="lazy" />
-              <div>
-                <h3>Gobierno digital: hacia una nueva era</h3>
-                <p class="g-post-meta"><img src="/isotipo.svg" alt="" width="20" height="20" /><span><b>Goberna Tech</b>Tecnología</span></p>
-              </div>
-            </article>
-            <article class="g-post">
-              <img src="/img/k-blog-3.webp" alt="" width="682" height="368" loading="lazy" />
-              <div>
-                <h3>Datos e inteligencia para decisiones estratégicas</h3>
-                <p class="g-post-meta"><img src="/isotipo.svg" alt="" width="20" height="20" /><span><b>Goberna Tech</b>Tecnología</span></p>
-              </div>
-            </article>
-          </div>
-        </div>
-        <!-- La cúpula asoma sobre el pie: esta es la parte que queda sobre el fondo claro. -->
-        <div class="g-cupula g-cupula-a" aria-hidden="true"><img src="/img/k-cupula.webp" alt="" width="624" height="586" loading="lazy" /></div>
-      </section>
+      </div>
     </main>
 
-    <!-- Munitech (Edición Perú): noticias, artículos y normas para la gestión municipal, según el documento
-         "GOBERNA TECH - Información". Las tres secciones esperan su contenido: cuando lo haya, reemplazar cada
-         .g-mt-vacio por la lista de entradas. -->
+    <!-- Nosotros: página aparte (#quienes-somos; #mision y #vision bajan a su tarjeta). Misión y visión vivían en el
+         inicio hasta el 26/11/2026. -->
+    <main id="quienes-somos" class="g-pag g-nos" hidden>
+      <div class="g-wrap">
+        <p class="g-kicker">Nosotros</p>
+        <h1 class="g-titulo g-izq">Quiénes <em>somos</em></h1>
+        <p class="g-pag-p">
+          Somos especialistas en estrategia, tecnología y consultoría política. Brindamos asesoría integral y
+          personalizada a políticos y autoridades de todos los niveles de gobierno, acompañándolos en el desarrollo de
+          proyectos de impacto.
+        </p>
+      </div>
+        <!-- Misión y visión: texto oficial del documento "GOBERNA TECH - Información". Las frases se encienden
+             palabra por palabra al bajar (src/credo.js). -->
+        <section class="g-credo" id="credo" aria-labelledby="g-credo-cab">
+          <div class="g-wrap">
+            <p class="g-kicker g-credo-cab" id="g-credo-cab">Nuestro propósito</p>
+            <article class="g-credo-b" id="mision" data-credo>
+              <h2 class="g-credo-t">Misión</h2>
+              <p class="g-credo-txt">
+                Acompañar a políticos, autoridades e instituciones en el fortalecimiento de su liderazgo y gestión,
+                integrando estrategia, tecnología y conocimiento especializado para
+                <em>generar resultados de alto impacto que trasciendan.</em>
+              </p>
+            </article>
+            <article class="g-credo-b" id="vision" data-credo>
+              <h2 class="g-credo-t">Visión</h2>
+              <p class="g-credo-txt">
+                Impulsar una nueva generación de autoridades, líderes y organizaciones políticas capaces de transformar
+                sus desafíos en oportunidades mediante el uso de tecnología y estrategia.
+              </p>
+            </article>
+          </div>
+        </section>
+
+      <div class="g-wrap">
+        <div class="g-nos-cta">
+          <p>¿Conversamos sobre tu proyecto?</p>
+          <a class="g-btn g-btn-oro" href="#contacto">Agenda una reunión</a>
+        </div>
+      </div>
+    </main>
+
     <main id="munitech" class="g-pag" hidden>
       <div class="g-wrap">
         <p class="g-kicker">Munitech · Edición Perú</p>
@@ -547,10 +579,10 @@
       <div class="g-wrap">
         <img class="g-pie-logo" src="/logo.svg" alt="Goberna Tech. Gestión pública, inteligencia, consultoría." width="331" height="92" />
         <nav aria-label="Pie de página">
-          <a href="#nosotros">Nosotros</a>
+          <a href="#quienes-somos">Nosotros</a>
           <a href="#editorial">Editorial</a>
           <a href="#munitech">Munitech</a>
-          <a href="#servicios">Servicios</a>
+          <a href="#nuestros-servicios">Servicios</a>
           <a href="#escuela-de-gobierno">Cursos</a>
           <a href="#blog">Blog</a>
         </nav>
