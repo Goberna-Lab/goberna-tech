@@ -875,12 +875,12 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
     const vertical = w <= 900 || w / h < 0.9;
     let c;
     if (vertical) {
-      const radio = Math.min((0.336 * w) / h, 0.24);
+      const radio = Math.min((0.29 * w) / h, 0.2);
       c = { cx: 0.5, cy: textoAbajo + 0.035 + radio, radio };
     } else {
       // Entre la barra y la fila de ejes, con aire arriba y abajo.
       const barra = (document.getElementById("bar")?.offsetHeight ?? 0.08 * h) / h;
-      const radio = Math.min(0.376, (0.216 * w) / h, (tiraArriba - barra) / 2 - 0.03);
+      const radio = Math.min(0.3, (0.17 * w) / h, (tiraArriba - barra) / 2 - 0.06);
       const textoDerecha = derecha ? derecha / w : 0.45;
       const cx = THREE.MathUtils.clamp(textoDerecha + (radio * h) / w + 0.02, 0.7, 0.8);
       c = { cx, cy: (barra + tiraArriba) / 2, radio };
@@ -892,6 +892,8 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
     camera.near = Math.max(0.1, comp.d * 0.9 - 1.45);
     camera.far = comp.d + 1.45;
     comp.offset = [w, h, (0.5 - c.cx) * w, (0.5 - c.cy) * h];
+    // Dónde queda el globo en la portada (centro y radio en px): la red de fondo (red-fondo.js) deja un claro ahí.
+    seccion.dataset.globo = `${(c.cx * w).toFixed(0)},${(c.cy * h).toFixed(0)},${(c.radio * h).toFixed(0)}`;
     camera.setViewOffset(w, h, comp.offset[2], comp.offset[3], w, h);
     u.uDist.value = comp.d - 1;
     u.uPunto.value = THREE.MathUtils.clamp(Math.sqrt((c.radio * h) / 440), 0.8, 1.3);

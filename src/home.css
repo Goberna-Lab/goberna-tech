@@ -695,6 +695,38 @@ body.g {
   margin-top: clamp(22px, 4vh, 46px);
 }
 
+/* Red de inteligencia de fondo (src/red-fondo.js), detrás del mundo: tenue, más apagada detrás del texto (izquierda)
+   y fundida hacia arriba (la barra) y hacia abajo (la fila de ejes). */
+.g-hero-red-fondo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 1.2s ease;
+  -webkit-mask-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6) 35%, #000 58%),
+    linear-gradient(to bottom, transparent, #000 16%, #000 76%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6) 35%, #000 58%),
+    linear-gradient(to bottom, transparent, #000 16%, #000 76%, transparent);
+  mask-composite: intersect;
+}
+
+.g-hero-red-fondo:not(.lista) {
+  opacity: 0;
+}
+
+/* En vertical el texto va arriba: la red se apaga detrás de él en vez de a la izquierda. */
+@media (max-width: 900px), (max-aspect-ratio: 9/10) {
+  .g-hero-red-fondo {
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.45) 50%, #000 62%, #000 80%, transparent);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.45) 50%, #000 62%, #000 80%, transparent);
+  }
+}
+
 /* Guías verticales que enmarcan la columna (se esfuman arriba). */
 .g-hero-guias {
   position: absolute;
@@ -1110,9 +1142,11 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 
 /* ───────── Misión y visión ───────── */
 
+/* Dos tarjetas pares, lado a lado, en el mismo vidrio oscuro de la fila de ejes de la portada y de los niveles de
+   gobierno: línea dorada arriba, número en mono y título en Montserrat. En pantallas angostas se apilan. */
 .g-credo {
   position: relative;
-  padding: clamp(24px, 3vw, 60px) 0 clamp(40px, 5vw, 100px);
+  padding: clamp(56px, 6vw, 120px) 0 clamp(64px, 7vw, 140px);
   background:
     var(--g-estrellas),
     radial-gradient(40% 36% at 100% 18%, rgba(var(--g-azul-b), 0.2), transparent 70%),
@@ -1120,41 +1154,77 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
     var(--g-noche);
 }
 
-/* Una frase a la vez: el título a la izquierda y la frase grande a la derecha. */
-.g-credo-b {
+.g-credo .g-wrap {
   display: grid;
-  grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr);
-  align-items: start;
-  gap: 24px clamp(28px, 6vw, 120px);
-  padding: clamp(44px, 7vw, 140px) 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 1.6vw, 30px);
+  counter-reset: credo;
 }
 
-.g-credo-b + .g-credo-b {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+.g-credo-cab {
+  grid-column: 1 / -1;
+  margin-bottom: clamp(4px, 0.8vw, 14px);
+}
+
+.g-credo-b {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 1.6vw, 28px);
+  padding: clamp(28px, 3vw, 56px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: clamp(12px, 1.2vw, 20px);
+  background:
+    radial-gradient(80% 60% at 0% 0%, rgba(var(--g-azul-b), 0.22), transparent 70%),
+    linear-gradient(160deg, rgba(12, 22, 48, 0.7), rgba(3, 7, 22, 0.75));
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  counter-increment: credo;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* La línea dorada de arriba. */
+.g-credo-b::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: clamp(28px, 3vw, 56px);
+  width: clamp(40px, 3.6vw, 70px);
+  height: 2px;
+  background: var(--g-oro);
+  box-shadow: 0 0 12px rgba(223, 165, 46, 0.6);
+  transition: width 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.g-credo-b:hover {
+  border-color: rgba(223, 165, 46, 0.28);
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.8);
+}
+
+.g-credo-b:hover::before {
+  width: clamp(70px, 7vw, 130px);
 }
 
 .g-credo-t {
-  font-size: clamp(1.5rem, 2.2vw, 2.7rem);
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.012em;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font: 700 clamp(1.2rem, 1.5vw, 1.8rem) / 1.1 "Montserrat", var(--sans);
+  letter-spacing: -0.005em;
 }
 
-.g-credo-t::after {
-  content: "";
-  display: block;
-  width: clamp(34px, 3.2vw, 62px);
-  height: 3px;
-  margin-top: clamp(14px, 1.4vw, 26px);
-  background: var(--g-oro);
+.g-credo-t::before {
+  content: "0" counter(credo);
+  color: rgba(223, 165, 46, 0.85);
+  font: 400 clamp(0.66rem, 0.7vw, 0.82rem) / 1 var(--mono);
+  letter-spacing: 0.14em;
 }
 
 .g-credo-txt {
-  max-width: 30em;
-  font-size: clamp(1.4rem, 2.75vw, 3.2rem);
+  font-size: clamp(1.08rem, 1.42vw, 1.72rem);
   font-weight: 500;
-  line-height: 1.26;
-  letter-spacing: -0.012em;
+  line-height: 1.42;
+  letter-spacing: -0.005em;
   text-wrap: pretty;
 }
 
@@ -1164,7 +1234,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 
 /* Cada palabra se enciende al leerla (src/credo.js). Lo que se enfatiza va en dorado. */
 .g-credo-txt .p {
-  color: rgba(238, 241, 246, 0.2);
+  color: rgba(238, 241, 246, 0.22);
   transition: color 0.6s ease;
 }
 
@@ -1181,12 +1251,12 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 }
 
 @media (max-width: 900px) {
-  .g-credo-b {
+  .g-credo .g-wrap {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .g-credo-txt {
-    font-size: clamp(1.35rem, 5.6vw, 2.1rem);
+    font-size: clamp(1.1rem, 4.6vw, 1.5rem);
   }
 }
 

@@ -1,5 +1,39 @@
 # Cambios
 
+## Portada: red de inteligencia de fondo (26/11/2026)
+
+Pedido: darle al fondo de la portada una red de inteligencia sutil (referencia: nodos dorados y azules unidos por
+líneas, con bokeh), con movimiento si conviene.
+
+- **Qué se ve** (`src/red-fondo.js`, `index.html`, `src/home.css`): nodos dorados (la mayoría) y azules en tres
+  profundidades (lejanos chicos y tenues, medios nítidos, unos pocos cercanos grandes y desenfocados), unidos por
+  líneas finas cuando están cerca. Va detrás del mundo.
+- **Movimiento**: los nodos derivan muy lento (la red se arma y se desarma sola), cada tanto un pulso de luz
+  recorre una conexión y, con el mouse, la red se corre apenas por capas (paralaje).
+- **Sutil a propósito**: mucho más tenue que la referencia, para no competir con el globo ni con el título. Se
+  apaga detrás del texto (a la izquierda; en vertical, arriba) y se funde hacia la barra y la fila de ejes.
+- **Liviana**: canvas 2D (no otra escena WebGL), 30 cuadros por segundo como mucho, densidad de píxeles limitada,
+  pausada con la portada fuera de pantalla o la pestaña oculta. Con "reducir movimiento" queda quieta.
+- **Convive con el mundo**: el globo se achicó (~22 %) y la red deja un claro a su alrededor (se desvanece entre 1 y
+  1,7 radios del globo; `globo3d.js` publica su centro y radio en `data-globo` de la portada). Algo menos densa
+  (hasta 80 nodos). El globo queda de protagonista y la red, de ambiente.
+- **Blindaje**: si la hoja de estilos no llega (pasó en desarrollo: el servidor leyó `home.css` vacío mientras se
+  guardaba), los lienzos quedaban dentro de la portada en vez de encima; al medirse la agrandaban y se volvían a
+  medir, sin fin (la página llegó a 25 millones de px y colgaba la pestaña). Ahora `red-fondo.js` y `lienzo3d.js`
+  no se miden si el lienzo no está posicionado.
+
+## Misión y visión, en dos tarjetas lado a lado (26/11/2026)
+
+Pedido: que misión y visión no estén tan separadas, que algo encasille sus textos y que se vean más chicas
+(ocupaban demasiado y se veía desordenado).
+
+- **Antes**: dos bloques apilados, título a la izquierda y frase enorme (hasta 3,2 rem) a la derecha, con 140 px de
+  aire arriba y abajo de cada uno: casi dos pantallas.
+- **Ahora** (`index.html`, `src/home.css`, "Misión y visión"): un rótulo "Nuestro propósito" y dos tarjetas pares,
+  lado a lado, en el mismo vidrio oscuro de la fila de ejes de la portada y de los niveles de gobierno: línea dorada
+  arriba (se alarga al pasar el mouse), número en mono ("01", "02") y título en Montserrat Bold. El texto baja a
+  1,1–1,7 rem. Las palabras se siguen encendiendo al leer (`src/credo.js`, sin cambios). En celular se apilan.
+
 ## "Conocimiento que acompaña": los niveles de gobierno reemplazan al chip del capitolio (26/11/2026)
 
 Pedido: quitar el capitolio sobre el chip (3D) y poner algo relevante en su lugar.

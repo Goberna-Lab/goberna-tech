@@ -78,6 +78,7 @@
            El globo se arrastra para girarlo y un clic lanza una onda dorada desde ese punto.
            Quedó guardado sin usar el mapa de América Latina con foco en el Perú (src/portada-mapa.js). -->
       <section class="g-hero" id="inicio">
+        <canvas class="g-hero-red-fondo" aria-hidden="true"></canvas>
         <canvas class="g-hero-3d" aria-hidden="true"></canvas>
         <div class="g-hero-guias" aria-hidden="true"></div>
         <div class="g-wrap g-hero-in">
@@ -135,8 +136,9 @@
 
       <!-- Misión y visión: texto oficial del documento "GOBERNA TECH - Información". Las frases se encienden
            palabra por palabra al bajar (src/credo.js). -->
-      <section class="g-credo" id="credo" aria-label="Misión y visión">
+      <section class="g-credo" id="credo" aria-labelledby="g-credo-cab">
         <div class="g-wrap">
+          <p class="g-kicker g-credo-cab" id="g-credo-cab">Nuestro propósito</p>
           <article class="g-credo-b" id="mision" data-credo>
             <h2 class="g-credo-t">Misión</h2>
             <p class="g-credo-txt">

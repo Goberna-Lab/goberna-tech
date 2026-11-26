@@ -191,6 +191,8 @@ export function crearLienzo3D({
   }
 
   function medir() {
+    // Sin la hoja de estilos el lienzo queda dentro del marco y no encima: medirlo agrandaría el marco sin fin.
+    if (getComputedStyle(canvas).position === "static") return;
     const w = marco.clientWidth;
     const h = marco.clientHeight;
     if (!w || !h) return;

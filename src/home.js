@@ -15,6 +15,7 @@ import { MODULOS } from "./modulos/index.js";
 import { FAMILIAS, familiaDe } from "./modulos/familias.js";
 import { ponerEsquemas, activarExploradores, sinMovimiento, revelar, beneficios } from "./modulos/comun.js";
 import { montarGlobo3D } from "./globo3d.js";
+import { montarRedFondo } from "./red-fondo.js";
 import { montarNiveles } from "./niveles.js";
 import { montarLegado3D } from "./legado3d.js";
 import { montarCursor } from "./cursor.js";
@@ -102,6 +103,8 @@ const cuandoLibre = (f) => (window.requestIdleCallback ? requestIdleCallback(f, 
 // Quedaron guardados sin usar: el mapa de América Latina con foco en el Perú (portada-mapa.js, montarPortadaMapa),
 // el Perú en hilos de luz (peru3d.js) y el territorio de montañas (portada3d.js).
 montarGlobo3D($(".g-hero"), $(".g-hero-3d"), { quieto: sinMovimiento });
+// Detrás del mundo, una red de inteligencia sutil (red-fondo.js).
+montarRedFondo($(".g-hero"), $(".g-hero-red-fondo"), { quieto: sinMovimiento });
 // "Conocimiento que acompaña": los niveles de gobierno (niveles.js). El chip que construye el edificio
 // (templo3d.js, montarTemplo3D) quedó guardado sin usar.
 montarNiveles($(".g-niveles"), { quieto: sinMovimiento });
