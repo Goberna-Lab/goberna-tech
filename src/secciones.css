@@ -1,0 +1,1022 @@
+/* Secciones de la página general que siguen la estructura del prototipo: conocimiento que
+   acompaña, tres ejes, franja, plataformas en lista fija y servicios premium.
+   Textos grandes; las imágenes llevan parallax y una luz que se mueve (src/efectos.js). */
+
+:root {
+  --tono: #1c5a96; /* segunda voz de los títulos sobre fondo claro: el azul de marca, aclarado */
+  --oro-texto: #a8700a; /* dorado legible sobre blanco, para rótulos pequeños */
+}
+
+.solo-lector {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Rótulo corto sobre un título: monoespaciada, en mayúsculas y dorado, como en el prototipo. */
+.eyebrow {
+  margin-bottom: clamp(16px, 2vw, 26px);
+  font: 400 0.74rem/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--oro-texto);
+}
+
+.eyebrow span {
+  margin-right: 1.2em;
+}
+
+.eje .eyebrow {
+  color: var(--soft);
+}
+
+.eje .eyebrow span {
+  color: var(--oro-texto);
+}
+
+.eje3 .eyebrow {
+  color: #fff;
+}
+
+.eje3 .eyebrow span {
+  color: var(--gold);
+}
+
+.ejes .eyebrow {
+  color: var(--gold);
+}
+
+.tono {
+  color: var(--tono);
+}
+
+/* Títulos grandes */
+.know h2,
+.eje h2,
+.eje3 h2,
+.plat-head h2,
+.premium > h2 {
+  font-size: clamp(2.1rem, 4.7vw, 4.3rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+}
+
+.btn-line,
+.btn-line-navy {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+
+.btn-line {
+  color: #fff;
+}
+
+.btn-line:hover {
+  background: #fff;
+  color: var(--navy);
+}
+
+.btn-line-navy {
+  color: var(--navy);
+}
+
+.btn-line-navy:hover {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* ───────── Parallax y luz ───────── */
+
+[data-parallax] {
+  translate: 0 var(--py, 0);
+  will-change: translate;
+}
+
+/* Imagen en su marco: es más alta que el marco y se desliza dentro de él al bajar. */
+.foto {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1 / 1.04;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--navy-deep);
+}
+
+.foto[data-parallax] {
+  translate: none;
+}
+
+.foto img {
+  position: absolute;
+  left: 0;
+  top: -12%;
+  width: 100%;
+  height: 124%;
+  object-fit: cover;
+  translate: 0 var(--py, 0);
+}
+
+/* La luz: dos focos que derivan despacio, un haz que barre la imagen y un foco que sigue al puntero. */
+.luz {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(40% 40% at 30% 30%, rgba(245, 175, 49, 0.34), transparent 72%), radial-gradient(48% 48% at 72% 72%, rgba(90, 160, 255, 0.34), transparent 72%);
+  background-size: 190% 190%;
+  animation: luz-deriva 13s ease-in-out infinite alternate;
+}
+
+.luz::before,
+.luz::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.luz::before {
+  background: linear-gradient(105deg, transparent 43%, rgba(255, 255, 255, 0.2) 50%, transparent 57%) no-repeat;
+  background-size: 320% 100%;
+  animation: luz-barrido 8s ease-in-out infinite;
+}
+
+.luz::after {
+  background: radial-gradient(circle 15em at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.24), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.luz.sigue::after {
+  opacity: 1;
+}
+
+@keyframes luz-deriva {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes luz-barrido {
+  0%,
+  35% {
+    background-position: 130% 0;
+  }
+  75%,
+  100% {
+    background-position: -30% 0;
+  }
+}
+
+/* ───────── Barra y portada ───────── */
+
+.bar-nav a,
+.bar-cta {
+  white-space: nowrap;
+}
+
+.hero-kicker.hero-kicker {
+  margin: 0 0 18px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+}
+
+.hero-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  color: #dbe4ee;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  translate: -50% 0;
+}
+
+.hero-cue svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: cue 1.8s ease-in-out infinite;
+}
+
+@keyframes cue {
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* ───────── Conocimiento que acompaña ───────── */
+
+.know {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(84px, 11vw, 160px) var(--gutter) clamp(64px, 8vw, 120px);
+}
+
+.know .intro-lead {
+  max-width: 20ch;
+  font-size: clamp(2rem, 3.9vw, 3.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.032em;
+}
+
+.know-text {
+  margin-top: clamp(22px, 2.6vw, 34px);
+  max-width: 58ch;
+  font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+  line-height: 1.55;
+  color: var(--soft);
+}
+
+.know-text strong {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.know .btn {
+  margin-top: clamp(24px, 2.8vw, 36px);
+}
+
+.know-more {
+  margin-top: clamp(40px, 5vw, 72px);
+  max-width: 820px;
+}
+
+.know-more details {
+  border-top: 1px solid var(--rule);
+}
+
+.know-more details:first-child {
+  border-top-color: var(--navy);
+}
+
+.know-more details:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.know-more summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  padding: clamp(16px, 1.8vw, 24px) 0;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  list-style: none;
+}
+
+.know-more summary::-webkit-details-marker {
+  display: none;
+}
+
+.know-more summary::after {
+  content: "+";
+  font-weight: 500;
+  color: var(--oro-texto);
+  transition: rotate 0.25s ease;
+}
+
+.know-more details[open] summary::after {
+  rotate: 45deg;
+}
+
+.know-more details > div {
+  max-width: 66ch;
+  padding-bottom: clamp(18px, 2vw, 28px);
+  color: var(--soft);
+  animation: fam-entra 0.3s ease both;
+}
+
+.know-more details > div p + p {
+  margin-top: 12px;
+}
+
+/* ───────── Tres ejes ───────── */
+
+.ejes {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy-deep);
+  color: #fff;
+}
+
+/* Una luz ancha que cruza despacio el fondo. */
+.ejes::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(34% 44% at 30% 40%, rgba(40, 110, 190, 0.5), transparent 70%), radial-gradient(26% 34% at 80% 70%, rgba(245, 175, 49, 0.12), transparent 70%);
+  animation: ejes-luz 16s ease-in-out infinite alternate;
+}
+
+@keyframes ejes-luz {
+  to {
+    transform: translate(9%, 6%) scale(1.12);
+  }
+}
+
+.ejes-in {
+  position: relative;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 150px) var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 40px clamp(28px, 4.4vw, 80px);
+  align-items: center;
+}
+
+.ejes-tit {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.8vw, 26px);
+}
+
+.ejes-3 {
+  flex: none;
+  font-size: clamp(8.5rem, 19vw, 17.5rem);
+  font-weight: 800;
+  line-height: 0.76;
+  letter-spacing: -0.05em;
+}
+
+.ejes h2 {
+  font-size: clamp(2rem, 4.3vw, 4rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.032em;
+}
+
+.ejes h2 em,
+.eje3 h2 em {
+  display: block;
+  font-style: normal;
+  color: var(--gold);
+}
+
+.ejes-copy > p:not(.eyebrow) {
+  margin-top: clamp(20px, 2.4vw, 32px);
+  max-width: 50ch;
+  font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+  line-height: 1.55;
+  color: #dbe4ee;
+}
+
+.ejes-lista {
+  margin-top: clamp(24px, 3vw, 40px);
+  max-width: 560px;
+}
+
+.ejes-lista a {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: color 0.2s ease, padding 0.3s ease;
+}
+
+.ejes-lista li:last-child a {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.ejes-lista span {
+  flex: none;
+  width: 3.4em;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--gold);
+}
+
+.ejes-lista a:hover {
+  padding-left: 12px;
+  color: var(--gold);
+}
+
+.ejes-mapa {
+  justify-self: center;
+  width: min(100%, 460px);
+  aspect-ratio: 0.7;
+}
+
+.ejes-mapa canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ───────── Cada eje: imagen y lista de servicios ───────── */
+
+.eje {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 140px) var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 36px clamp(32px, 5.4vw, 104px);
+  align-items: center;
+}
+
+/* El segundo eje va al revés y sobre un fondo a todo el ancho. */
+.eje-inv {
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  background: var(--mist);
+  box-shadow: 0 0 0 100vmax var(--mist);
+  clip-path: inset(0 -100vmax);
+}
+
+.eje-inv .foto {
+  order: 2;
+}
+
+.eje-copy > p:not(.eyebrow),
+.eje3-in > p:not(.eyebrow),
+.plat-head p {
+  margin-top: clamp(14px, 1.6vw, 22px);
+  max-width: 54ch;
+  font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+  line-height: 1.55;
+  color: var(--soft);
+}
+
+.eje-lista {
+  margin-top: clamp(22px, 2.6vw, 36px);
+  border-top: 1px solid var(--navy);
+}
+
+.eje-lista a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: clamp(16px, 1.7vw, 22px) 14px clamp(16px, 1.7vw, 22px) 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--navy);
+  font-size: clamp(1.05rem, 1.45vw, 1.3rem);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.25s ease, padding 0.3s ease;
+}
+
+.eje-lista a > b {
+  font-weight: inherit;
+}
+
+.eje-lista a > span {
+  font-size: 0.86em;
+  font-weight: 700;
+  color: var(--oro-texto);
+  font-variant-numeric: tabular-nums;
+}
+
+.eje-lista svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: translate 0.3s ease, stroke 0.2s ease;
+}
+
+.eje-lista a:hover,
+.eje-lista a:focus-visible {
+  padding-left: 16px;
+  background: var(--mist);
+  font-weight: 800;
+}
+
+.eje-inv .eje-lista a:hover,
+.eje-inv .eje-lista a:focus-visible {
+  background: #fff;
+}
+
+.eje-lista a:hover svg,
+.eje-lista a:focus-visible svg {
+  stroke: var(--oro-texto);
+  translate: 3px -3px;
+}
+
+.soon {
+  justify-self: start;
+  margin-left: 10px;
+  padding: 2px 9px;
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px var(--dim);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--grey);
+  vertical-align: middle;
+}
+
+/* ───────── Franja ───────── */
+
+.banda {
+  position: relative;
+  height: clamp(360px, 64vh, 640px);
+  overflow: hidden;
+  background: var(--navy-deep);
+  color: #fff;
+}
+
+.banda > img {
+  position: absolute;
+  left: 0;
+  top: -18%;
+  width: 100%;
+  height: 136%;
+  object-fit: cover;
+}
+
+.banda::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(3, 20, 42, 0.88) 0%, rgba(3, 20, 42, 0.3) 62%, rgba(3, 20, 42, 0) 100%), linear-gradient(0deg, var(--navy-deep) 0%, rgba(3, 20, 42, 0) 30%);
+}
+
+.banda-copy {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 50%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  translate: 0 -50%;
+}
+
+.banda-tit {
+  max-width: 11ch;
+  font-size: clamp(2.7rem, 8.4vw, 7.6rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.banda-tit em {
+  color: var(--gold);
+}
+
+.banda-sub {
+  margin-top: clamp(18px, 2.4vw, 32px);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #dbe4ee;
+}
+
+/* ───────── Eje 3 (sobre azul) ───────── */
+
+.eje3 {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy-deep);
+  color: #fff;
+}
+
+.eje3-bg {
+  position: absolute;
+  left: 0;
+  top: -12%;
+  width: 100%;
+  height: 124%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.eje3-in {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 140px) var(--gutter) clamp(80px, 10vw, 150px);
+}
+
+.eje3-in > p:not(.eyebrow) {
+  color: #dbe4ee;
+}
+
+.eje3 .eje-lista {
+  border-top-color: rgba(255, 255, 255, 0.5);
+}
+
+.eje3 .eje-lista a {
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.eje3 .eje-lista a > b {
+  font-weight: inherit;
+}
+
+.eje-lista a > span {
+  color: var(--gold);
+}
+
+.eje3 .eje-lista a:hover,
+.eje3 .eje-lista a:focus-visible {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.eje3 .eje-lista a:hover svg,
+.eje3 .eje-lista a:focus-visible svg {
+  stroke: var(--gold);
+}
+
+/* ───────── Plataformas ───────── */
+
+.plat-head h2 {
+  max-width: 20ch;
+}
+
+.plat-head p {
+  max-width: 66ch;
+}
+
+.fams {
+  margin-top: clamp(48px, 6vw, 96px);
+}
+
+.fam:first-child {
+  border-top-color: var(--navy);
+}
+
+.fams-cuenta {
+  display: none;
+}
+
+/* Lista fija: la sección se queda en pantalla mientras el scroll recorre las plataformas.
+   A la izquierda, las cuatro familias (la activa despliega sus plataformas); a la derecha,
+   en el mismo sitio, va apareciendo la demostración de cada una. */
+@media (min-width: 1280px) and (min-height: 700px) {
+  .fams.es-fija {
+    height: calc(var(--pasos) * 44vh + 100vh - var(--bar-h));
+    margin-top: clamp(24px, 3vw, 48px);
+  }
+
+  .es-fija .fams-stick {
+    position: sticky;
+    top: var(--bar-h);
+    height: calc(100vh - var(--bar-h));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .es-fija .fam {
+    display: contents;
+  }
+
+  .es-fija .fam-head {
+    width: 36%;
+    padding: clamp(10px, 1.5vh, 16px) 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .es-fija .fam:first-child .fam-head {
+    border-top-color: var(--navy);
+  }
+
+  .es-fija .fam-head h3 {
+    font-size: clamp(1.6rem, 2.5vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.032em;
+    color: #a5b4c4;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .es-fija .fam-head h3:hover,
+  .es-fija .es-activa .fam-head h3 {
+    color: var(--navy);
+  }
+
+  .es-fija .fam-head > p,
+  .es-fija .fam-tabs {
+    max-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, margin 0.5s ease, opacity 0.3s ease;
+  }
+
+  .es-fija .es-activa .fam-head > p {
+    max-height: 5rem;
+    margin-top: 6px;
+    opacity: 1;
+  }
+
+  .es-fija .es-activa .fam-tabs {
+    max-height: 16rem;
+    margin-top: 12px;
+    opacity: 1;
+  }
+
+  .es-fija .fam-tabs a {
+    padding: 6px 0 6px 16px;
+  }
+
+  .es-fija .fam-tabs strong {
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    letter-spacing: -0.02em;
+  }
+
+  .es-fija .fam-stage {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 60%;
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 calc(-50% + 30px);
+    transition: opacity 0.45s ease, translate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s 0.45s;
+  }
+
+  .es-fija .es-activa .fam-stage {
+    opacity: 1;
+    visibility: visible;
+    translate: 0 -50%;
+    transition-delay: 0s;
+  }
+
+  .es-fija .fams-cuenta {
+    position: absolute;
+    left: 0;
+    bottom: clamp(14px, 3vh, 34px);
+    display: block;
+    width: 36%;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--grey);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .fams-cuenta b {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--navy);
+  }
+
+  .fams-cuenta i {
+    display: block;
+    height: 3px;
+    margin-top: 8px;
+    background: linear-gradient(var(--gold), var(--gold)) no-repeat 0 0 / calc(var(--p, 0) * 100%) 100%, var(--rule);
+  }
+}
+
+/* ───────── Servicios premium ───────── */
+
+.premium {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 140px) var(--gutter);
+  display: grid;
+  gap: clamp(18px, 2vw, 28px);
+}
+
+.premium > h2 {
+  margin-bottom: clamp(14px, 2vw, 28px);
+}
+
+.premium-card {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: clamp(380px, 44vw, 600px);
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--navy-deep);
+  color: #fff;
+}
+
+.premium-card > img {
+  position: absolute;
+  left: 0;
+  top: -14%;
+  width: 100%;
+  height: 128%;
+  object-fit: cover;
+}
+
+.premium-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(3, 20, 42, 0.92) 0%, rgba(3, 20, 42, 0.55) 46%, rgba(3, 20, 42, 0) 78%);
+}
+
+.premium-card > div {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  padding: clamp(26px, 4.6vw, 68px);
+}
+
+.premium-card h3 {
+  font-size: clamp(2.3rem, 6vw, 5.4rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.premium-lema {
+  margin-top: 10px;
+  max-width: 16ch;
+  font-size: clamp(1.25rem, 2.2vw, 1.9rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+}
+
+.premium-card p:not(.premium-lema) {
+  margin-top: 16px;
+  max-width: 50ch;
+  line-height: 1.55;
+  color: #dbe4ee;
+}
+
+.premium-card .btn {
+  margin-top: 24px;
+}
+
+/* ───────── Pantallas medianas y chicas ───────── */
+
+@media (max-width: 1100px) {
+  .ejes-in,
+  .eje,
+  .eje-inv {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ejes-mapa {
+    width: min(78%, 340px);
+  }
+
+  .eje .foto {
+    order: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .premium-card::after {
+    background: linear-gradient(0deg, rgba(3, 20, 42, 0.94) 30%, rgba(3, 20, 42, 0.3) 100%);
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-cue {
+    display: none;
+  }
+
+  .ejes-tit {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ejes-3 {
+    font-size: 8.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .luz,
+  .luz::before,
+  .ejes::before,
+  .hero-cue svg {
+    animation: none;
+  }
+
+  [data-parallax],
+  .foto img {
+    translate: none;
+  }
+}
+
+/* ───────── Estilo del prototipo: menú, botones y portada ───────── */
+
+/* Botones: etiqueta monoespaciada en mayúsculas, esquinas de 4 px. */
+.btn,
+.bar-menu {
+  min-height: 46px;
+  padding: 0 26px;
+  border-radius: 4px;
+  font: 400 0.75rem/1 var(--mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.btn-lg {
+  min-height: 54px;
+  padding: 0 36px;
+  font-size: 0.78rem;
+}
+
+.btn-line,
+.btn-line-navy {
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.bar-nav {
+  gap: clamp(22px, 2.6vw, 44px);
+}
+
+.bar-nav a {
+  font: 400 0.72rem/1 var(--mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.fam-tabs strong,
+.fam-head h3 {
+  font-weight: 800;
+}
+
+/* En la página general el contenido va más al centro, con el margen ancho del prototipo.
+   La barra se alinea con él. */
+#home,
+body:has(#home:not([hidden])) .bar {
+  --gutter: clamp(20px, 7vw, 96px);
+  --band: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+}
+
+body:has(#home:not([hidden])) .bar {
+  padding: 0 var(--band);
+}
+
+/* Portada: el texto a media altura, alineado con el logo. */
+.hero-copy h1 {
+  max-width: 11ch;
+  font-size: clamp(2.7rem, 6.2vw, 6rem);
+  line-height: 0.97;
+  letter-spacing: -0.03em;
+}
+
+.hero-copy p {
+  max-width: 50ch;
+}
+
+.hero-kicker.hero-kicker {
+  font: 400 0.74rem/1.4 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-cue {
+  font: 400 0.68rem/1 var(--mono);
+}
+
+@media (min-width: 761px) {
+  .hero-copy {
+    left: var(--band);
+    right: auto;
+    top: 50%;
+    bottom: auto;
+    width: min(56vw, 800px);
+    max-width: none;
+    translate: 0 -46%;
+  }
+}
+
+.banda-tit em {
+  font-style: italic;
+}
+
+.banda-sub,
+.fams-cuenta {
+  font-family: var(--mono);
+  font-weight: 400;
+}

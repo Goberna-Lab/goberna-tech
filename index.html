@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goberna Tech | La estrategia transforma territorios</title>
+    <meta
+      name="description"
+      content="Goberna Tech integra estrategia, tecnología y conocimiento especializado para acompañar a autoridades y líderes en proyectos de impacto: gobierno y gestión, escuela y formación, y estrategia electoral."
+    />
+    <link rel="icon" type="image/svg+xml" href="/isotipo.svg" />
+    <meta name="theme-color" content="#020819" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="g">
+    <!-- Página según el mockup de Adobe XD (20/11/2026). 3D en la portada, en "Conocimiento que acompaña" (src/templo3d.js)
+         y en el legado (src/legado3d.js), y el territorio de hilos de la portada (src/portada3d.js);
+         el globo (src/globo3d.js) quedó guardado sin usar;
+         la versión anterior, con la escena 3D y las demostraciones, quedó en index-3d.html. -->
+    <a class="skip" href="#nosotros">Saltar al contenido</a>
+
+    <header class="g-bar" id="bar">
+      <div class="g-wrap">
+        <a class="g-logo" href="#inicio" aria-label="Goberna Tech, inicio">
+          <img src="/logo.svg" alt="" width="331" height="92" />
+        </a>
+        <nav class="g-nav" aria-label="Secciones">
+          <div class="g-nav-grupo">
+            <a href="#nosotros">Nosotros</a>
+            <div class="g-sub">
+              <a href="#nosotros">Quiénes somos</a>
+              <a href="#mision">Misión</a>
+              <a href="#vision">Visión</a>
+            </div>
+          </div>
+          <div class="g-nav-grupo">
+            <a href="#servicios">Servicios</a>
+            <div class="g-sub">
+              <a href="#eje-gobierno">Gobierno y gestión</a>
+              <a href="#eje-escuela">Escuela y formación</a>
+              <a href="#eje-electoral">Estrategia electoral</a>
+            </div>
+          </div>
+          <a href="#editorial">Editorial</a>
+          <a href="#escuela-de-gobierno">Cursos</a>
+          <a href="#munitech">Munitech</a>
+          <a href="#blog">Blog</a>
+        </nav>
+        <button class="g-menu-btn" type="button" aria-expanded="false" aria-controls="g-menu">Menú</button>
+      </div>
+    </header>
+
+    <!-- Menú a pantalla completa (teléfono y tableta) -->
+    <div class="g-menu" id="g-menu" hidden>
+      <nav aria-label="Menú completo">
+        <a href="#nosotros">Nosotros</a>
+        <div class="g-menu-sub">
+          <a href="#nosotros">Quiénes somos</a>
+          <a href="#mision">Misión</a>
+          <a href="#vision">Visión</a>
+        </div>
+        <a href="#servicios">Servicios</a>
+        <div class="g-menu-sub">
+          <a href="#eje-gobierno">Gobierno y gestión</a>
+          <a href="#eje-escuela">Escuela y formación</a>
+          <a href="#eje-electoral">Estrategia electoral</a>
+        </div>
+        <a href="#editorial">Editorial</a>
+        <a href="#escuela-de-gobierno">Cursos</a>
+        <a href="#munitech">Munitech</a>
+        <a href="#blog">Blog</a>
+        <a class="g-btn g-btn-oro" href="#contacto">Agenda una reunión</a>
+      </nav>
+    </div>
+
+    <main id="home">
+      <!-- 1. Portada -->
+      <section class="g-hero" id="inicio">
+        <!-- La foto de América Latina del hero del Foro de Estado, con foco en el Perú y la red de Lima a las capitales de región (src/portada-mapa.js).
+             Quedaron guardados sin usar, con un <canvas class="g-hero-3d">: el Perú en hilos de luz (src/peru3d.js),
+             el territorio de montañas (src/portada3d.js) y el globo (src/globo3d.js). -->
+        <div class="g-hero-mapa" aria-hidden="true">
+          <div class="g-hero-deriva">
+            <svg class="g-hero-red" viewBox="0 0 1920 949" preserveAspectRatio="xMaxYMid slice">
+              <image href="/img/hero-mapa.webp" x="-111" y="0" width="2142" height="949" preserveAspectRatio="none" />
+              <g class="g-red"></g>
+            </svg>
+          </div>
+        </div>
+        <div class="g-hero-brillo" aria-hidden="true"><img src="/img/hero-brillo.webp" alt="" width="1688" height="1004" /></div>
+        <div class="g-wrap g-hero-in">
+          <p class="g-kicker">Inteligencia estratégica</p>
+          <h1><span>Goberna</span> <span>Tech</span></h1>
+          <p class="g-hero-p">Estrategia, tecnología y consultoría política.</p>
+          <div class="g-acciones">
+            <a class="g-btn g-btn-oro" href="#nosotros">Conoce Goberna Tech</a>
+            <a class="g-btn g-btn-linea" href="#contacto">Agenda una reunión</a>
+          </div>
+        </div>
+        <a class="g-desliza" href="#nosotros">Desliza para explorar<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6l7 6 7-6M5 13l7 6 7-6"/></svg></a>
+      </section>
+
+      <!-- 2. Conocimiento que acompaña -->
+      <section class="g-saber" id="nosotros">
+        <div class="g-wrap">
+          <p class="g-kicker">Conocimiento que acompaña</p>
+          <h2 class="g-titulo g-ancho"><em>Somos especialistas</em> en estrategia, tecnología y consultoría política.</h2>
+          <div class="g-saber-in">
+            <div class="g-saber-txt">
+              <h3>Brindamos asesoría integral y personalizada</h3>
+              <p>
+                a políticos y autoridades de todos los niveles de gobierno, acompañándolos en el
+                desarrollo de proyectos de impacto.
+              </p>
+              <a class="g-btn g-btn-oro" href="#servicios">Quiero saber más</a>
+            </div>
+            <!-- Un chip que construye el edificio, en 3D (src/templo3d.js). -->
+            <div class="g-saber-3d" data-parallax="56" aria-hidden="true"><canvas></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Misión y visión: texto oficial del documento "GOBERNA TECH - Información". Las frases se encienden
+           palabra por palabra al bajar (src/credo.js). -->
+      <section class="g-credo" id="credo" aria-label="Misión y visión">
+        <div class="g-wrap">
+          <article class="g-credo-b" id="mision" data-credo>
+            <h2 class="g-credo-t">Misión</h2>
+            <p class="g-credo-txt">
+              Acompañar a políticos, autoridades e instituciones en el fortalecimiento de su liderazgo y gestión,
+              integrando estrategia, tecnología y conocimiento especializado para
+              <em>generar resultados de alto impacto que trasciendan.</em>
+            </p>
+          </article>
+          <article class="g-credo-b" id="vision" data-credo>
+            <h2 class="g-credo-t">Visión</h2>
+            <p class="g-credo-txt">
+              Impulsar una nueva generación de autoridades, líderes y organizaciones políticas capaces de transformar
+              sus desafíos en oportunidades mediante el uso de tecnología y estrategia.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. Nuestros servicios: tres tarjetas apiladas -->
+      <section class="g-serv" id="servicios">
+        <div class="g-wrap">
+          <h2 class="g-titulo">Nuestros <em>servicios</em></h2>
+          <div class="g-ejes">
+            <article class="g-eje g-eje-1">
+              <span class="g-eje-n" aria-hidden="true" data-parallax="-26">01</span>
+              <div>
+                <h3>Gobierno y <em>gestión</em></h3>
+                <p>Estrategias para una gestión moderna, eficiente y orientada a resultados.</p>
+              </div>
+              <a class="g-btn g-btn-oro" href="#eje-gobierno">Ver servicios</a>
+            </article>
+            <article class="g-eje g-eje-2">
+              <span class="g-eje-n" aria-hidden="true" data-parallax="-26">02</span>
+              <div>
+                <h3>Escuela y <em>formación</em></h3>
+                <p>Conocimiento especializado para equipos y liderazgos públicos.</p>
+              </div>
+              <a class="g-btn g-btn-oro" href="#eje-escuela">Ver servicios</a>
+            </article>
+            <article class="g-eje g-eje-3">
+              <span class="g-eje-n" aria-hidden="true" data-parallax="-26">03</span>
+              <div>
+                <h3>Estrategia Electoral</h3>
+                <p>Inteligencia estratégica, escucha activa y planificación para cada etapa de la campaña.</p>
+              </div>
+              <a class="g-btn g-btn-oro" href="#eje-electoral">Ver servicios</a>
+            </article>
+          </div>
+        <!-- Los 12 servicios, por eje (texto del documento "GOBERNA TECH - Información"). Con JavaScript se ven como
+             pestañas (src/home.js); sin él, uno debajo del otro. -->
+        <div class="g-svc" id="servicios-detalle">
+          <div class="g-svc-tabs" role="tablist" aria-label="Ejes de servicio">
+            <button class="g-svc-tab" type="button" role="tab" id="tab-gobierno" aria-controls="eje-gobierno" aria-selected="true"><span>01</span>Gobierno y gestión</button>
+            <button class="g-svc-tab" type="button" role="tab" id="tab-escuela" aria-controls="eje-escuela" aria-selected="false" tabindex="-1"><span>02</span>Escuela y formación</button>
+            <button class="g-svc-tab" type="button" role="tab" id="tab-electoral" aria-controls="eje-electoral" aria-selected="false" tabindex="-1"><span>03</span>Estrategia electoral</button>
+          </div>
+          <div class="g-svc-panel" role="tabpanel" id="eje-gobierno" aria-labelledby="tab-gobierno">
+            <h3 class="g-svc-eje">Gobierno y gestión</h3>
+            <p class="g-svc-intro">Estrategias para una gestión moderna, eficiente y orientada a resultados.</p>
+            <ol class="g-svc-lista">
+              <li class="g-svc-item" id="asesoria-legal">
+                <span class="g-svc-n" aria-hidden="true">01</span>
+                <div>
+                  <h3>Asesoría y defensa legal</h3>
+                  <p>Brindamos asesoría, representación y defensa legal a autoridades, funcionarios y servidores públicos frente a los desafíos jurídicos derivados del ejercicio de sus funciones.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Gobierno y gestión: Asesoría y defensa legal">Agenda una reunión</a>
+              </li>
+              <li class="g-svc-item" id="transformacion-digital">
+                <span class="g-svc-n" aria-hidden="true">02</span>
+                <div>
+                  <h3>Innovación y transformación digital</h3>
+                  <p class="g-svc-gancho">Tecnología e inteligencia artificial para transformar la gestión pública.</p>
+                  <p>Desarrollamos soluciones tecnológicas personalizadas que permiten modernizar los servicios públicos, optimizar procesos institucionales y fortalecer la capacidad de gestión de las entidades gubernamentales.</p>
+                </div>
+                <div class="g-svc-acciones">
+                  <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Gobierno y gestión: Innovación y transformación digital">Agenda una reunión</a>
+                  <a class="g-btn g-btn-linea" href="#plataformas">Ver plataformas</a>
+                </div>
+              </li>
+              <li class="g-svc-item" id="comunicacion-de-gestion">
+                <span class="g-svc-n" aria-hidden="true">03</span>
+                <div>
+                  <h3>Comunicación y posicionamiento de gestión</h3>
+                  <p class="g-svc-gancho">Comunicar resultados también es parte de una buena gestión.</p>
+                  <p>Diseñamos estrategias integrales de comunicación gubernamental que permiten a las autoridades informar sobre sus acciones, proyectos y resultados, fortaleciendo la transparencia y el vínculo con la ciudadanía.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Gobierno y gestión: Comunicación y posicionamiento de gestión">Agenda una reunión</a>
+              </li>
+              <li class="g-svc-item" id="cooperacion-internacional">
+                <span class="g-svc-n" aria-hidden="true">04</span>
+                <div>
+                  <h3>Cooperación internacional</h3>
+                  <p class="g-svc-gancho">Conectamos tu gestión con oportunidades globales de desarrollo y financiamiento.</p>
+                  <p>Facilitamos la vinculación de autoridades e instituciones públicas con organismos internacionales, gobiernos, entidades de cooperación y potenciales fuentes de financiamiento para impulsar proyectos de desarrollo local y regional.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Gobierno y gestión: Cooperación internacional">Agenda una reunión</a>
+              </li>
+              <li class="g-svc-item" id="encuestas-y-focus-groups">
+                <span class="g-svc-n" aria-hidden="true">05</span>
+                <div>
+                  <h3>Encuestas y focus groups</h3>
+                  <p class="g-svc-gancho">Conoce las necesidades de tu ciudadanía y toma decisiones con información.</p>
+                  <p>Realizamos estudios de opinión pública, encuestas de percepción ciudadana y focus groups que permiten a las autoridades conocer las principales necesidades, preocupaciones y expectativas de la población.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Gobierno y gestión: Encuestas y focus groups">Agenda una reunión</a>
+              </li>
+            </ol>
+          </div>
+          <div class="g-svc-panel" role="tabpanel" id="eje-escuela" aria-labelledby="tab-escuela">
+            <h3 class="g-svc-eje">Escuela y formación</h3>
+            <ol class="g-svc-lista">
+              <li class="g-svc-item" id="escuela-de-gobierno">
+                <span class="g-svc-n" aria-hidden="true">06</span>
+                <div>
+                  <h3>Escuela de Gobierno y Gestión</h3>
+                  <p class="g-svc-gancho">Formamos líderes preparados para los desafíos del gobierno.</p>
+                  <p>Cursos, diplomados y especializaciones con docentes expertos, cátedras de alto impacto y certificaciones con universidades de alto nivel.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Escuela y formación: Escuela de Gobierno y Gestión">Inscríbete</a>
+              </li>
+              <li class="g-svc-item" id="capacitacion-de-equipos">
+                <span class="g-svc-n" aria-hidden="true">07</span>
+                <div>
+                  <h3>Capacitación de equipos</h3>
+                  <p class="g-svc-gancho">Fortalecemos las capacidades de tu equipo.</p>
+                  <p>Diseñamos programas de capacitación a medida para autoridades, funcionarios, servidores públicos y equipos institucionales, considerando los objetivos, desafíos y responsabilidades de cada organización.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Escuela y formación: Capacitación de equipos">Agenda una reunión</a>
+              </li>
+              <li class="g-svc-item" id="editorial">
+                <span class="g-svc-n" aria-hidden="true">08</span>
+                <div>
+                  <h3>Editorial</h3>
+                  <p>Nuestra línea editorial está dirigida a autoridades, altos funcionarios, líderes políticos, consultores y profesionales que buscan acceder a conocimientos, experiencias y herramientas que fortalezcan su capacidad de análisis, liderazgo y toma de decisiones.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Escuela y formación: Editorial">Revisa nuestro catálogo</a>
+              </li>
+            </ol>
+          </div>
+          <div class="g-svc-panel" role="tabpanel" id="eje-electoral" aria-labelledby="tab-electoral">
+            <h3 class="g-svc-eje">Estrategia electoral</h3>
+            <ol class="g-svc-lista">
+              <li class="g-svc-item" id="campana-360">
+                <span class="g-svc-n" aria-hidden="true">09</span>
+                <div>
+                  <h3>Campaña 360</h3>
+                  <p class="g-svc-gancho">Estrategia integral.</p>
+                  <p>Diseñamos, planificamos y ejecutamos campañas políticas integrales que articulan inteligencia electoral, estrategia política, comunicación, tecnología y organización territorial. Nuestro modelo de Campaña 360° contempla el análisis del escenario político, la planificación estratégica, el desarrollo de propuestas, la comunicación digital, la producción audiovisual, las relaciones con medios y la coordinación de actividades territoriales.</p>
+                  <p>Integramos metodologías de estrategia política como STRATPOL, herramientas de análisis de datos y soluciones tecnológicas para facilitar la organización, el seguimiento y la evaluación de las acciones de campaña.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Estrategia electoral: Campaña 360">Agenda una reunión</a>
+              </li>
+              <li class="g-svc-item" id="encuestas-electorales">
+                <span class="g-svc-n" aria-hidden="true">10</span>
+                <div>
+                  <h3>Encuestas</h3>
+                  <p class="g-svc-gancho">Información electoral para comprender el escenario político.</p>
+                  <p>Desarrollamos encuestas de opinión pública e intención de voto que permiten conocer las percepciones ciudadanas, identificar los principales problemas de interés público y analizar las tendencias del escenario electoral.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Estrategia electoral: Encuestas">Cotiza el servicio</a>
+              </li>
+              <li class="g-svc-item" id="focus-groups-electorales">
+                <span class="g-svc-n" aria-hidden="true">11</span>
+                <div>
+                  <h3>Focus groups</h3>
+                  <p class="g-svc-gancho">Comprende las percepciones, preocupaciones y expectativas ciudadanas.</p>
+                  <p>Realizamos estudios cualitativos mediante grupos focales que permiten profundizar en las opiniones, experiencias y valoraciones de la ciudadanía sobre temas de interés político y electoral.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Estrategia electoral: Focus groups">Cotiza el servicio</a>
+              </li>
+              <li class="g-svc-item" id="media-training">
+                <span class="g-svc-n" aria-hidden="true">12</span>
+                <div>
+                  <h3>Media training para candidatos</h3>
+                  <p class="g-svc-gancho">Preparamos líderes para comunicar con seguridad, claridad y liderazgo.</p>
+                  <p>Brindamos entrenamiento especializado en comunicación política, oratoria, vocería pública, entrevistas, debates y manejo de medios para candidatos y líderes políticos.</p>
+                </div>
+                <a class="g-btn g-btn-linea-oro" href="#contacto" data-interes="Estrategia electoral: Media training para candidatos">Agenda una reunión</a>
+              </li>
+            </ol>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <!-- 4. Servicios premium -->
+      <section class="g-premium" id="premium">
+        <div class="g-wrap">
+          <h2 class="g-titulo">Servicios <em>premium</em></h2>
+          <article class="g-prem">
+            <!-- Las tres etapas (Gestión, Trayectoria, Legado) en 3D (src/legado3d.js). -->
+            <div class="g-legado-3d" data-parallax="44" aria-hidden="true"><canvas></canvas></div>
+            <div>
+              <h3><span>Tu legado</span> Permanece</h3>
+              <p>
+                Servicio exclusivo para autoridades y exautoridades que buscan preservar, documentar y
+                proyectar los resultados de su gestión, consolidando su trayectoria y legado público.
+              </p>
+              <ol class="g-pasos">
+                <li>Gestión</li>
+                <li>Trayectoria</li>
+                <li>Legado</li>
+              </ol>
+              <a class="g-btn g-btn-oro" href="#contacto" data-interes="Servicios premium: Legado">Conoce el servicio</a>
+            </div>
+          </article>
+        </div>
+        <article class="g-prem g-prem-inv">
+          <div class="g-wrap">
+            <div>
+              <h3><span>Media Training</span> Presidencial</h3>
+              <p>
+                Programa exclusivo de preparación en comunicación, oratoria, entrevistas y manejo de
+                medios, diseñado para candidatos presidenciales y líderes políticos de alto nivel. El
+                programa ofrece una experiencia adaptada al perfil y a las necesidades de cada
+                participante.
+              </p>
+              <p class="g-lugar">Miami, Estados Unidos.</p>
+              <a class="g-btn g-btn-oro" href="#contacto" data-interes="Servicios premium: Media Training Presidencial">Conoce el servicio</a>
+            </div>
+            <figure class="g-prem-foto" data-parallax="44">
+              <img src="/img/media-training.webp" alt="Ponente con micrófono durante una conferencia, frente a la pantalla del escenario" width="1200" height="1282" loading="lazy" />
+            </figure>
+          </div>
+        </article>
+      </section>
+
+      <!-- 5. Blog. Las tres entradas son las del mockup: todavía no tienen artículo. -->
+      <section class="g-blog" id="blog">
+        <div class="g-wrap">
+          <div class="g-blog-cab">
+            <div>
+              <h2>Blog</h2>
+              <p>
+                Explora artículos de opinión, análisis de actualidad y contenidos especializados en
+                gobierno, política, innovación y liderazgo.
+              </p>
+            </div>
+            <a class="g-btn g-btn-linea-oro" href="#blog" data-pendiente>Ver todo</a>
+          </div>
+          <div class="g-posts">
+            <article class="g-post">
+              <img src="/img/k-blog-1.webp" alt="" width="682" height="368" loading="lazy" />
+              <div>
+                <h3>Inteligencia artificial en la gestión pública</h3>
+                <p class="g-post-meta"><img src="/isotipo.svg" alt="" width="20" height="20" /><span><b>Goberna Tech</b>Tecnología</span></p>
+              </div>
+            </article>
+            <article class="g-post">
+              <img src="/img/k-blog-2.webp" alt="" width="682" height="368" loading="lazy" />
+              <div>
+                <h3>Gobierno digital: hacia una nueva era</h3>
+                <p class="g-post-meta"><img src="/isotipo.svg" alt="" width="20" height="20" /><span><b>Goberna Tech</b>Tecnología</span></p>
+              </div>
+            </article>
+            <article class="g-post">
+              <img src="/img/k-blog-3.webp" alt="" width="682" height="368" loading="lazy" />
+              <div>
+                <h3>Datos e inteligencia para decisiones estratégicas</h3>
+                <p class="g-post-meta"><img src="/isotipo.svg" alt="" width="20" height="20" /><span><b>Goberna Tech</b>Tecnología</span></p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <!-- La cúpula asoma sobre el pie: esta es la parte que queda sobre el fondo claro. -->
+        <div class="g-cupula g-cupula-a" aria-hidden="true"><img src="/img/k-cupula.webp" alt="" width="624" height="586" loading="lazy" /></div>
+      </section>
+    </main>
+
+    <!-- Munitech (Edición Perú): noticias, artículos y normas para la gestión municipal, según el documento
+         "GOBERNA TECH - Información". Las tres secciones esperan su contenido: cuando lo haya, reemplazar cada
+         .g-mt-vacio por la lista de entradas. -->
+    <main id="munitech" class="g-pag" hidden>
+      <div class="g-wrap">
+        <p class="g-kicker">Munitech · Edición Perú</p>
+        <h1 class="g-titulo g-izq">Información para la <em>gestión municipal</em></h1>
+        <p class="g-pag-p">
+          Accede a noticias de actualidad, artículos especializados y un repositorio actualizado de leyes y normativas
+          esenciales para la gestión municipal. Encuentra información relevante, herramientas y recursos que te permitan
+          tomar decisiones estratégicas.
+        </p>
+        <div class="g-mt-secs">
+          <section class="g-mt" aria-labelledby="mt-noticias">
+            <span class="g-svc-n" aria-hidden="true">01</span>
+            <h2 id="mt-noticias">Noticias</h2>
+            <p>Actualidad de la gestión municipal en el Perú.</p>
+            <p class="g-mt-vacio">Contenido en preparación.</p>
+          </section>
+          <section class="g-mt" aria-labelledby="mt-articulos">
+            <span class="g-svc-n" aria-hidden="true">02</span>
+            <h2 id="mt-articulos">Artículos especializados</h2>
+            <p>Análisis y orientación para autoridades y funcionarios municipales.</p>
+            <p class="g-mt-vacio">Contenido en preparación.</p>
+          </section>
+          <section class="g-mt" aria-labelledby="mt-normas">
+            <span class="g-svc-n" aria-hidden="true">03</span>
+            <h2 id="mt-normas">Leyes y normativas</h2>
+            <p>Repositorio actualizado de las normas esenciales para la gestión municipal.</p>
+            <p class="g-mt-vacio">Contenido en preparación.</p>
+          </section>
+        </div>
+        <p class="g-mt-fuente">
+          Fuente: Municipio al Día
+          (<a href="https://www.gob.pe/municipioaldia" target="_blank" rel="noopener">gob.pe/municipioaldia</a>).
+        </p>
+        <div class="g-mt-plat">
+          <p>¿Buscas las <strong>plataformas de Goberna Tech</strong> para municipalidades?</p>
+          <a class="g-btn g-btn-linea" href="#plataformas">Ver plataformas</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Plataformas para municipalidades (parte del servicio "Innovación y transformación digital"). La lista la arma
+         src/home.js. Antes estaban bajo el nombre Munitech. -->
+    <main id="plataformas" class="g-pag" hidden>
+      <div class="g-wrap">
+        <p class="g-kicker">Innovación y transformación digital</p>
+        <h1 class="g-titulo g-izq">Plataformas para la <em>gestión municipal</em></h1>
+        <p class="g-pag-p">Once plataformas en cuatro familias. Cada una tiene su propia página.</p>
+        <div class="g-fams"></div>
+      </div>
+    </main>
+
+    <!-- Contacto -->
+    <main id="contacto" class="g-pag" hidden>
+      <div class="g-wrap">
+      <section class="contact">
+        <div class="contact-copy">
+          <h2>Conversemos</h2>
+          <p>
+            Cuéntanos qué necesita tu municipalidad, tu equipo o tu campaña y coordinamos una
+            demostración o una reunión sobre lo que te interesa.
+          </p>
+        </div>
+        <form id="contact-form" novalidate>
+          <label>
+            Nombre
+            <input type="text" name="nombre" autocomplete="name" required />
+          </label>
+          <label>
+            Cargo
+            <select name="cargo">
+              <option>Alcalde o alcaldesa</option>
+              <option>Funcionario</option>
+              <option>Servidor público</option>
+              <option>Otro</option>
+            </select>
+          </label>
+          <label>
+            Municipalidad o institución
+            <input type="text" name="institucion" autocomplete="organization" />
+          </label>
+          <label>
+            Correo
+            <input type="email" name="correo" autocomplete="email" required />
+          </label>
+          <label class="wide">
+            Qué te interesa
+            <select name="interes">
+              <option>Todas las plataformas</option>
+              <option>Territorio y trabajo de campo</option>
+              <option>Atención al ciudadano</option>
+              <option>Seguridad ciudadana</option>
+              <option>Gestión interna</option>
+              <optgroup label="Gobierno y gestión">
+                <option>Gobierno y gestión: Asesoría y defensa legal</option>
+                <option>Gobierno y gestión: Innovación y transformación digital</option>
+                <option>Gobierno y gestión: Comunicación y posicionamiento de gestión</option>
+                <option>Gobierno y gestión: Cooperación internacional</option>
+                <option>Gobierno y gestión: Encuestas y focus groups</option>
+              </optgroup>
+              <optgroup label="Escuela y formación">
+                <option>Escuela y formación: Escuela de Gobierno y Gestión</option>
+                <option>Escuela y formación: Capacitación de equipos</option>
+                <option>Escuela y formación: Editorial</option>
+              </optgroup>
+              <optgroup label="Estrategia electoral">
+                <option>Estrategia electoral: Campaña 360</option>
+                <option>Estrategia electoral: Encuestas</option>
+                <option>Estrategia electoral: Focus groups</option>
+                <option>Estrategia electoral: Media training para candidatos</option>
+              </optgroup>
+              <optgroup label="Servicios premium">
+                <option>Servicios premium: Legado</option>
+                <option>Servicios premium: Media Training Presidencial</option>
+              </optgroup>
+            </select>
+          </label>
+          <label class="check wide">
+            <input type="checkbox" name="resumen" />
+            <span>Quiero recibir novedades de Goberna Tech</span>
+          </label>
+          <button class="g-btn g-btn-oro" type="submit">Enviar solicitud</button>
+          <p class="form-note wide" role="status" hidden></p>
+        </form>
+      </section>
+      </div>
+    </main>
+
+    <!-- Página de una plataforma. La arma src/home.js con lo que hay en src/modulos. -->
+    <main id="modulo" class="module" hidden></main>
+
+    <footer class="g-pie">
+      <div class="g-cupula g-cupula-b" aria-hidden="true"><img src="/img/k-cupula.webp" alt="" width="624" height="586" loading="lazy" /></div>
+      <div class="g-wrap">
+        <img class="g-pie-logo" src="/logo.svg" alt="Goberna Tech. Gestión pública, inteligencia, consultoría." width="331" height="92" />
+        <nav aria-label="Pie de página">
+          <a href="#nosotros">Nosotros</a>
+          <a href="#editorial">Editorial</a>
+          <a href="#munitech">Munitech</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#escuela-de-gobierno">Cursos</a>
+          <a href="#blog">Blog</a>
+        </nav>
+      </div>
+      <p class="g-legal">© <span id="year"></span> Goberna Tech</p>
+    </footer>
+
+    <script type="module" src="/src/home.js"></script>
+  </body>
+</html>

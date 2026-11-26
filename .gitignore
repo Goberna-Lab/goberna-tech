@@ -1,0 +1,6 @@
+node_modules
+dist
+# Repo aparte (Goberna-Lab/Foro-estado2)
+Foro-estado2/
+# Lo genera "npm run standalone" (y el despliegue a GitHub Pages)
+goberna-tech.html

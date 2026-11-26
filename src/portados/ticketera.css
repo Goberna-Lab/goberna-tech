@@ -1,0 +1,339 @@
+/* Generado por tools/portar.py a partir de app/globals.css de la presentación. */
+.mod-ticketera {
+  --fondo: #ffffff;
+  --fondo-2: color-mix(in srgb, #b4c2d1 22%, #ffffff);
+  --papel: #ffffff;
+  --tinta: #072e51;
+  --suave: #5d7389;
+  --linea: rgba(7, 46, 81, 0.18);
+  --pino: #072e51;
+  --pino-claro: color-mix(in srgb, #072e51 8%, #ffffff);
+  --trigo: #f5af31;
+  --trigo-claro: color-mix(in srgb, #f5af31 20%, #ffffff);
+  --barro: #04213c;
+  --pantalla: #04213c;
+  --pantalla-texto: #ffffff;
+  --f-display: 'Bricolage Grotesque', 'Segoe UI', sans-serif;
+  --f-texto: 'Figtree', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+.mod-ticketera:not([data-theme="light"]) {
+    --fondo: #04213c; --fondo-2: #072e51; --papel: #072e51; --tinta: #ffffff; --suave: #b4c2d1; --linea: rgba(255, 255, 255, 0.18);
+    --pino: #f5af31; --pino-claro: rgba(245, 175, 49, 0.15); --trigo: #f5af31; --trigo-claro: rgba(245, 175, 49, 0.15); --barro: #b4c2d1;
+    --pantalla: #04213c; --pantalla-texto: #ffffff; color-scheme: dark;
+  }
+
+}
+.mod-ticketera[data-theme="dark"] {
+  --fondo: #04213c; --fondo-2: #072e51; --papel: #072e51; --tinta: #ffffff; --suave: #b4c2d1; --linea: rgba(255, 255, 255, 0.18);
+  --pino: #f5af31; --pino-claro: rgba(245, 175, 49, 0.15); --trigo: #f5af31; --trigo-claro: rgba(245, 175, 49, 0.15); --barro: #b4c2d1;
+  --pantalla: #04213c; --pantalla-texto: #ffffff; color-scheme: dark;
+}
+.mod-ticketera * { box-sizing: border-box; }
+.mod-ticketera { margin: 0; background: var(--fondo); color: var(--tinta); font: 400 16px/1.6 var(--f-texto); -webkit-font-smoothing: antialiased; }
+.mod-ticketera h1, .mod-ticketera h2, .mod-ticketera h3 { font-family: var(--f-display); margin: 0; line-height: 1.04; text-wrap: balance; letter-spacing: -0.015em; }
+.mod-ticketera p { margin: 0; }
+.mod-ticketera button { font: inherit; color: inherit; }
+.mod-ticketera a { color: inherit; }
+.mod-ticketera :focus-visible { outline: 2px solid var(--trigo); outline-offset: 3px; }
+.mod-ticketera .envoltura { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.mod-ticketera .seccion { padding-block: clamp(64px, 9vw, 112px); }
+.mod-ticketera .seccion-alterna { background: var(--fondo-2); }
+.mod-ticketera .etiqueta { font: 600 12px/1 var(--f-texto); letter-spacing: 0.12em; text-transform: uppercase; color: var(--pino); }
+.mod-ticketera .titulo-seccion { font-size: clamp(2.1rem, 4.4vw, 3.4rem); font-weight: 700; margin-top: 12px; max-width: 20ch; }
+.mod-ticketera .p-intro { color: var(--suave); max-width: 62ch; margin-top: 14px; font-size: 1.06rem; }
+.mod-ticketera .codigo { font-family: var(--f-mono); font-weight: 700; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
+.mod-ticketera .cabecera { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--fondo) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--linea); }
+.mod-ticketera .cabecera .envoltura { display: flex; align-items: center; gap: 24px; height: 62px; }
+.mod-ticketera .marca { display: flex; align-items: center; gap: 10px; font: 800 1.2rem/1 var(--f-display); text-decoration: none; }
+.mod-ticketera .marca-ticket { font: 700 11px/1 var(--f-mono); background: var(--pino); color: var(--fondo); padding: 6px 7px; border-radius: 4px; }
+.mod-ticketera .nav { display: flex; gap: 22px; margin-left: auto; font-size: 0.93rem; color: var(--suave); }
+.mod-ticketera .nav a { text-decoration: none; }
+.mod-ticketera .nav a:hover { color: var(--tinta); }
+.mod-ticketera .sello-gm { font-size: 12px; border: 1px solid var(--linea); padding: 7px 11px; border-radius: 999px; color: var(--suave); white-space: nowrap; }
+@media (max-width: 880px) {
+.mod-ticketera .nav { display: none; }
+.mod-ticketera .sello-gm { margin-left: auto; }
+ }
+.mod-ticketera .portada { padding-block: clamp(40px, 6vw, 72px) clamp(48px, 6vw, 80px); }
+.mod-ticketera .portada-texto { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 32px; align-items: end; }
+@media (max-width: 900px) {
+.mod-ticketera .portada-texto { grid-template-columns: minmax(0, 1fr); }
+ }
+.mod-ticketera .portada h1 { font-size: clamp(2.8rem, 6.4vw, 5.2rem); font-weight: 800; }
+.mod-ticketera .portada h1 .resalte { color: var(--pino); }
+.mod-ticketera .portada .bajada { color: var(--suave); font-size: 1.1rem; max-width: 48ch; }
+.mod-ticketera .acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.mod-ticketera .boton { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 18px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; border: 1px solid var(--linea); background: var(--papel); cursor: pointer; transition: transform 0.12s, background 0.2s; }
+.mod-ticketera .boton:hover { border-color: var(--suave); }
+.mod-ticketera .boton:active { transform: translateY(1px); }
+.mod-ticketera .boton-fuerte { background: var(--pino); color: var(--fondo); border-color: var(--pino); }
+.mod-ticketera .boton-fuerte:hover { filter: brightness(1.08); }
+.mod-ticketera .boton:disabled { opacity: 0.45; cursor: not-allowed; }
+.mod-ticketera .simulador { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 1020px) {
+.mod-ticketera .simulador { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.mod-ticketera .pantalla { grid-column: 1 / -1; }
+ }
+@media (max-width: 640px) {
+.mod-ticketera .simulador { grid-template-columns: minmax(0, 1fr); }
+ }
+.mod-ticketera .bloque { background: var(--papel); border: 1px solid var(--linea); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.mod-ticketera .bloque-titulo { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.mod-ticketera .bloque-titulo h3 { font-size: 1.15rem; font-weight: 700; }
+.mod-ticketera .bloque-titulo span { font-size: 0.8rem; color: var(--suave); }
+.mod-ticketera .p-areas { display: flex; flex-direction: column; gap: 8px; }
+.mod-ticketera .area-boton { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--linea); background: var(--fondo); cursor: pointer; text-align: left; font-weight: 600; }
+.mod-ticketera .area-boton:hover { border-color: var(--pino); background: var(--pino-claro); }
+.mod-ticketera .area-boton .codigo { font-size: 0.82rem; color: var(--suave); }
+.mod-ticketera .interruptor { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer; user-select: none; }
+.mod-ticketera .interruptor input { width: 18px; height: 18px; accent-color: var(--trigo); }
+.mod-ticketera .ticket { border: 1px dashed var(--linea); border-radius: 10px; padding: 14px; text-align: center; background: var(--fondo); animation: imprime-tk 0.45s ease both; }
+@keyframes imprime-tk { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+.mod-ticketera .ticket .codigo { font-size: 2.2rem; display: block; line-height: 1.1; margin-block: 4px; }
+.mod-ticketera .ticket small { color: var(--suave); }
+.mod-ticketera .cola { display: flex; flex-wrap: wrap; gap: 6px; min-height: 40px; align-content: flex-start; }
+.mod-ticketera .ficha-turno { font: 700 13px/1 var(--f-mono); padding: 8px 9px; border-radius: 6px; background: var(--fondo); border: 1px solid var(--linea); animation: entra-tk 0.35s ease both; }
+.mod-ticketera .ficha-turno.pref { background: var(--trigo-claro); border-color: var(--trigo); }
+.mod-ticketera .ficha-turno.deriv { box-shadow: inset 3px 0 0 var(--barro); }
+@keyframes entra-tk { from { transform: scale(0.8); opacity: 0; } }
+.mod-ticketera .orden { font-size: 0.82rem; color: var(--suave); display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.mod-ticketera .orden i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; border: 1px solid var(--linea); }
+.mod-ticketera .ventanillas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 420px) {
+.mod-ticketera .ventanillas { grid-template-columns: minmax(0, 1fr); }
+ }
+.mod-ticketera .ventanilla { border: 1px solid var(--linea); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: var(--fondo); min-width: 0; }
+.mod-ticketera .ventanilla b { font-size: 0.86rem; }
+.mod-ticketera .ventanilla .sirve { font-size: 0.74rem; color: var(--suave); line-height: 1.3; }
+.mod-ticketera .ventanilla .actual { font: 700 1.3rem/1 var(--f-mono); min-height: 1.3rem; }
+.mod-ticketera .ventanilla .actual.vacio { color: var(--suave); font: 500 0.8rem/1.3rem var(--f-texto); }
+.mod-ticketera .ventanilla .botones { display: flex; flex-direction: column; gap: 6px; }
+.mod-ticketera .ventanilla .boton { padding: 7px 8px; font-size: 0.8rem; }
+.mod-ticketera .auto { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--suave); flex-wrap: wrap; }
+.mod-ticketera .pantalla { background: var(--pantalla); color: var(--pantalla-texto); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.mod-ticketera .pantalla .bloque-titulo span { color: color-mix(in srgb, var(--pantalla-texto) 60%, transparent); }
+.mod-ticketera .llamado-grande { border-radius: 10px; padding: 18px; background: color-mix(in srgb, var(--pantalla-texto) 7%, transparent); text-align: center; }
+.mod-ticketera .llamado-grande .codigo { font-size: clamp(2.6rem, 6vw, 3.6rem); display: block; line-height: 1; }
+.mod-ticketera .llamado-grande .donde { font: 700 1.1rem/1.2 var(--f-display); margin-top: 8px; color: #f5af31; }
+.mod-ticketera .llamado-grande.destello { animation: destello-tk 1.2s ease; }
+@keyframes destello-tk { 0%, 40% { background: color-mix(in srgb, #f5af31 30%, transparent); } }
+.mod-ticketera .recientes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: 0.92rem; }
+.mod-ticketera .recientes li { display: flex; justify-content: space-between; padding: 7px 4px; border-bottom: 1px solid color-mix(in srgb, var(--pantalla-texto) 12%, transparent); }
+.mod-ticketera .marquesina { overflow: hidden; white-space: nowrap; font-size: 0.85rem; border-top: 1px solid color-mix(in srgb, var(--pantalla-texto) 12%, transparent); padding-top: 10px; }
+.mod-ticketera .marquesina span { display: inline-block; padding-left: 100%; animation: corre-tk 22s linear infinite; }
+@keyframes corre-tk { to { transform: translateX(-100%); } }
+.mod-ticketera .totales { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 18px; font-size: 0.9rem; color: var(--suave); }
+.mod-ticketera .totales b { color: var(--tinta); font: 700 1.05rem var(--f-mono); }
+.mod-ticketera .estados { margin-top: 40px; background: var(--papel); border: 1px solid var(--linea); border-radius: 14px; overflow-x: auto; }
+.mod-ticketera .estados svg { display: block; width: 100%; min-width: 720px; height: auto; }
+.mod-ticketera .est rect { fill: var(--fondo); stroke: var(--linea); }
+.mod-ticketera .est text { fill: var(--tinta); font: 700 14px var(--f-mono); }
+.mod-ticketera .est.fin rect { fill: var(--pino-claro); stroke: var(--pino); }
+.mod-ticketera .est.mal rect { fill: color-mix(in srgb, var(--barro) 14%, var(--papel)); stroke: var(--barro); }
+.mod-ticketera .trans { stroke: var(--suave); stroke-width: 1.4; fill: none; }
+.mod-ticketera .trans-texto { fill: var(--suave); font: 500 11px var(--f-texto); }
+.mod-ticketera .actores { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 820px) {
+.mod-ticketera .actores { grid-template-columns: minmax(0, 1fr); }
+ }
+.mod-ticketera .lista-actores { display: flex; flex-direction: column; gap: 8px; }
+@media (max-width: 820px) {
+.mod-ticketera .lista-actores { flex-direction: row; flex-wrap: wrap; }
+ }
+.mod-ticketera .actor-boton { text-align: left; border: 1px solid var(--linea); background: var(--papel); border-radius: 10px; padding: 14px 16px; cursor: pointer; }
+.mod-ticketera .actor-boton b { display: block; font: 700 1.05rem var(--f-display); }
+.mod-ticketera .actor-boton small { color: var(--suave); font-family: var(--f-mono); font-size: 0.76rem; }
+.mod-ticketera .actor-boton[aria-selected="true"] { border-color: var(--pino); background: var(--pino-claro); }
+.mod-ticketera .actor-panel { background: var(--papel); border: 1px solid var(--linea); border-radius: 14px; padding: 24px; min-width: 0; }
+.mod-ticketera .actor-panel h3 { font-size: 1.8rem; }
+.mod-ticketera .actor-panel ul { margin: 16px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+.mod-ticketera .actor-panel .ruta { display: inline-block; margin-top: 10px; font: 500 0.85rem var(--f-mono); color: var(--pino); background: var(--pino-claro); padding: 5px 9px; border-radius: 6px; }
+.mod-ticketera .capas { margin-top: 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 900px) {
+.mod-ticketera .capas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+ }
+@media (max-width: 560px) {
+.mod-ticketera .capas { grid-template-columns: minmax(0, 1fr); }
+ }
+.mod-ticketera .capa { padding: 22px; border-top: 3px solid var(--pino); background: var(--papel); border-radius: 0 0 12px 12px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.mod-ticketera .capa h3 { font-size: 1.25rem; font-weight: 700; }
+.mod-ticketera .capa p { color: var(--suave); font-size: 0.94rem; }
+.mod-ticketera .asis { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 24px; }
+@media (max-width: 900px) {
+.mod-ticketera .asis { grid-template-columns: minmax(0, 1fr); }
+ }
+.mod-ticketera .agentes { display: flex; flex-direction: column; gap: 14px; margin-top: 22px; }
+.mod-ticketera .agente b { font: 700 1.1rem var(--f-display); }
+.mod-ticketera .agente p { color: var(--suave); font-size: 0.93rem; }
+.mod-ticketera .aviso-propuesta { margin-top: 22px; font-size: 0.85rem; color: var(--suave); border: 1px dashed var(--trigo); background: var(--trigo-claro); padding: 10px 12px; border-radius: 8px; }
+.mod-ticketera .pronostico { background: var(--papel); border: 1px solid var(--linea); border-radius: 14px; padding: 20px; min-width: 0; }
+.mod-ticketera .pronostico svg { width: 100%; height: auto; display: block; }
+.mod-ticketera .barra { fill: var(--pino); }
+.mod-ticketera .barra.pico { fill: var(--trigo); }
+.mod-ticketera .eje { fill: var(--suave); font: 500 11px var(--f-mono); }
+.mod-ticketera .rejilla { stroke: var(--linea); stroke-width: 1; }
+.mod-ticketera .capacidad-linea { stroke: var(--barro); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.mod-ticketera .sugerencia { margin-top: 16px; display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap; justify-content: space-between; border-top: 1px solid var(--linea); padding-top: 16px; }
+.mod-ticketera .sugerencia p { max-width: 46ch; font-size: 0.95rem; }
+.mod-ticketera .selector-dia { display: flex; gap: 6px; flex-wrap: wrap; }
+.mod-ticketera .selector-dia button { border: 1px solid var(--linea); background: var(--fondo); border-radius: 999px; padding: 5px 12px; font-size: 0.85rem; cursor: pointer; }
+.mod-ticketera .selector-dia button[aria-pressed="true"] { background: var(--pino); border-color: var(--pino); color: #fff; }
+.mod-ticketera .flujo-gm { margin-top: 40px; background: var(--papel); border: 1px solid var(--linea); border-radius: 14px; overflow-x: auto; }
+.mod-ticketera .flujo-gm svg { display: block; width: 100%; min-width: 660px; height: auto; }
+.mod-ticketera .caja-gm rect { fill: var(--fondo); stroke: var(--linea); }
+.mod-ticketera .caja-gm.tk rect { stroke: var(--pino); }
+.mod-ticketera .caja-gm .t1 { fill: var(--tinta); font: 800 22px var(--f-display); }
+.mod-ticketera .caja-gm .t2 { fill: var(--suave); font: 500 12px var(--f-mono); }
+.mod-ticketera .flecha { stroke: var(--suave); stroke-width: 1.4; }
+.mod-ticketera .flecha-texto { font: 600 12px var(--f-mono); }
+.mod-ticketera .pie { padding-block: 36px; border-top: 1px solid var(--linea); color: var(--suave); font-size: 0.86rem; }
+.mod-ticketera .pie .envoltura { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; }
+@media (prefers-reduced-motion: reduce) {
+.mod-ticketera *, .mod-ticketera *::before { animation: none !important; transition: none !important; }
+
+}
+.mod-ticketera .captura { margin: 0; min-width: 0; }
+.mod-ticketera .captura-marco { display: block; width: 100%; padding: 0; border: 1px solid var(--linea); background: var(--papel); border-radius: 12px; overflow: hidden; cursor: zoom-in; box-shadow: 0 24px 60px -28px color-mix(in srgb, var(--tinta) 45%, transparent); transition: transform 0.25s, border-color 0.25s; }
+.mod-ticketera .captura-marco:hover { transform: translateY(-3px); border-color: var(--pino); }
+.mod-ticketera .captura-marco img { display: block; width: 100%; height: auto; max-width: 100%; }
+.mod-ticketera .captura-barra { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: var(--fondo-2); border-bottom: 1px solid var(--linea); }
+.mod-ticketera .captura-barra i { width: 9px; height: 9px; border-radius: 50%; background: var(--linea); }
+.mod-ticketera .captura figcaption { margin-top: 10px; font-size: 0.88rem; color: var(--suave); }
+.mod-ticketera .visor { position: fixed; inset: 0; z-index: 50; background: rgba(4, 33, 60, 0.92); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); cursor: zoom-out; }
+.mod-ticketera .visor img { max-width: 100%; max-height: 88vh; border-radius: 10px; }
+.mod-ticketera .visor-cerrar { position: absolute; top: calc(16px + env(safe-area-inset-top, 0px)); right: calc(16px + env(safe-area-inset-right, 0px)); background: var(--papel); border: 1px solid var(--linea); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.mod-ticketera .escena { margin-top: clamp(36px, 5vw, 60px); display: grid; grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr); gap: 20px; align-items: end; }
+@media (max-width: 760px) {
+.mod-ticketera .escena { grid-template-columns: minmax(0, 1fr); }
+ }
+.mod-ticketera .tres { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+@media (max-width: 860px) {
+.mod-ticketera .tres { grid-template-columns: minmax(0, 1fr); }
+ }
+.mod-ticketera .tres h3 { font-size: 1.6rem; font-weight: 800; }
+.mod-ticketera .tres p { color: var(--suave); margin-top: 10px; }
+.mod-ticketera .tres .marca-num { display: inline-block; font: 700 0.9rem var(--f-mono); color: var(--pino); background: var(--pino-claro); border-radius: 6px; padding: 4px 8px; margin-bottom: 12px; }
+.mod-ticketera .recorrido { margin-top: 52px; display: flex; flex-direction: column; gap: clamp(56px, 8vw, 104px); }
+.mod-ticketera .momento { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 4vw, 60px); align-items: center; }
+.mod-ticketera .momento.invertido { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+.mod-ticketera .momento.invertido .momento-texto { order: 2; }
+@media (max-width: 900px) {
+.mod-ticketera .momento, .mod-ticketera .momento.invertido { grid-template-columns: minmax(0, 1fr); }
+.mod-ticketera .momento.invertido .momento-texto { order: 0; }
+ }
+.mod-ticketera .momento-numero { font: 700 0.95rem var(--f-mono); color: var(--pino); background: var(--pino-claro); border-radius: 6px; padding: 5px 9px; display: inline-block; }
+.mod-ticketera .momento h3 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; margin-top: 14px; }
+.mod-ticketera .momento-texto > p { color: var(--suave); margin-top: 14px; font-size: 1.05rem; }
+.mod-ticketera .puntos { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+.mod-ticketera .puntos li { padding-left: 24px; position: relative; color: var(--suave); }
+.mod-ticketera .puntos li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 10px; height: 10px; border-radius: 3px; background: var(--trigo); }
+.mod-ticketera .puntos b { color: var(--tinta); font-weight: 600; }
+.mod-ticketera .par { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.mod-ticketera .personas { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 860px) {
+.mod-ticketera .personas { grid-template-columns: minmax(0, 1fr); }
+ }
+.mod-ticketera .persona { background: var(--papel); border: 1px solid var(--linea); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.mod-ticketera .persona .quien { font: 600 12px/1 var(--f-texto); letter-spacing: 0.12em; text-transform: uppercase; color: var(--trigo); }
+.mod-ticketera .persona h3 { font-size: 1.5rem; font-weight: 800; }
+.mod-ticketera .persona p { color: var(--suave); }
+.mod-ticketera .beneficios { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 36px; }
+@media (max-width: 860px) {
+.mod-ticketera .beneficios { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+ }
+@media (max-width: 520px) {
+.mod-ticketera .beneficios { grid-template-columns: minmax(0, 1fr); }
+ }
+.mod-ticketera .beneficio { border-top: 3px solid var(--pino); padding-top: 16px; }
+.mod-ticketera .beneficio h3 { font-size: 1.25rem; font-weight: 800; }
+.mod-ticketera .beneficio p { color: var(--suave); margin-top: 8px; }
+.mod-ticketera .cierre { padding-block: clamp(72px, 10vw, 128px); background: var(--pino); color: var(--fondo); text-align: center; }
+.mod-ticketera .cierre h2 { font-size: clamp(2.4rem, 5.6vw, 4.2rem); font-weight: 800; max-width: 18ch; margin: 0 auto; }
+.mod-ticketera .cierre p { opacity: 0.88; max-width: 58ch; margin: 18px auto 0; font-size: 1.1rem; }
+.mod-ticketera .cierre .acciones { justify-content: center; }
+.mod-ticketera .cierre .boton { background: var(--fondo); color: var(--tinta); border-color: var(--fondo); }
+.mod-ticketera .cabecera .boton { white-space: nowrap; }
+@media (max-width: 480px) {
+.mod-ticketera .cabecera .boton { padding: 7px 10px !important; font-size: 0.8rem !important; }
+.mod-ticketera .marca { font-size: 1.05rem; }
+ }
+.mod-ticketera div.area-boton { cursor: default; transition: background 0.3s, border-color 0.3s; }
+.mod-ticketera div.area-boton:hover { border-color: var(--linea); background: var(--fondo); }
+.mod-ticketera div.area-boton.activa { border-color: var(--pino); background: var(--pino-claro); }
+.mod-ticketera .ticket-pref { border-color: var(--trigo); background: var(--trigo-claro); }
+.mod-ticketera .ventanilla { transition: border-color 0.3s, background 0.3s; }
+.mod-ticketera .ventanilla.llamado { border-color: var(--trigo); background: var(--trigo-claro); }
+.mod-ticketera .ventanilla.atendiendo { border-color: var(--pino); background: var(--pino-claro); }
+.mod-ticketera .estado-ventanilla { font-size: 0.8rem; font-weight: 600; color: var(--suave); }
+.mod-ticketera .ventanilla.llamado .estado-ventanilla { color: var(--trigo); }
+.mod-ticketera .ventanilla.atendiendo .estado-ventanilla { color: var(--pino); }
+.mod-ticketera .relato { border-top: 1px solid var(--linea); padding-top: 12px; }
+.mod-ticketera .relato ol { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; min-height: 9.5em; }
+.mod-ticketera .relato li { padding-left: 14px; position: relative; color: var(--suave); line-height: 1.4; }
+.mod-ticketera .relato li:first-child { color: var(--tinta); font-weight: 600; animation: entra-tk 0.4s ease both; }
+.mod-ticketera .relato li::before { content: ''; position: absolute; left: 0; top: 0.5em; width: 7px; height: 7px; border-radius: 50%; background: var(--linea); }
+.mod-ticketera .relato .aviso-llega::before { background: var(--suave); }
+.mod-ticketera .relato .aviso-llama::before { background: var(--trigo); }
+.mod-ticketera .relato .aviso-atiende::before, .mod-ticketera .relato .aviso-termina::before { background: var(--pino); }
+.mod-ticketera .relato .aviso-deriva::before { background: var(--barro); }
+.mod-ticketera .totales { align-items: center; }
+.mod-ticketera .vuelo { position: relative; }
+.mod-ticketera .vuelo-fijo { position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; }
+.mod-ticketera .vuelo-lienzo { position: absolute; inset: 0; }
+.mod-ticketera .vuelo-lienzo canvas { display: block; width: 100% !important; height: 100% !important; }
+.mod-ticketera .vuelo-cargando { position: absolute; inset: 0; display: grid; place-items: center; color: var(--suave); }
+.mod-ticketera .vuelo-texto { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(clamp(20px, 5vh, 56px) + env(safe-area-inset-bottom, 0px)); width: min(440px, calc(100% - 32px)); background: color-mix(in srgb, var(--papel) 88%, transparent); backdrop-filter: blur(8px); border: 1px solid var(--linea); border-radius: 14px; padding: 20px 22px; box-shadow: 0 20px 50px -30px color-mix(in srgb, var(--tinta) 50%, transparent); animation: vuelo-entra-tk 0.5s ease both; }
+@media (min-width: 1220px) {
+.mod-ticketera .vuelo-texto { left: calc((100vw - 1180px) / 2 + 16px); }
+ }
+@keyframes vuelo-entra-tk { from { opacity: 0; transform: translateY(10px); } }
+.mod-ticketera .vuelo-paso { font: 700 12px/1 var(--f-mono); color: var(--pino); background: var(--pino-claro); padding: 5px 8px; border-radius: 6px; display: inline-block; }
+.mod-ticketera .vuelo-texto h3 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 800; margin-top: 12px; }
+.mod-ticketera .vuelo-texto p { color: var(--suave); margin-top: 8px; }
+.mod-ticketera .vuelo-puntos { position: absolute; right: max(16px, env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; }
+.mod-ticketera .vuelo-puntos button { width: 12px; height: 12px; border-radius: 50%; border: 1px solid var(--pino); background: transparent; padding: 0; cursor: pointer; }
+.mod-ticketera .vuelo-puntos button[aria-current="true"] { background: var(--trigo); border-color: var(--trigo); }
+.mod-ticketera .vuelo-guia { position: absolute; left: 50%; top: calc(78px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); font-size: 13px; font-weight: 600; color: var(--suave); animation: latido-tk 1.8s ease-in-out infinite; }
+@keyframes latido-tk { 50% { opacity: 0.35; } }
+.mod-ticketera .vuelo-intro { padding-block: clamp(64px, 9vw, 110px) 0; }
+@keyframes vuelo-aparece-tk { from { opacity: 0; } }
+.mod-ticketera .vuelo-texto { animation: vuelo-aparece-tk 0.45s ease both; }
+@media (min-width: 981px) {
+.mod-ticketera .vuelo-texto { top: 50%; bottom: auto; transform: translateY(-50%); width: min(370px, 28vw); }
+
+}
+@media (max-width: 980px) {
+.mod-ticketera .vuelo-texto { padding: 16px 18px; }
+.mod-ticketera .vuelo-texto p { font-size: 0.92rem; }
+.mod-ticketera .vuelo-puntos { top: auto; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transform: none; flex-direction: row; right: 50%; translate: 50% 0; display: none; }
+
+}
+.mod-ticketera .vuelo-intro { padding-bottom: clamp(24px, 4vw, 48px); }
+.mod-ticketera .vuelo-marcas { position: absolute; inset: 0; pointer-events: none; transition: opacity 0.35s ease; }
+.mod-ticketera .vuelo-marca { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 8px; will-change: transform; }
+.mod-ticketera .vuelo-marca > * { animation: marca-entra-tk 0.5s cubic-bezier(.2,.9,.3,1.3) both; animation-delay: var(--retraso); }
+.mod-ticketera .vuelo-marca-num { flex: none; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; display: grid; place-items: center; font: 700 13px/1 var(--f-mono); color: #072e51; background: var(--trigo); box-shadow: 0 0 0 6px color-mix(in srgb, var(--trigo) 35%, transparent), 0 6px 18px -6px rgba(0,0,0,0.5); position: relative; }
+.mod-ticketera .vuelo-marca-num::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--trigo); animation: marca-pulso-tk 2s ease-out infinite; animation-delay: calc(var(--retraso) + 0.5s); opacity: 0; }
+.mod-ticketera .vuelo-marca-texto { margin-top: -15px; white-space: nowrap; font: 600 13px/1.2 var(--f-texto); color: var(--tinta); background: var(--papel); border: 1px solid var(--linea); padding: 7px 11px; border-radius: 8px; box-shadow: 0 10px 24px -12px rgba(0,0,0,0.55); }
+.mod-ticketera .vuelo-marca.izquierda { flex-direction: row-reverse; }
+.mod-ticketera .vuelo-marca.izquierda .vuelo-marca-num { margin: -15px -15px 0 0; }
+.mod-ticketera .vuelo-marca.izquierda { translate: -100% 0; }
+@keyframes marca-entra-tk { from { opacity: 0; scale: 0.4; } }
+@keyframes marca-pulso-tk { 0% { opacity: 0.8; scale: 0.8; } 100% { opacity: 0; scale: 1.9; } }
+.mod-ticketera .vuelo-lista { display: none; margin: 12px 0 0; padding-left: 0; list-style: none; counter-reset: v; font-size: 0.86rem; }
+.mod-ticketera .vuelo-lista li { counter-increment: v; display: flex; gap: 8px; margin-top: 6px; color: var(--suave); }
+.mod-ticketera .vuelo-lista li::before { content: counter(v); flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font: 700 11px var(--f-mono); color: #072e51; background: var(--trigo); }
+@media (max-width: 980px) {
+.mod-ticketera .vuelo-marca-texto { display: none; }
+.mod-ticketera .vuelo-marca.izquierda { translate: 0 0; flex-direction: row; }
+.mod-ticketera .vuelo-marca.izquierda .vuelo-marca-num { margin: -15px 0 0 -15px; }
+.mod-ticketera .vuelo-marca-num { width: 24px; height: 24px; margin: -12px 0 0 -12px; font-size: 11px; }
+.mod-ticketera .vuelo-lista { display: block; }
+
+}
+@media (min-width: 981px) {
+.mod-ticketera .vuelo-texto { width: min(330px, 25vw) !important; }
+ }
+

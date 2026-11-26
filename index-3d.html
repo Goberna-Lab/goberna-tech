@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goberna Tech | Estrategia, tecnología e inteligencia para la gestión pública</title>
+    <meta
+      name="description"
+      content="Goberna Tech desarrolla plataformas para municipalidades (reportes de campo, turnos de atención, inteligencia territorial, seguridad ciudadana y gestión interna) y acompaña la gestión con consultoría, capacitación y acceso a financiamiento."
+    />
+    <link rel="icon" type="image/svg+xml" href="/isotipo.svg" />
+    <meta name="theme-color" content="#04213C" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <a class="skip" href="#plataformas">Saltar al contenido</a>
+
+    <header class="bar" id="bar">
+      <a class="bar-logo" href="#inicio" aria-label="Goberna Tech, inicio">
+        <img class="logo-on-dark" src="/logo.svg" alt="" width="331" height="92" />
+        <span class="logo-on-light">
+          <img src="/isotipo.svg" alt="" width="92" height="92" />
+          <img src="/wordmark-light.svg" alt="" width="235" height="43" />
+        </span>
+      </a>
+      <nav class="bar-nav" aria-label="Secciones">
+        <a href="#nosotros">Nosotros</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#plataformas">Plataformas</a>
+        <a href="#premium">Premium</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="btn btn-gold bar-cta" href="#contacto">Solicitar demostración</a>
+      <button class="bar-menu" type="button" aria-expanded="false" aria-controls="menu">Menú</button>
+    </header>
+
+    <!-- Menú a pantalla completa (teléfono y tableta) -->
+    <div class="menu" id="menu" hidden>
+      <nav aria-label="Menú completo">
+        <a class="menu-top" href="#nosotros">Nosotros</a>
+        <a class="menu-top" href="#servicios">Servicios</a>
+        <a class="menu-top" href="#plataformas">Plataformas</a>
+        <ul>
+          <li><a href="#gobernanza-municipal">Gobernanza Municipal</a></li>
+          <li><a href="#sgti-municipal">SGTI Municipal</a></li>
+          <li><a href="#sistema-ule">Sistema ULE</a></li>
+          <li><a href="#ticketera">Ticketera</a></li>
+          <li><a href="#asistente-virtual">Asistente virtual</a></li>
+          <li><a href="#reserva-canchas">Reserva de canchas</a></li>
+          <li><a href="#talleres">Talleres municipales</a></li>
+          <li><a href="#alerta-vecinal">Alerta vecinal</a></li>
+          <li><a href="#monitoreo-seguridad">Monitoreo de seguridad</a></li>
+          <li><a href="#control-presupuestal">Control presupuestal</a></li>
+          <li><a href="#generador-requerimientos">Generador de requerimientos</a></li>
+        </ul>
+        <a class="menu-top" href="#premium">Servicios premium</a>
+        <a class="menu-top" href="#metodo">Cómo trabajamos</a>
+        <a class="menu-top" href="#contacto">Solicitar demostración</a>
+      </nav>
+    </div>
+
+    <main id="home">
+      <!-- Portada: la escena 3D queda de fondo. La sección es más alta que la pantalla;
+           ese recorrido extra mueve la cámara del palacio hacia el distrito. -->
+      <section class="hero" id="inicio">
+        <div class="hero-stage">
+          <canvas id="world" aria-hidden="true"></canvas>
+          <div class="hero-shade" aria-hidden="true"></div>
+          <div class="hero-copy">
+            <p class="hero-kicker">Goberna Tech / Inteligencia estratégica</p>
+            <h1>La estrategia transforma <em>territorios.</em></h1>
+            <p>
+              Integramos estrategias, tecnología y conocimiento especializado para acompañar a
+              autoridades y líderes en proyectos de impacto.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-gold btn-lg" href="#nosotros">Conoce Goberna Tech</a>
+              <a class="btn btn-line btn-lg" href="#contacto">Solicitar demostración</a>
+            </div>
+          </div>
+          <a class="hero-cue" href="#nosotros">Desliza para explorar<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6l7 6 7-6M5 13l7 6 7-6"/></svg></a>
+        </div>
+      </section>
+
+      <!-- Conocimiento que acompaña. A la derecha, partículas que arman una figura por cada
+           idea del titular (src/particulas.js). -->
+      <section class="know" id="nosotros">
+        <div class="intro-top">
+          <div>
+            <p class="eyebrow">Conocimiento que acompaña</p>
+            <h2 class="intro-lead">
+              Unimos <span class="k" data-k="2">conocimiento,</span> <span class="k" data-k="0">estrategia</span> y <span class="k" data-k="1">tecnología</span> <span class="tono">para afrontar desafíos complejos.</span>
+            </h2>
+            <p class="know-text">
+              <strong>Somos especialistas en estrategia, tecnología y consultoría política.</strong>
+              Brindamos asesoría integral y personalizada a políticos y autoridades de todos los
+              niveles de gobierno, acompañándolos en el desarrollo de proyectos de impacto.
+            </p>
+            <a class="btn btn-line-navy btn-lg" href="#servicios">Quiero saber más</a>
+          </div>
+          <div class="intro-fx" aria-hidden="true" data-parallax="46"><canvas></canvas></div>
+        </div>
+        <div class="know-more">
+          <details name="adn">
+            <summary>Misión</summary>
+            <div>
+              <p>
+                Brindar soluciones estratégicas, tecnológicas y de consultoría especializada que
+                fortalezcan la gestión pública, impulsen el desarrollo de proyectos y contribuyan a la
+                planificación y ejecución de campañas electorales.
+              </p>
+              <p>
+                Acompañamos a autoridades, instituciones y organizaciones políticas con herramientas
+                innovadoras, asesoría personalizada y formación especializada, orientadas a alcanzar
+                resultados concretos.
+              </p>
+            </div>
+          </details>
+          <details name="adn">
+            <summary>Visión</summary>
+            <div>
+              <p>
+                Impulsar una nueva generación de autoridades, líderes y organizaciones políticas capaces
+                de transformar sus desafíos en oportunidades, desarrollar campañas electorales
+                estratégicas y liderar gobiernos modernos, eficientes e innovadores, mediante el uso de
+                tecnología, conocimiento especializado y soluciones orientadas a resultados.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Nuestros servicios: tres ejes. El mapa es un lienzo (src/mapa.js): el Perú en puntos,
+           con una luz que lo recorre y arcos que salen de Lima. -->
+      <section class="ejes" id="servicios">
+        <div class="ejes-in">
+          <div class="ejes-copy">
+            <p class="eyebrow">Nuestros servicios</p>
+            <div class="ejes-tit">
+              <span class="ejes-3" aria-hidden="true" data-parallax="-34">3</span>
+              <h2><span class="solo-lector">Tres </span>Ejes estratégicos <em>Una visión integral.</em></h2>
+            </div>
+            <p>
+              Acompañamos la gestión, formamos capacidades y construimos estrategia electoral desde
+              una comprensión integral del territorio.
+            </p>
+            <ul class="ejes-lista">
+              <li><a href="#eje-1"><span>Eje 1</span>Gobierno y gestión</a></li>
+              <li><a href="#eje-2"><span>Eje 2</span>Escuela y formación</a></li>
+              <li><a href="#eje-3"><span>Eje 3</span>Estrategia electoral</a></li>
+            </ul>
+          </div>
+          <div class="ejes-mapa" aria-hidden="true" data-parallax="60"><canvas></canvas></div>
+        </div>
+      </section>
+
+      <!-- Eje 1. Las imágenes de los ejes son vistas fijas del mundo 3D de la portada
+           (tools/fotos.mjs). Se mueven con el scroll (parallax) y llevan una luz que las recorre
+           y sigue al puntero (src/efectos.js). Para usar una foto, basta cambiar el archivo. -->
+      <section class="eje" id="eje-1">
+        <figure class="foto" data-parallax="70">
+          <img src="/img/m-palacio.webp" alt="" width="1000" height="1000" loading="lazy" />
+          <i class="luz"></i>
+        </figure>
+        <div class="eje-copy">
+          <p class="eyebrow"><span>Eje 1.</span> Gobierno y gestión</p>
+          <h2>Gobierno y <span class="tono">gestión</span></h2>
+          <p>Estrategias para una gestión moderna, eficiente y orientada a resultados.</p>
+          <ol class="eje-lista">
+            <li><a href="#contacto" data-interes="Eje 1: Gobierno y gestión"><span>01</span><b>Asesoría y defensa legal</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+            <li><a href="#contacto" data-interes="Eje 1: Gobierno y gestión"><span>02</span><b>Innovación y transformación digital</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+            <li><a href="#contacto" data-interes="Eje 1: Gobierno y gestión"><span>03</span><b>Comunicación y posicionamiento de gestión</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+            <li><a href="#contacto" data-interes="Eje 1: Gobierno y gestión"><span>04</span><b>Cooperación internacional</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+            <li><a href="#contacto" data-interes="Eje 1: Gobierno y gestión"><span>05</span><b>Encuestas y focus groups</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="eje eje-inv" id="eje-2">
+        <figure class="foto" data-parallax="70">
+          <img src="/img/m-foro.webp" alt="" width="1000" height="1000" loading="lazy" />
+          <i class="luz"></i>
+        </figure>
+        <div class="eje-copy">
+          <p class="eyebrow"><span>Eje 2.</span> Escuela y formación</p>
+          <h2>El conocimiento se vuelve <span class="tono">capacidad.</span></h2>
+          <p>Conocimiento especializado para equipos y liderazgos públicos.</p>
+          <ol class="eje-lista">
+            <li><a href="#contacto" data-interes="Eje 2: Escuela y formación"><span>01</span><b>Escuela de gobierno y gestión</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+            <li><a href="#contacto" data-interes="Eje 2: Escuela y formación"><span>02</span><b>Capacitación de equipos</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+            <li><a href="#contacto" data-interes="Eje 2: Escuela y formación"><span>03</span><b>Editorial <em class="soon">Próximamente</em></b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Franja de paso entre el eje 2 y el 3 -->
+      <section class="banda">
+        <img src="/img/m-distrito.webp" alt="" width="1800" height="855" loading="lazy" data-parallax="110" />
+        <i class="luz"></i>
+        <div class="banda-copy">
+          <p class="banda-tit" data-parallax="-40">Del territorio a la <em>decisión</em></p>
+          <p class="banda-sub">Territorio · Escucha · Estrategia</p>
+        </div>
+      </section>
+
+      <section class="eje3" id="eje-3">
+        <img class="eje3-bg" src="/img/m-puente.webp" alt="" width="1600" height="900" loading="lazy" data-parallax="90" />
+        <i class="luz"></i>
+        <div class="eje3-in">
+          <p class="eyebrow"><span>Eje 3.</span> Estrategia electoral</p>
+          <h2>Anticipar escenarios. <em>Conectar realidades.</em></h2>
+          <p>Inteligencia estratégica, escucha activa y planificación para cada etapa de la campaña.</p>
+          <ol class="eje-lista">
+            <li><a href="#contacto" data-interes="Eje 3: Estrategia electoral"><span>01</span><b>Campaña 360</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+            <li><a href="#contacto" data-interes="Eje 3: Estrategia electoral"><span>02</span><b>Encuestas</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+            <li><a href="#contacto" data-interes="Eje 3: Estrategia electoral"><span>03</span><b>Focus groups</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+            <li><a href="#contacto" data-interes="Eje 3: Estrategia electoral"><span>04</span><b>Media training para candidatos</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Plataformas. En pantallas grandes la sección queda fija mientras se baja: a la
+           izquierda, la lista; a la derecha va apareciendo la demostración de cada producto, sin
+           hacer clic (src/main.js y src/escenas.js). En el celular, una familia debajo de otra. -->
+      <section class="intro" id="plataformas">
+        <div class="plat-head">
+          <h2>Inteligencia y tecnología <span class="tono">para una gestión estratégica</span></h2>
+          <p>
+            Integramos tecnología, inteligencia y conocimiento especializado para desarrollar
+            soluciones que fortalecen la gestión pública, desde la estrategia hasta su implementación.
+          </p>
+        </div>
+
+        <!-- Cifras de la oferta. Todas salen de esta misma página (plataformas, etapas, pruebas
+             y roles); no son cifras de clientes. -->
+        <dl class="figures">
+          <div><dt data-cifra="11">11</dt><dd>plataformas para la gestión municipal</dd></div>
+          <div><dt data-cifra="5">5</dt><dd>etapas de puesta en marcha, de preparar a acompañar</dd></div>
+          <div><dt data-cifra="267">267</dt><dd>pruebas automáticas con cada cambio en SGTI Municipal y Ticketera</dd></div>
+          <div><dt data-cifra="4">4</dt><dd>niveles de acceso: alcaldía, gerencia, supervisión y campo</dd></div>
+        </dl>
+
+        <svg class="hilo" aria-hidden="true"><path class="hilo-base"/><path class="hilo-oro"/><g></g></svg>
+        <div class="fams">
+          <div class="fams-stick">
+            <section class="fam" data-fam="territorio" aria-label="Territorio y trabajo de campo">
+              <div class="fam-head">
+                <h3>Territorio y trabajo de campo</h3>
+                <p>Para planificar el trabajo en el distrito, salir a campo y saber qué pasa en cada sector.</p>
+                <ul class="fam-tabs">
+                  <li><a href="#gobernanza-municipal" data-plat="gobernanza-municipal" class="is-on"><strong>Gobernanza Municipal</strong><span>Inteligencia territorial: el panel planifica, asigna y mide; la app guía al brigadista casa por casa.</span></a></li>
+                  <li><a href="#sgti-municipal" data-plat="sgti-municipal"><strong>SGTI Municipal</strong><span>Incidencias y reportes de campo, del teléfono del operador al panel de cada gerencia y a la alcaldía.</span></a></li>
+                  <li><a href="#sistema-ule" data-plat="sistema-ule"><strong>Sistema ULE</strong><span>Empadronamiento: cada hogar, desde el vencimiento de su clasificación hasta la respuesta del ministerio.</span></a></li>
+                </ul>
+              </div>
+              <div class="fam-stage"></div>
+            </section>
+            <section class="fam" data-fam="atencion" aria-label="Atención al ciudadano">
+              <div class="fam-head">
+                <h3>Atención al ciudadano</h3>
+                <p>Para atender al vecino en la municipalidad y también en línea.</p>
+                <ul class="fam-tabs">
+                  <li><a href="#ticketera" data-plat="ticketera" class="is-on"><strong>Ticketera</strong><span>Turnos de atención al público: dispensador, pantalla de llamados y ventanilla.</span></a></li>
+                  <li><a href="#asistente-virtual" data-plat="asistente-virtual"><strong>Asistente virtual</strong><span>Un chat en la web municipal que orienta al ciudadano y deriva sus solicitudes.</span></a></li>
+                  <li><a href="#reserva-canchas" data-plat="reserva-canchas"><strong>Reserva de canchas</strong><span>Horarios disponibles y reserva en línea de los espacios deportivos municipales.</span></a></li>
+                  <li><a href="#talleres" data-plat="talleres"><strong>Talleres municipales</strong><span>Oferta, matrícula y administración de los talleres deportivos y culturales.</span></a></li>
+                </ul>
+              </div>
+              <div class="fam-stage"></div>
+            </section>
+            <section class="fam" data-fam="seguridad" aria-label="Seguridad ciudadana">
+              <div class="fam-head">
+                <h3>Seguridad ciudadana</h3>
+                <p>Del aviso del vecino a la central de serenazgo.</p>
+                <ul class="fam-tabs">
+                  <li><a href="#alerta-vecinal" data-plat="alerta-vecinal" class="is-on"><strong>Alerta vecinal</strong><span>App para el vecino con botón de pánico y reportes con foto, conectada al despacho.</span></a></li>
+                  <li><a href="#monitoreo-seguridad" data-plat="monitoreo-seguridad"><strong>Monitoreo de seguridad</strong><span>El panel de la central de serenazgo: incidencias, patrulleros y cámaras en el mapa.</span></a></li>
+                </ul>
+              </div>
+              <div class="fam-stage"></div>
+            </section>
+            <section class="fam" data-fam="gestion" aria-label="Gestión interna">
+              <div class="fam-head">
+                <h3>Gestión interna</h3>
+                <p>Para seguir el presupuesto y preparar documentos sin trabajo manual.</p>
+                <ul class="fam-tabs">
+                  <li><a href="#control-presupuestal" data-plat="control-presupuestal" class="is-on"><strong>Control presupuestal</strong><span>Indicadores financieros y seguimiento de la ejecución del presupuesto.</span></a></li>
+                  <li><a href="#generador-requerimientos" data-plat="generador-requerimientos"><strong>Generador de requerimientos</strong><span>Informes, TDR y expedientes de locadores generados en lote desde un Excel.</span></a></li>
+                </ul>
+              </div>
+              <div class="fam-stage"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- Servicios premium -->
+      <section class="premium" id="premium">
+        <h2>Servicios <span class="tono">premium</span></h2>
+        <article class="premium-card">
+          <img src="/img/m-legado.webp" alt="" width="1600" height="720" loading="lazy" data-parallax="80" />
+          <i class="luz"></i>
+          <div>
+            <h3>Legado</h3>
+            <p class="premium-lema">Tu gestión termina. Tu legado permanece.</p>
+            <p>
+              Servicio exclusivo para autoridades y exautoridades que buscan preservar, documentar y
+              proyectar los resultados de su gestión, consolidando su trayectoria y legado público.
+            </p>
+            <a class="btn btn-gold btn-lg" href="#contacto" data-interes="Servicios premium: Legado">Quiero saber más</a>
+          </div>
+        </article>
+        <article class="premium-card">
+          <img src="/img/m-escenario.webp" alt="" width="1600" height="720" loading="lazy" data-parallax="80" />
+          <i class="luz"></i>
+          <div>
+            <h3>Media Training Presidencial</h3>
+            <p>
+              Programa exclusivo de comunicación estratégica, oratoria y manejo de medios para
+              candidatos presidenciales y líderes políticos, con preparación personalizada según su
+              perfil y objetivos.
+            </p>
+            <a class="btn btn-gold btn-lg" href="#contacto" data-interes="Servicios premium: Media Training Presidencial">Quiero saber más</a>
+          </div>
+        </article>
+      </section>
+
+      <!-- Cómo trabajamos.
+           Un escenario con fondo en movimiento y las cinco etapas, una a la vez.
+           El fondo es la escena 3D del foro. Para usar un video en su lugar, poner su ruta en
+           data-video (y una imagen en data-poster): se reproduce sin sonido y en bucle. -->
+      <section class="method" id="metodo">
+        <div class="method-stage">
+          <div class="method-bg" data-video="" data-poster="" aria-hidden="true"></div>
+          <div class="method-shade" aria-hidden="true"></div>
+          <div class="method-top">
+            <h2>Cómo <em>trabajamos</em></h2>
+            <p>
+              Cada municipalidad es autónoma en su día a día. Nuestro equipo se ocupa del sistema,
+              las altas, las mejoras y el soporte.
+            </p>
+          </div>
+          <div class="rollout" data-rollout>
+            <h3>Puesta en marcha en cinco etapas</h3>
+            <ol class="rollout-details">
+              <li class="is-on">
+                <span class="rollout-n" aria-hidden="true">1</span>
+                <div><strong>Preparar</strong><p>Accesos, copias de respaldo y configuración del servidor y de la app.</p></div>
+              </li>
+              <li>
+                <span class="rollout-n" aria-hidden="true">2</span>
+                <div><strong>Desplegar</strong><p>Publicamos los sistemas en el servidor.</p></div>
+              </li>
+              <li>
+                <span class="rollout-n" aria-hidden="true">3</span>
+                <div><strong>Dar de alta</strong><p>Creamos la municipalidad con su logo, su hora local y su equipo.</p></div>
+              </li>
+              <li>
+                <span class="rollout-n" aria-hidden="true">4</span>
+                <div><strong>Capacitar</strong><p>Por rol: administrador, gerentes, personal de campo y ventanillas.</p></div>
+              </li>
+              <li>
+                <span class="rollout-n" aria-hidden="true">5</span>
+                <div><strong>Acompañar</strong><p>Soporte cercano y mejoras según lo que pida cada municipalidad.</p></div>
+              </li>
+            </ol>
+            <div class="rollout-nav" role="group" aria-label="Etapas">
+              <button type="button" data-step="0" aria-pressed="true" class="is-on"><i></i><b>1</b><span>Preparar</span></button>
+              <button type="button" data-step="1" aria-pressed="false"><i></i><b>2</b><span>Desplegar</span></button>
+              <button type="button" data-step="2" aria-pressed="false"><i></i><b>3</b><span>Dar de alta</span></button>
+              <button type="button" data-step="3" aria-pressed="false"><i></i><b>4</b><span>Capacitar</span></button>
+              <button type="button" data-step="4" aria-pressed="false"><i></i><b>5</b><span>Acompañar</span></button>
+            </div>
+            <button class="method-pause" type="button">Pausar movimiento</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Quiénes ya trabajan con Goberna Tech. Queda oculto hasta tener datos reales y permiso
+           para publicarlos: quitar "hidden" y completar. No usar citas ni logos de ejemplo.
+           <figure><blockquote>Cita textual.</blockquote><figcaption><strong>Nombre</strong> Cargo, Municipalidad</figcaption></figure> -->
+      <section class="voices" id="clientes" hidden>
+        <h2>Municipalidades que ya trabajan con nosotros</h2>
+        <div class="voices-logos"></div>
+        <div class="voices-list"></div>
+      </section>
+
+      <!-- Preguntas frecuentes: reúne las garantías y los requisitos para empezar. -->
+      <section class="faq" id="preguntas">
+        <div class="faq-head">
+          <h2>Preguntas frecuentes</h2>
+          <p>Lo que más nos consultan antes de empezar. Si la suya no está, <a href="#contacto">escríbanos</a>.</p>
+        </div>
+        <div class="faq-list">
+          <details name="faq" open>
+            <summary>¿Qué necesita la municipalidad para empezar?</summary>
+            <div>
+              <p>Para cualquier plataforma: su nombre y la dirección web que usará, su logo (opcional), la lista de su personal con el rol de cada uno e internet estable en sus oficinas.</p>
+              <p><strong>SGTI Municipal</strong> suma teléfonos Android para el personal de campo y la lista de gerencias y sectores. <strong>Ticketera</strong>, un televisor para la pantalla de llamados, una PC o tableta y una impresora de tickets.</p>
+            </div>
+          </details>
+          <details name="faq">
+            <summary>¿Cómo es la puesta en marcha?</summary>
+            <div>
+              <p>En cinco etapas: preparamos accesos y servidor, desplegamos los sistemas, damos de alta a la municipalidad con su logo y su equipo, capacitamos por rol y acompañamos con soporte y mejoras. <a href="#metodo">Ver las cinco etapas</a>.</p>
+            </div>
+          </details>
+          <details name="faq">
+            <summary>¿Quién puede ver los datos de la municipalidad?</summary>
+            <div>
+              <p>Solo su gente. Cada municipalidad tiene su propia dirección web, su logo, su hora local y sus usuarios; nadie ve la información de otra.</p>
+              <p>Dentro de la municipalidad, los permisos van por rol: alcalde y administrador, gerente, supervisor y operador de campo.</p>
+            </div>
+          </details>
+          <details name="faq">
+            <summary>¿Queda registro de lo que se hace en el sistema?</summary>
+            <div>
+              <p>Sí. En SGTI Municipal y Ticketera cada cambio se guarda con quién lo hizo y cuándo, y la base de SGTI se respalda todos los días.</p>
+            </div>
+          </details>
+          <details name="faq">
+            <summary>¿Cómo se evita que una mejora dañe lo que ya funciona?</summary>
+            <div>
+              <p>Con pruebas automáticas: 163 en SGTI Municipal y 104 en Ticketera corren con cada cambio. Si una falla, el cambio no se publica.</p>
+            </div>
+          </details>
+          <details name="faq">
+            <summary>¿Puedo ver una plataforma antes de decidir?</summary>
+            <div>
+              <p>Sí. Cada plataforma tiene su página en esta web, y coordinamos una demostración con el equipo de Goberna Tech. <a href="#contacto">Solicitar demostración</a>.</p>
+            </div>
+          </details>
+          <details name="faq">
+            <summary>Además del software, ¿qué ofrece Goberna Tech?</summary>
+            <div>
+              <p>Tres ejes de servicio: gobierno y gestión, escuela y formación, y estrategia electoral. Y dos servicios premium: Legado y Media Training Presidencial. <a href="#servicios">Ver los servicios</a>.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Contacto -->
+      <section class="contact" id="contacto">
+        <div class="contact-copy">
+          <h2>Conversemos</h2>
+          <p>
+            Cuéntanos qué necesita tu municipalidad, tu equipo o tu campaña y coordinamos una
+            demostración o una reunión sobre lo que te interesa.
+          </p>
+        </div>
+        <form id="contact-form" novalidate>
+          <label>
+            Nombre
+            <input type="text" name="nombre" autocomplete="name" required />
+          </label>
+          <label>
+            Cargo
+            <select name="cargo">
+              <option>Alcalde o alcaldesa</option>
+              <option>Funcionario</option>
+              <option>Servidor público</option>
+              <option>Otro</option>
+            </select>
+          </label>
+          <label>
+            Municipalidad o institución
+            <input type="text" name="institucion" autocomplete="organization" />
+          </label>
+          <label>
+            Correo
+            <input type="email" name="correo" autocomplete="email" required />
+          </label>
+          <label class="wide">
+            Qué te interesa
+            <select name="interes">
+              <option>Todas las plataformas</option>
+              <option>Territorio y trabajo de campo</option>
+              <option>Atención al ciudadano</option>
+              <option>Seguridad ciudadana</option>
+              <option>Gestión interna</option>
+              <option>Eje 1: Gobierno y gestión</option>
+              <option>Eje 2: Escuela y formación</option>
+              <option>Eje 3: Estrategia electoral</option>
+              <option>Servicios premium: Legado</option>
+              <option>Servicios premium: Media Training Presidencial</option>
+            </select>
+          </label>
+          <label class="check wide">
+            <input type="checkbox" name="resumen" />
+            <span>Quiero recibir novedades de Goberna Tech</span>
+          </label>
+          <button class="btn btn-navy btn-lg" type="submit">Enviar solicitud</button>
+          <p class="form-note wide" role="status" hidden></p>
+        </form>
+      </section>
+    </main>
+
+    <!-- Módulo de plataforma: se llena desde src/modulos según la ruta (#ticketera, #sgti-municipal, …) -->
+    <main id="modulo" class="module" hidden></main>
+
+    <footer class="foot">
+      <img src="/logo.svg" alt="Goberna Tech. Gestión pública, inteligencia, consultoría." width="331" height="92" />
+      <nav aria-label="Pie de página">
+        <div class="foot-mods">
+          <p>Plataformas</p>
+          <a href="#gobernanza-municipal">Gobernanza Municipal</a>
+          <a href="#sgti-municipal">SGTI Municipal</a>
+          <a href="#sistema-ule">Sistema ULE</a>
+          <a href="#ticketera">Ticketera</a>
+          <a href="#asistente-virtual">Asistente virtual</a>
+          <a href="#reserva-canchas">Reserva de canchas</a>
+          <a href="#talleres">Talleres municipales</a>
+          <a href="#alerta-vecinal">Alerta vecinal</a>
+          <a href="#monitoreo-seguridad">Monitoreo de seguridad</a>
+          <a href="#control-presupuestal">Control presupuestal</a>
+          <a href="#generador-requerimientos">Generador de requerimientos</a>
+        </div>
+        <div>
+          <p>Goberna Tech</p>
+          <a href="#metodo">Cómo trabajamos</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#preguntas">Preguntas frecuentes</a>
+          <a href="#contacto">Solicitar demostración</a>
+        </div>
+      </nav>
+      <p class="foot-legal">© <span id="year"></span> Goberna Tech</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

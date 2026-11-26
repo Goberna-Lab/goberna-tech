@@ -1,0 +1,2045 @@
+/* Página estática según el mockup de Adobe XD (index.html). Clases con prefijo g-.
+   Las medidas salen del mockup (lienzo de 1920 px) y escalan con el ancho de la pantalla. */
+
+:root {
+  --g-fondo: #020617;
+  --g-fondo-2: #091120;
+  --g-oro: #dfa52e;
+  --g-azul: #1f3b73;
+  --g-claro: #f3f5f9;
+  /* Fondo con aura (según el mockup): noche casi negra, dos azules apagados que se funden entre sí,
+     un cobre rosado muy tenue y un grano fino de estrellas que además evita las bandas del degradado. */
+  --g-noche: #030716;
+  --g-azul-a: 27, 42, 94; /* índigo profundo */
+  --g-azul-b: 38, 72, 128; /* azul acero, más claro */
+  --g-cobre: 112, 72, 84;
+  --g-estrellas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='e'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.78 0 0 0 0 0.86 0 0 0 0 1 0 0 0 10 -7.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23e)' opacity='0.32'/%3E%3C/svg%3E");
+  --g-tinta: #0c1426;
+  --g-lado: clamp(20px, 7.3vw, 140px);
+  --bar-h: clamp(68px, 6.4vw, 112px);
+}
+
+body.g {
+  background: var(--g-fondo);
+  color: #fff;
+  font-family: var(--sans);
+}
+
+.g-wrap {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 var(--g-lado);
+}
+
+/* ───────── Botones ───────── */
+
+.g-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(46px, 3.4vw, 66px);
+  padding: 0 clamp(26px, 2.9vw, 56px);
+  border: 0;
+  border-radius: 5px;
+  font: 600 clamp(0.76rem, 0.9vw, 1.06rem) / 1 var(--sans);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.g-btn-oro {
+  background: var(--g-oro);
+  color: #1b2030;
+}
+
+.g-btn-oro:hover {
+  background: #efb94a;
+}
+
+.g-btn-linea {
+  color: #fff;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.8);
+}
+
+.g-btn-linea:hover {
+  background: #fff;
+  color: var(--g-tinta);
+}
+
+.g-btn-linea-oro {
+  color: #b7801a;
+  box-shadow: inset 0 0 0 1.5px var(--g-oro);
+}
+
+.g-btn-linea-oro:hover {
+  background: var(--g-oro);
+  color: #1b2030;
+}
+
+.g-btn:focus-visible,
+.g-nav a:focus-visible {
+  outline: 2px solid var(--g-oro);
+  outline-offset: 3px;
+}
+
+/* ───────── Barra ───────── */
+
+.g-bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 20;
+  height: var(--bar-h);
+  transition: background 0.25s ease;
+}
+
+.g-bar.es-solida,
+.g-menu-abierto .g-bar {
+  background: rgba(2, 6, 23, 0.9);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.g-bar .g-wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.g-logo img {
+  display: block;
+  width: auto;
+  height: clamp(44px, 3.9vw, 74px);
+}
+
+.g-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(22px, 3.6vw, 70px);
+  margin-left: clamp(40px, 9vw, 172px);
+}
+
+.g-nav a {
+  padding: 8px 0;
+  color: #e8ecf4;
+  font: 600 clamp(0.74rem, 0.82vw, 0.98rem) / 1 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.g-nav a:hover {
+  color: var(--g-oro);
+}
+
+/* Submenús (Nosotros, Servicios): se abren al pasar el mouse o al llegar con el teclado. */
+.g-nav-grupo {
+  position: relative;
+}
+
+.g-nav-grupo > a::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  opacity: 0.7;
+  rotate: 45deg;
+  translate: 0 -3px;
+}
+
+.g-sub {
+  position: absolute;
+  top: 100%;
+  left: -18px;
+  display: grid;
+  min-width: 230px;
+  margin-top: 12px;
+  padding: 10px 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(2, 6, 23, 0.96);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 6px;
+  transition: opacity 0.18s ease, translate 0.18s ease, visibility 0s linear 0.18s;
+}
+
+/* Puente invisible entre el enlace y el submenú: el mouse no lo pierde al bajar. */
+.g-sub::before {
+  content: "";
+  position: absolute;
+  inset: -14px 0 auto;
+  height: 14px;
+}
+
+.g-nav-grupo:hover .g-sub,
+.g-nav-grupo:focus-within .g-sub {
+  opacity: 1;
+  visibility: visible;
+  translate: none;
+  transition-delay: 0s;
+}
+
+.g-sub a {
+  padding: 10px 18px;
+  font-size: clamp(0.86rem, 0.9vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.g-menu-btn {
+  display: none;
+  margin-left: auto;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  background: none;
+  color: #fff;
+  font: 600 0.78rem/1 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.g-menu {
+  position: fixed;
+  inset: var(--bar-h) 0 0 0;
+  z-index: 19;
+  overflow: auto;
+  padding: 24px var(--g-lado) 40px;
+  background: var(--g-fondo);
+}
+
+.g-menu nav {
+  display: grid;
+}
+
+.g-menu nav > a:not(.g-btn) {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Las secciones de Nosotros y Servicios, debajo de cada una y más chicas. */
+.g-menu nav > a:has(+ .g-menu-sub) {
+  border-bottom: 0;
+}
+
+.g-menu-sub {
+  display: grid;
+  padding: 0 0 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.g-menu-sub a {
+  padding: 8px 0;
+  color: #c7cfdf;
+  font-size: 1.05rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.g-menu .g-btn {
+  margin-top: 28px;
+  justify-self: start;
+}
+
+.g-menu-abierto {
+  overflow: hidden;
+}
+
+/* ───────── Textos comunes ───────── */
+
+.g-kicker {
+  color: var(--g-oro);
+  font-size: clamp(0.72rem, 0.82vw, 0.98rem);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* Título de sección: centrado, con una palabra en dorado y una raya debajo. */
+.g-titulo {
+  max-width: 22ch;
+  margin: 0 auto;
+  font-size: clamp(1.9rem, 3.5vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.g-titulo em {
+  font-style: normal;
+  color: var(--g-oro);
+}
+
+.g-titulo::after {
+  content: "";
+  display: block;
+  width: clamp(34px, 3.2vw, 62px);
+  height: 3px;
+  margin: clamp(14px, 1.6vw, 30px) auto 0;
+  background: var(--g-oro);
+}
+
+.g-titulo.g-ancho {
+  max-width: 30ch;
+  text-wrap: wrap;
+}
+
+.g-titulo.g-izq {
+  max-width: 18ch;
+  margin-left: 0;
+  text-align: left;
+}
+
+.g-titulo.g-izq::after {
+  margin-left: 0;
+}
+
+/* Las ilustraciones vienen sobre fondo oscuro: se funden con el fondo de la sección. */
+.g-prem img {
+  mix-blend-mode: lighten;
+  pointer-events: none;
+}
+
+/* ───────── 1. Portada ───────── */
+
+.g-hero {
+  position: relative;
+  min-height: max(100vh, 560px);
+  min-height: max(100svh, 560px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    var(--g-estrellas),
+    radial-gradient(48% 55% at 90% 6%, rgba(var(--g-azul-b), 0.26), transparent 70%),
+    radial-gradient(62% 62% at 68% 38%, rgba(var(--g-azul-a), 0.3), transparent 72%),
+    var(--g-noche);
+}
+
+/* La foto nocturna de América Latina del hero del Foro de Estado, con una puesta en escena propia
+   (src/portada-mapa.js): la cámara entra desde el continente y se acerca al Perú, el resto queda en penumbra,
+   el Perú se ilumina en dorado y la red sale de Lima hacia las capitales de región. Línea de tiempo, desde que la
+   foto está lista (clase .listo):
+     0 s foto · 0,2–3,2 s acercamiento · 1,6 s penumbra · 2,2 s silueta · 2,8 s Lima · 3 s red · 4,6 s ondas */
+.g-hero-mapa {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(var(--px, 0), var(--py, 0), 0);
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Hasta que la foto carga, la portada queda en su fondo oscuro (sin JS, la foto se ve quieta y entera). */
+.js .g-hero-mapa:not(.listo) {
+  opacity: 0;
+}
+
+.g-hero-mapa.listo {
+  animation: g-red-aparece 0.6s ease both;
+}
+
+/* Abajo se funde con la sección siguiente. */
+.g-hero-mapa::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 78%, var(--g-noche));
+  pointer-events: none;
+}
+
+/* La cámara: del continente entero (escala 1) al Perú (--zoom), con el origen que calcula portada-mapa.js. */
+.g-hero-deriva {
+  position: absolute;
+  inset: 0;
+  transform-origin: var(--origen, 70% 45%);
+  transform: scale(var(--zoom, 1));
+}
+
+.listo .g-hero-deriva {
+  animation: g-hero-entrada 3s 0.2s cubic-bezier(0.65, 0, 0.25, 1) both;
+}
+
+.g-hero-red {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform-origin: var(--origen, 70% 45%);
+}
+
+/* Ya cerca, la cámara sigue respirando muy lento. */
+.listo .g-hero-red {
+  animation: g-hero-deriva 22s 3.2s ease-in-out infinite alternate;
+}
+
+/* Halo de luz detrás del texto, como en el Foro. La imagen trae bordes con color: se esfuman con una máscara para
+   que no se vea el recuadro. */
+.g-hero-brillo {
+  position: absolute;
+  inset: 0 10% 0 0;
+  opacity: 0.49;
+  pointer-events: none;
+  animation: g-hero-respira 8s ease-in-out infinite;
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 72%, transparent), linear-gradient(to right, #000 75%, transparent);
+  mask-composite: intersect;
+}
+
+.g-hero-brillo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+}
+
+/* Foco: todo en penumbra menos el Perú. */
+.g-foco-sombra {
+  fill: #020617;
+  opacity: 0;
+}
+
+.listo .g-foco-sombra {
+  animation: g-foco-sombra 1.6s 1.6s ease forwards;
+}
+
+.g-peru-luz {
+  fill: rgba(223, 165, 46, 0.1);
+  filter: drop-shadow(0 0 14px rgba(223, 165, 46, 0.35));
+  opacity: 0;
+}
+
+.listo .g-peru-luz {
+  animation: g-red-aparece 1.2s 2.6s ease forwards;
+}
+
+.g-peru-borde {
+  fill: none;
+  stroke: rgba(255, 214, 140, 0.75);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  filter: drop-shadow(0 0 3px rgba(223, 165, 46, 0.8));
+}
+
+.listo .g-peru-borde {
+  animation: g-red-traza 1.8s 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Red: de Lima a las capitales, primero las cercanas. */
+.g-peru-linea {
+  fill: none;
+  stroke: rgba(255, 214, 140, 0.4);
+  stroke-width: 0.7;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.listo .g-peru-linea {
+  animation: g-red-traza 0.8s calc(3s + var(--lejos) * 0.8s) ease-out forwards;
+}
+
+.g-peru-capital {
+  fill: #ffd98a;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Aparecen y después se encienden cada vez que la onda las alcanza (--toque). */
+.listo .g-peru-capital {
+  animation:
+    g-red-aparece-a 0.5s calc(3.4s + var(--lejos) * 0.8s) ease forwards,
+    g-peru-toque 6s var(--toque) ease-out infinite;
+}
+
+.g-peru-onda {
+  fill: none;
+  stroke: var(--g-oro);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.listo .g-peru-onda {
+  animation: g-peru-onda 6s 4.6s linear infinite;
+}
+
+.g-peru-sede {
+  opacity: 0;
+}
+
+.listo .g-peru-sede {
+  animation: g-red-aparece 0.6s 2.8s ease forwards;
+}
+
+.g-peru-sede-aro {
+  fill: none;
+  stroke: #ffe6ad;
+  stroke-width: 1.2;
+  filter: drop-shadow(0 0 4px rgba(223, 165, 46, 0.9));
+}
+
+.g-peru-sede-centro {
+  fill: #fff6e3;
+  filter: drop-shadow(0 0 6px rgba(223, 165, 46, 1));
+}
+
+/* En vertical el texto sube y deja abajo el Perú (la cámara lo baja, ver portada-mapa.js). */
+@media (orientation: portrait) and (max-width: 900px) {
+  .g-hero {
+    align-items: flex-start;
+  }
+
+  .g-hero .g-hero-in {
+    padding-top: calc(var(--bar-h) + 6vh);
+  }
+}
+
+@keyframes g-hero-entrada {
+  from {
+    transform: scale(1);
+  }
+}
+
+@keyframes g-hero-deriva {
+  to {
+    transform: scale(1.035) translateX(-8px);
+  }
+}
+
+@keyframes g-hero-respira {
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes g-red-aparece {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes g-red-aparece-a {
+  to {
+    opacity: 0.75;
+  }
+}
+
+@keyframes g-foco-sombra {
+  to {
+    opacity: 0.6;
+  }
+}
+
+@keyframes g-red-traza {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes g-peru-onda {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.03);
+  }
+  40%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* La capital se enciende al tocarla la onda y vuelve a su brillo de reposo. */
+@keyframes g-peru-toque {
+  0% {
+    fill: #fff6e3;
+    transform: scale(2);
+    filter: drop-shadow(0 0 4px rgba(223, 165, 46, 1));
+  }
+  25%,
+  100% {
+    fill: #ffd98a;
+    transform: scale(1);
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .g-hero-mapa,
+  .g-hero-deriva,
+  .g-hero-brillo,
+  .g-hero-red,
+  .g-hero-red * {
+    animation: none !important;
+  }
+
+  .g-foco-sombra {
+    opacity: 0.6;
+  }
+
+  .g-peru-luz,
+  .g-peru-sede {
+    opacity: 1;
+  }
+
+  .g-peru-capital {
+    opacity: 0.75;
+  }
+
+  .g-peru-borde,
+  .g-peru-linea {
+    stroke-dashoffset: 0;
+  }
+
+  .g-peru-onda {
+    display: none;
+  }
+}
+
+/* Lienzo de las portadas 3D guardadas sin usar (peru3d.js, portada3d.js, globo3d.js). */
+.g-hero-3d {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.g-hero-3d:not(.lista) {
+  opacity: 0;
+}
+
+/* Portada: poco texto, a la izquierda (las montañas quedan a la derecha). Un rótulo, el nombre como título,
+   una frase y dos botones. */
+.g-hero-in {
+  position: relative;
+  padding-top: calc(var(--bar-h) + 6px);
+  padding-bottom: clamp(48px, 5vw, 96px);
+}
+
+/* Rótulo en mono (como el menú), con un filete fino delante. */
+.g-hero .g-kicker {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.3vw, 24px);
+  font: 600 clamp(0.72rem, 0.86vw, 1.02rem) / 1 var(--sans);
+  letter-spacing: 0.2em;
+}
+
+.g-hero .g-kicker::before {
+  content: "";
+  width: clamp(26px, 3.4vw, 64px);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* El nombre es el título, en dos renglones: "Goberna" en blanco macizo y "Tech" en dorado y más fino, como en el
+   logotipo. */
+.g-hero h1 {
+  margin-top: clamp(18px, min(2.6vw, 4vh), 50px);
+  font-size: clamp(2.6rem, min(7.4vw, 14vh), 9.6rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.g-hero h1 span {
+  display: block;
+}
+
+.g-hero h1 span:last-child {
+  color: var(--g-oro);
+  font-weight: 400;
+}
+
+/* La misma raya dorada que va debajo de los títulos de sección. */
+.g-hero h1::after {
+  content: "";
+  display: block;
+  width: clamp(34px, 3.2vw, 62px);
+  height: 3px;
+  margin-top: clamp(18px, 2vw, 36px);
+  background: var(--g-oro);
+}
+
+/* El subtítulo del nombre: una sola idea, corta y con presencia, para que se entienda en un segundo qué hace
+   Goberna Tech. */
+.g-hero-p {
+  margin-top: clamp(18px, 2vw, 34px);
+  max-width: 20em;
+  color: #e4e9f2;
+  font-size: clamp(1.2rem, 1.75vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.g-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px clamp(12px, 1vw, 20px);
+  margin-top: clamp(26px, 2.7vw, 52px);
+}
+
+.g-desliza {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(10px, 1.4vw, 26px);
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  color: #dfe4ee;
+  font: 600 clamp(0.66rem, 0.72vw, 0.86rem) / 1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  translate: -50% 0;
+}
+
+.g-desliza svg {
+  width: clamp(24px, 2.2vw, 40px);
+  height: clamp(24px, 2.2vw, 40px);
+  fill: none;
+  stroke: var(--g-oro);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* La flecha rebota con suavidad: baja, vuelve, un rebote pequeño y descansa. */
+.g-desliza svg {
+  animation: g-rebote 2.6s cubic-bezier(0.45, 0, 0.3, 1) infinite;
+}
+
+@keyframes g-rebote {
+  0%,
+  56%,
+  100% {
+    transform: translateY(0);
+  }
+  22% {
+    transform: translateY(7px);
+  }
+  38% {
+    transform: translateY(0);
+  }
+  47% {
+    transform: translateY(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .g-desliza svg,
+  .g-prem-inv .g-prem-foto img {
+    animation: none;
+  }
+}
+
+/* ───────── 2. Conocimiento que acompaña ───────── */
+
+.g-saber {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(24px, 2.2vw, 44px);
+  background:
+    var(--g-estrellas),
+    radial-gradient(42% 40% at 76% 62%, rgba(var(--g-azul-b), 0.2), transparent 70%),
+    radial-gradient(55% 42% at 50% 72%, rgba(var(--g-azul-a), 0.26), transparent 72%),
+    var(--g-noche);
+}
+
+.g-saber .g-titulo {
+  margin-top: clamp(40px, 5.6vw, 108px);
+}
+
+.g-saber-in {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 37vw;
+  margin-top: clamp(10px, 1vw, 20px);
+}
+
+.g-saber-txt {
+  position: relative;
+  z-index: 1;
+  max-width: clamp(280px, 30vw, 580px);
+  margin-left: clamp(0px, 2.1vw, 40px);
+  padding-left: clamp(18px, 2.1vw, 40px);
+}
+
+/* La raya dorada va junto al titular y al texto, no junto al botón. */
+.g-saber-txt::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+  bottom: calc(clamp(46px, 3.4vw, 66px) + clamp(30px, 3.4vw, 64px));
+  width: 3px;
+  background: var(--g-oro);
+}
+
+.g-saber-txt h3 {
+  font-size: clamp(1.4rem, 2.25vw, 2.7rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.g-saber-txt p {
+  margin-top: clamp(10px, 1vw, 20px);
+  max-width: 34em;
+  color: #dfe4ee;
+  font-size: clamp(0.92rem, 1.04vw, 1.25rem);
+  line-height: 1.55;
+}
+
+.g-saber-txt .g-btn {
+  margin-top: clamp(30px, 3.4vw, 64px);
+}
+
+/* El chip que construye el edificio (3D) ocupa el sitio de la ilustración del mockup: llega hasta
+   el borde derecho de la pantalla. Los bordes los funde la propia escena (src/templo3d.js). */
+.g-saber-3d {
+  position: absolute;
+  right: calc(var(--g-lado) * -1);
+  bottom: 0;
+  width: 63vw;
+  aspect-ratio: 1572 / 904;
+  pointer-events: none;
+}
+
+.g-saber-3d canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.6s ease;
+}
+
+.g-saber-3d canvas:not(.lista) {
+  opacity: 0;
+}
+
+/* ───────── Misión y visión ───────── */
+
+.g-credo {
+  position: relative;
+  padding: clamp(24px, 3vw, 60px) 0 clamp(40px, 5vw, 100px);
+  background:
+    var(--g-estrellas),
+    radial-gradient(40% 36% at 100% 18%, rgba(var(--g-azul-b), 0.2), transparent 70%),
+    radial-gradient(46% 40% at 14% 72%, rgba(var(--g-azul-a), 0.3), transparent 72%),
+    var(--g-noche);
+}
+
+/* Una frase a la vez: el título a la izquierda y la frase grande a la derecha. */
+.g-credo-b {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.34fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px clamp(28px, 6vw, 120px);
+  padding: clamp(44px, 7vw, 140px) 0;
+}
+
+.g-credo-b + .g-credo-b {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.g-credo-t {
+  font-size: clamp(1.5rem, 2.2vw, 2.7rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+}
+
+.g-credo-t::after {
+  content: "";
+  display: block;
+  width: clamp(34px, 3.2vw, 62px);
+  height: 3px;
+  margin-top: clamp(14px, 1.4vw, 26px);
+  background: var(--g-oro);
+}
+
+.g-credo-txt {
+  max-width: 30em;
+  font-size: clamp(1.4rem, 2.75vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.26;
+  letter-spacing: -0.012em;
+  text-wrap: pretty;
+}
+
+.g-credo-txt em {
+  font-style: normal;
+}
+
+/* Cada palabra se enciende al leerla (src/credo.js). Lo que se enfatiza va en dorado. */
+.g-credo-txt .p {
+  color: rgba(238, 241, 246, 0.2);
+  transition: color 0.6s ease;
+}
+
+.g-credo-txt .p.on {
+  color: var(--g-claro);
+}
+
+.g-credo-txt em .p {
+  color: rgba(223, 165, 46, 0.3);
+}
+
+.g-credo-txt em .p.on {
+  color: var(--g-oro);
+}
+
+@media (max-width: 900px) {
+  .g-credo-b {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .g-credo-txt {
+    font-size: clamp(1.35rem, 5.6vw, 2.1rem);
+  }
+}
+
+/* ───────── 3. Nuestros servicios ───────── */
+
+.g-serv {
+  padding: clamp(48px, 5vw, 96px) 0 clamp(64px, 7vw, 130px);
+  background:
+    var(--g-estrellas),
+    radial-gradient(36% 36% at 0% 44%, rgba(var(--g-azul-a), 0.4), transparent 70%),
+    radial-gradient(34% 34% at 100% 64%, rgba(var(--g-azul-b), 0.18), transparent 70%),
+    radial-gradient(26% 26% at 6% 52%, rgba(120, 62, 26, 0.12), transparent 70%),
+    var(--g-noche);
+}
+
+.g-ejes {
+  margin-top: clamp(40px, 5vw, 96px);
+}
+
+/* Tres tarjetas apiladas: cada una monta sus esquinas redondeadas sobre la anterior. */
+.g-eje {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 20px clamp(20px, 3vw, 60px);
+  min-height: clamp(190px, 20.6vw, 396px);
+  padding: clamp(28px, 3.4vw, 64px) clamp(22px, 3.4vw, 64px) calc(clamp(28px, 3.4vw, 64px) + 26px) clamp(22px, 12.2vw, 234px);
+  overflow: hidden;
+  border-radius: clamp(16px, 1.6vw, 30px) clamp(16px, 1.6vw, 30px) 0 0;
+  color: var(--g-tinta);
+}
+
+.g-eje + .g-eje {
+  margin-top: -26px;
+}
+
+.g-eje-1 {
+  background: linear-gradient(180deg, #dfe8fd, #f4f7ff);
+}
+
+.g-eje-2 {
+  background: linear-gradient(180deg, #dde2ee, #b7c8ea);
+}
+
+.g-eje-3 {
+  background: linear-gradient(180deg, #1c2a4b 0%, #111a33 60%, #060c1e 100%);
+  border-radius: clamp(16px, 1.6vw, 30px);
+  color: #fff;
+}
+
+.g-eje-n {
+  position: absolute;
+  left: -0.03em;
+  top: 50%;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: clamp(7rem, 15.6vw, 18.7rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  translate: 0 -54%;
+  pointer-events: none;
+}
+
+.g-eje-1 .g-eje-n {
+  color: rgba(190, 205, 235, 0.42);
+}
+
+.g-eje-2 .g-eje-n {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.g-eje-3 .g-eje-n {
+  color: rgba(255, 255, 255, 0.12);
+}
+
+.g-eje > div {
+  position: relative;
+}
+
+.g-eje h3 {
+  font-size: clamp(1.6rem, 3vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+}
+
+.g-eje h3 em {
+  font-style: normal;
+  color: var(--g-azul);
+}
+
+.g-eje p {
+  margin-top: clamp(4px, 0.5vw, 10px);
+  max-width: 27em;
+  font-size: clamp(0.95rem, 1.2vw, 1.44rem);
+  line-height: 1.45;
+}
+
+.g-eje .g-btn {
+  position: relative;
+}
+
+/* Los 12 servicios, por eje. Sin JavaScript, los tres ejes uno debajo del otro; con él, pestañas. */
+.g-svc {
+  margin-top: clamp(56px, 6vw, 120px);
+  scroll-margin-top: calc(var(--bar-h) + 16px);
+}
+
+.g-svc-tabs {
+  display: none;
+}
+
+.js .g-svc-tabs {
+  display: flex;
+  gap: clamp(20px, 3vw, 56px);
+  overflow-x: auto;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  scrollbar-width: none;
+}
+
+.g-svc-tab {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 18px 2px;
+  margin-bottom: -1px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: #9fabc2;
+  font: 600 clamp(0.98rem, 1.2vw, 1.4rem) / 1.2 var(--sans);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+/* En pantallas angostas las pestañas bajan de renglón: las tres quedan a la vista. */
+@media (max-width: 600px) {
+  .js .g-svc-tabs {
+    flex-wrap: wrap;
+    column-gap: 22px;
+  }
+
+  .g-svc-tab {
+    padding: 14px 2px;
+  }
+
+  .js .g-svc .g-svc-panel {
+    scroll-margin-top: calc(var(--bar-h) + 215px);
+  }
+}
+
+.g-svc-tab span {
+  color: var(--g-oro);
+  font-size: 0.78em;
+  letter-spacing: 0.08em;
+}
+
+.g-svc-tab:hover,
+.g-svc-tab[aria-selected="true"] {
+  color: #fff;
+}
+
+.g-svc-tab[aria-selected="true"] {
+  border-bottom-color: var(--g-oro);
+}
+
+.g-svc-tab:focus-visible {
+  outline: 2px solid var(--g-oro);
+  outline-offset: 2px;
+}
+
+.g-svc-panel {
+  padding-top: clamp(28px, 3vw, 56px);
+  scroll-margin-top: calc(var(--bar-h) + 16px);
+}
+
+/* Al llegar a un eje, las pestañas quedan a la vista encima de él (no debajo de la barra). */
+.js .g-svc-panel {
+  scroll-margin-top: calc(var(--bar-h) + 100px);
+}
+
+.g-svc-panel + .g-svc-panel {
+  margin-top: clamp(32px, 3vw, 56px);
+}
+
+.g-svc-eje {
+  font-size: clamp(1.5rem, 2.2vw, 2.6rem);
+  font-weight: 600;
+}
+
+/* Con pestañas, el nombre del eje ya está en la pestaña: queda solo para lectores de pantalla. */
+.js .g-svc-eje {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.g-svc-intro {
+  max-width: 36em;
+  margin-bottom: clamp(20px, 2vw, 40px);
+  color: #c7cfdf;
+  font-size: clamp(1.05rem, 1.4vw, 1.6rem);
+  line-height: 1.4;
+}
+
+.g-svc-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: clamp(14px, 1.4vw, 28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.g-svc-item {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: clamp(24px, 2.2vw, 42px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: clamp(12px, 1.2vw, 22px);
+  background: linear-gradient(180deg, rgba(31, 59, 115, 0.3), rgba(9, 17, 32, 0.65));
+  scroll-margin-top: calc(var(--bar-h) + 100px);
+  transition: border-color 0.4s ease;
+}
+
+/* Al llegar desde el menú (Editorial, Cursos), el servicio se marca con un borde dorado. */
+.g-svc-item:target {
+  border-color: var(--g-oro);
+}
+
+.g-svc-item > div {
+  flex: 1;
+}
+
+.g-svc-n {
+  color: var(--g-oro);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.g-svc-item h3 {
+  font-size: clamp(1.25rem, 1.6vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.g-svc-gancho {
+  margin-top: 10px;
+  color: #fff;
+  font-size: clamp(1rem, 1.1vw, 1.26rem);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.g-svc-item p:not(.g-svc-gancho) {
+  margin-top: 10px;
+  color: #aeb8cc;
+  font-size: clamp(0.92rem, 0.98vw, 1.12rem);
+  line-height: 1.55;
+}
+
+.g-svc-item .g-btn {
+  align-self: flex-start;
+}
+
+.g-svc-item .g-btn-linea-oro {
+  color: var(--g-oro);
+}
+
+.g-svc-item .g-btn-linea-oro:hover {
+  color: #1b2030;
+}
+
+.g-svc-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ───────── 4. Servicios premium ───────── */
+
+.g-premium {
+  background:
+    var(--g-estrellas),
+    radial-gradient(46% 40% at 100% 100%, rgba(var(--g-cobre), 0.2), transparent 70%),
+    radial-gradient(70% 50% at 32% 100%, rgba(var(--g-azul-a), 0.36), transparent 72%),
+    linear-gradient(180deg, var(--g-noche) 0%, #050b20 100%);
+}
+
+.g-prem {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 28px clamp(28px, 6vw, 116px);
+  padding: clamp(40px, 4.6vw, 88px) 0 clamp(48px, 5vw, 96px);
+}
+
+.g-prem img {
+  display: block;
+  width: 100%;
+  max-width: clamp(280px, 37vw, 710px);
+  height: auto;
+  -webkit-mask-image: radial-gradient(closest-side, #000 82%, transparent);
+  mask-image: radial-gradient(closest-side, #000 82%, transparent);
+}
+
+.g-prem > img {
+  justify-self: start;
+}
+
+/* Las tres etapas en 3D ocupan el sitio de la ilustración del mockup y llegan hasta el borde
+   izquierdo de la pantalla; la escena funde sus bordes con el fondo (src/legado3d.js). */
+.g-legado-3d {
+  position: relative;
+  justify-self: start;
+  width: calc(100% + var(--g-lado) + clamp(28px, 6vw, 116px) * 0.6);
+  margin-left: calc(var(--g-lado) * -1);
+  aspect-ratio: 1.3;
+}
+
+.g-legado-3d canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.6s ease;
+}
+
+.g-legado-3d canvas:not(.lista) {
+  opacity: 0;
+}
+
+.g-prem h3 {
+  font-size: clamp(2rem, 3.5vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.012em;
+}
+
+.g-prem h3 span {
+  display: block;
+  font-size: 0.74em;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.g-prem h3::after {
+  content: "";
+  display: block;
+  width: clamp(34px, 3.2vw, 62px);
+  height: 3px;
+  margin-top: clamp(12px, 1.2vw, 24px);
+  background: var(--g-oro);
+}
+
+.g-prem p {
+  margin-top: clamp(16px, 1.8vw, 34px);
+  max-width: 31em;
+  color: #e3e7ef;
+  font-size: clamp(0.95rem, 1.12vw, 1.34rem);
+  line-height: 1.55;
+}
+
+.g-prem .g-btn {
+  margin-top: clamp(24px, 2.6vw, 50px);
+}
+
+.g-prem p.g-lugar {
+  margin-top: clamp(18px, 2.2vw, 42px);
+  color: var(--g-oro);
+  font-size: clamp(0.82rem, 0.92vw, 1.1rem);
+}
+
+.g-prem .g-lugar + .g-btn {
+  margin-top: clamp(12px, 1.2vw, 22px);
+}
+
+/* Gestión → Trayectoria → Legado */
+.g-pasos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: clamp(280px, 31vw, 600px);
+  margin: clamp(22px, 2.4vw, 46px) 0 0;
+  padding: 0;
+  list-style: none;
+  background: linear-gradient(rgba(223, 165, 46, 0.55), rgba(223, 165, 46, 0.55)) no-repeat 0 6px / 100% 1px;
+  color: #e3e7ef;
+  font-size: clamp(0.72rem, 0.86vw, 1.02rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.g-pasos li {
+  display: grid;
+  gap: clamp(16px, 1.7vw, 32px);
+}
+
+.g-pasos li:nth-child(2) {
+  justify-items: center;
+}
+
+.g-pasos li:nth-child(3) {
+  justify-items: end;
+}
+
+.g-pasos li::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  margin: 0 clamp(8px, 2.4vw, 46px);
+  border: 1.5px solid var(--g-oro);
+  border-radius: 50%;
+  background: #05102a;
+}
+
+.g-pasos li:last-child::before {
+  background: var(--g-oro);
+}
+
+/* Con la escena 3D, la línea de tiempo se enciende al ritmo de los paneles (src/legado3d.js):
+   la línea dorada avanza hasta cada etapa y su punto se enciende; el de Legado queda lleno. */
+.g-pasos.animada {
+  background:
+    linear-gradient(var(--g-oro), var(--g-oro)) no-repeat 0 6px / var(--avance, 0%) 1px,
+    linear-gradient(rgba(223, 165, 46, 0.22), rgba(223, 165, 46, 0.22)) no-repeat 0 6px / 100% 1px;
+  transition: background-size 0.9s cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+
+.g-pasos.animada li {
+  color: rgba(227, 231, 239, 0.5);
+  transition: color 0.5s ease;
+}
+
+.g-pasos.animada li::before {
+  border-color: rgba(223, 165, 46, 0.4);
+  background: #05102a;
+  transition: border-color 0.5s ease, background 0.5s ease, box-shadow 0.5s ease;
+}
+
+.g-pasos.animada li.encendido {
+  color: #e3e7ef;
+}
+
+.g-pasos.animada li.encendido::before {
+  border-color: var(--g-oro);
+  box-shadow: 0 0 0 5px rgba(223, 165, 46, 0.1), 0 0 14px rgba(223, 165, 46, 0.35);
+}
+
+.g-pasos.animada li.encendido:last-child::before {
+  background: var(--g-oro);
+}
+
+/* Media Training: texto a la izquierda, imagen a la derecha, sobre un azul que crece hacia abajo. */
+.g-prem-inv {
+  display: block;
+  padding: 0;
+  background:
+    var(--g-estrellas),
+    radial-gradient(44% 46% at 44% 78%, rgba(var(--g-azul-b), 0.26), transparent 70%),
+    radial-gradient(58% 52% at 30% 70%, rgba(var(--g-azul-a), 0.3), transparent 72%),
+    radial-gradient(36% 46% at 64% 28%, rgba(120, 62, 26, 0.16), transparent 70%),
+    linear-gradient(180deg, #050b20 0%, var(--g-noche) 34%, #040a1e 100%);
+}
+
+.g-prem-inv .g-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 28px clamp(28px, 6vw, 116px);
+  padding-top: clamp(48px, 5vw, 96px);
+  padding-bottom: clamp(56px, 6.4vw, 124px);
+}
+
+.g-prem-inv img {
+  justify-self: end;
+}
+
+/* La foto del ponente: nítida, con su color natural, en una tarjeta con esquinas suaves, filete
+   tenue y sombra. Dentro de su marco respira muy despacio (como la escena de la página de los libros). */
+.g-prem-inv .g-prem-foto {
+  justify-self: end;
+  width: 100%;
+  max-width: clamp(280px, 31vw, 600px);
+  margin: 0;
+  overflow: hidden;
+  border-radius: clamp(10px, 1vw, 18px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 32px 80px -32px rgba(0, 0, 0, 0.8);
+}
+
+.g-prem-inv .g-prem-foto img {
+  max-width: none;
+  mix-blend-mode: normal;
+  -webkit-mask-image: none;
+  mask-image: none;
+  transform-origin: 55% 28%; /* la cara del ponente */
+  animation: g-respira 22s ease-in-out infinite;
+}
+
+@keyframes g-respira {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ───────── 5. Blog ───────── */
+
+.g-blog {
+  position: relative;
+  padding: clamp(56px, 6vw, 116px) 0 clamp(80px, 11.6vw, 224px);
+  background: linear-gradient(180deg, #f6f7fa 0%, #f2f4f8 70%, #eaedf3 100%);
+  color: var(--g-tinta);
+}
+
+.g-blog-cab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.g-blog h2 {
+  font-size: clamp(2rem, 3.4vw, 4.1rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.g-blog-cab p {
+  margin-top: clamp(8px, 0.9vw, 16px);
+  max-width: 36em;
+  font-size: clamp(0.98rem, 1.24vw, 1.48rem);
+  line-height: 1.4;
+  color: #2a3247;
+}
+
+.g-posts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 40px);
+  margin-top: clamp(32px, 4vw, 76px);
+}
+
+.g-post {
+  overflow: hidden;
+  border-radius: clamp(8px, 0.8vw, 14px);
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(12, 20, 38, 0.14);
+}
+
+.g-post > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 341 / 184;
+  object-fit: cover;
+}
+
+.g-post > div {
+  padding: clamp(12px, 1.1vw, 22px) clamp(12px, 1.1vw, 22px) clamp(12px, 1vw, 20px);
+}
+
+.g-post h3 {
+  font-size: clamp(0.98rem, 1.16vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.g-post-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(8px, 0.8vw, 16px);
+  font-size: clamp(0.66rem, 0.7vw, 0.84rem);
+  line-height: 1.35;
+  color: #6b7385;
+}
+
+.g-post-meta img {
+  width: clamp(20px, 1.6vw, 30px);
+  height: auto;
+}
+
+.g-post-meta b {
+  display: block;
+  font-weight: 600;
+  color: #2a3247;
+}
+
+/* ───────── Pie ───────── */
+
+.g-pie {
+  position: relative;
+  padding: clamp(40px, 5.6vw, 108px) 0 clamp(20px, 2vw, 36px);
+  background: var(--g-fondo-2);
+}
+
+/* La cúpula asoma sobre el borde del pie, a la izquierda. Va en dos mitades de la misma imagen:
+   la de arriba sobre el fondo claro del blog y la de abajo sobre el pie. */
+.g-cupula {
+  position: absolute;
+  left: 0;
+  width: 25vw;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.g-cupula img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.g-cupula-a {
+  bottom: 0;
+  height: 8.1vw;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent), linear-gradient(180deg, transparent, #000 30%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, #000 70%, transparent), linear-gradient(180deg, transparent, #000 30%);
+  mask-composite: intersect;
+}
+
+.g-cupula-b {
+  top: 0;
+  height: 15.3vw;
+  -webkit-mask-image: linear-gradient(90deg, #000 86%, transparent), linear-gradient(180deg, #000 70%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, #000 86%, transparent), linear-gradient(180deg, #000 70%, transparent);
+  mask-composite: intersect;
+}
+
+.g-cupula-b img {
+  margin-top: -8.1vw;
+}
+
+body:not([data-pagina="home"]) .g-cupula {
+  display: none;
+}
+
+.g-pie .g-wrap {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 28px clamp(32px, 10vw, 190px);
+  padding-left: clamp(20px, 25vw, 480px);
+}
+
+.g-pie-logo {
+  width: auto;
+  height: clamp(52px, 4.9vw, 94px);
+}
+
+.g-pie nav {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: clamp(16px, 2vw, 40px) clamp(28px, 4.6vw, 90px);
+}
+
+.g-pie nav a {
+  color: #dfe4ee;
+  font: 600 clamp(0.74rem, 0.82vw, 0.98rem) / 1 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.g-pie nav a:hover {
+  color: var(--g-oro);
+}
+
+.g-legal {
+  margin-top: clamp(40px, 5vw, 90px);
+  padding: 0 var(--g-lado);
+  color: #8d96a8;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+/* ───────── Munitech, plataformas y contacto (páginas aparte) ───────── */
+
+.g-pag {
+  min-height: 80vh;
+  padding: calc(var(--bar-h) + clamp(32px, 4vw, 72px)) 0 clamp(64px, 7vw, 130px);
+}
+
+.g-pag-p {
+  margin-top: clamp(16px, 1.6vw, 30px);
+  max-width: 40em;
+  color: #dfe4ee;
+  font-size: clamp(1rem, 1.2vw, 1.4rem);
+}
+
+/* Munitech: tres secciones (noticias, artículos, normas), cada una con su contenido o, mientras no lo haya, un aviso. */
+.g-mt-secs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.4vw, 28px);
+  margin-top: clamp(36px, 4.4vw, 84px);
+}
+
+.g-mt {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(24px, 2.2vw, 42px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: clamp(12px, 1.2vw, 22px);
+  background: linear-gradient(180deg, rgba(31, 59, 115, 0.3), rgba(9, 17, 32, 0.65));
+}
+
+.g-mt h2 {
+  font-size: clamp(1.3rem, 1.7vw, 2rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.g-mt p {
+  color: #aeb8cc;
+  font-size: clamp(0.95rem, 1vw, 1.15rem);
+  line-height: 1.5;
+}
+
+.g-mt .g-mt-vacio {
+  margin-top: auto;
+  padding: 12px 16px;
+  border: 1px dashed rgba(223, 165, 46, 0.5);
+  border-radius: 10px;
+  color: var(--g-oro);
+  font-size: 0.9rem;
+}
+
+.g-mt-fuente {
+  margin-top: 22px;
+  color: #8d96a8;
+  font-size: 0.9rem;
+}
+
+.g-mt-fuente a {
+  color: #dfe4ee;
+}
+
+.g-mt-plat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 28px;
+  margin-top: clamp(40px, 4vw, 80px);
+  padding-top: clamp(24px, 2.4vw, 44px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.g-mt-plat p {
+  color: #dfe4ee;
+  font-size: clamp(1rem, 1.2vw, 1.4rem);
+}
+
+@media (max-width: 900px) {
+  .g-mt-secs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.g-fams {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 3.4vw, 64px) clamp(28px, 5vw, 96px);
+  margin-top: clamp(36px, 4.4vw, 84px);
+}
+
+.g-fam h2 {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--g-oro);
+  color: var(--g-oro);
+  font-size: clamp(0.82rem, 0.9vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.g-fam ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.g-fam a {
+  display: grid;
+  gap: 2px;
+  padding: clamp(12px, 1.2vw, 22px) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  text-decoration: none;
+}
+
+.g-fam strong {
+  font-size: clamp(1.3rem, 1.9vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.g-fam span {
+  color: #b9c2d3;
+  font-size: clamp(0.9rem, 1vw, 1.15rem);
+}
+
+.g-fam a:hover strong {
+  color: var(--g-oro);
+}
+
+#contacto.g-pag {
+  background: var(--g-claro);
+  color: var(--g-tinta);
+}
+
+#contacto .contact {
+  padding: 0;
+  background: none;
+}
+
+#contacto .contact h2 {
+  font-size: clamp(2rem, 3.4vw, 4.1rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* Las páginas de plataforma conservan su diseño claro; solo cambia la barra. */
+body[data-pagina="modulo"] {
+  background: #fff;
+  color: var(--navy);
+}
+
+.module .btn {
+  border-radius: 5px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ───────── Pantallas medianas y chicas ───────── */
+
+@media (max-width: 900px) {
+  .g-cupula.g-cupula {
+    display: none;
+  }
+
+  .g-nav {
+    display: none;
+  }
+
+  .g-menu-btn {
+    display: block;
+  }
+
+  .g-saber-in {
+    display: block;
+    min-height: 0;
+    margin-top: 36px;
+  }
+
+  .g-saber-txt {
+    max-width: 30em;
+    margin-left: 0;
+  }
+
+  .g-saber-3d {
+    position: relative;
+    right: auto;
+    width: calc(100% + var(--g-lado) * 2);
+    margin: 28px calc(var(--g-lado) * -1) 0;
+  }
+
+  .g-eje {
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: clamp(22px, 3.4vw, 64px);
+  }
+
+  .g-eje .g-btn {
+    justify-self: start;
+  }
+
+
+  .g-prem,
+  .g-prem-inv .g-wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .g-prem > img,
+  .g-prem-inv img {
+    justify-self: center;
+    max-width: min(100%, 440px);
+  }
+
+  .g-legado-3d {
+    width: calc(100% + var(--g-lado) * 2);
+    margin: 0 calc(var(--g-lado) * -1);
+    aspect-ratio: 1.15;
+  }
+
+  .g-prem-inv img {
+    order: -1;
+  }
+
+  .g-prem-inv .g-prem-foto {
+    order: -1;
+    justify-self: center;
+    max-width: min(100%, 420px);
+  }
+
+  .g-blog-cab {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .g-posts,
+  .g-fams {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .g-post {
+    max-width: 520px;
+  }
+
+  .g-pie .g-wrap {
+  position: relative;
+    padding-left: var(--g-lado);
+  }
+
+  .g-desliza {
+    display: none;
+  }
+}
+
+/* Con globo, en pantallas verticales el texto de la portada sube y deja abajo el globo (src/portada3d.js). */
+@media (max-width: 900px) and (orientation: portrait) {
+  .g-hero.g-con-globo {
+    align-items: flex-start;
+  }
+
+  .g-hero.g-con-globo .g-hero-in {
+    padding-top: calc(var(--bar-h) + 3vh);
+  }
+}
+
+/* En pantallas angostas el nombre crece: con el tamaño de escritorio quedaría chico. */
+@media (max-width: 900px) {
+  .g-hero h1 {
+    font-size: clamp(2.6rem, min(11.5vw, 14vh), 9.6rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .g-hero h1 {
+    font-size: clamp(2.6rem, min(16vw, 14vh), 9.6rem);
+    letter-spacing: 0.03em;
+  }
+}
+
+@media (max-width: 520px) {
+  .g-acciones .g-btn {
+    width: 100%;
+  }
+
+  .g-pie nav {
+    grid-template-columns: repeat(2, auto);
+    justify-content: start;
+  }
+}
+
+/* ───────── Movimiento: parallax, entradas y tarjetas apiladas ───────── */
+
+/* Parallax (src/efectos.js escribe --py al bajar). */
+[data-parallax] {
+  translate: 0 var(--py, 0);
+  will-change: translate;
+}
+
+.g-eje-n[data-parallax] {
+  translate: 0 calc(-54% + var(--py, 0px));
+}
+
+/* Las fotos aparecen como en la página de los libros: desenfocadas y oscuras, se aclaran mientras
+   se acomodan. */
+.js .g-unveil {
+  opacity: 0;
+  scale: 1.06;
+  filter: blur(8px) brightness(0.35);
+  transition: opacity 1.3s ease-out var(--d, 0ms), scale 1.4s cubic-bezier(0.16, 0.84, 0.24, 1) var(--d, 0ms), filter 1.3s ease-out var(--d, 0ms);
+}
+
+.js .g-unveil.in {
+  opacity: 1;
+  scale: none;
+  filter: none;
+}
+
+/* Los textos entran al aparecer. */
+.js .g-rev {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease var(--d, 0ms), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms);
+}
+
+.js .g-rev.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Tarjetas de servicios: cada una se queda arriba y la siguiente sube y la cubre. */
+@media (min-width: 901px) and (min-height: 620px) {
+  /* El recorte redondea el conjunto: las tarjetas de atrás no asoman por las esquinas. */
+  .g-ejes {
+    clip-path: inset(0 round clamp(16px, 1.6vw, 30px));
+  }
+
+  .g-eje {
+    position: sticky;
+    top: calc(var(--bar-h) + 14px);
+  }
+
+  .g-eje-2 {
+    top: calc(var(--bar-h) + 30px);
+  }
+
+  .g-eje-3 {
+    top: calc(var(--bar-h) + 46px);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-parallax],
+  .g-eje-n[data-parallax] {
+    translate: none;
+  }
+
+  .g-eje-n[data-parallax] {
+    translate: 0 -54%;
+  }
+}
+
+/* ───────── Puntero propio (src/cursor.js) ───────── */
+
+/* Solo con mouse: se oculta el del sistema, salvo donde se escribe. */
+html.con-cursor,
+html.con-cursor * {
+  cursor: none !important;
+}
+
+html.con-cursor input,
+html.con-cursor textarea,
+html.con-cursor [contenteditable="true"] {
+  cursor: text !important;
+}
+
+.g-cursor,
+.g-cursor-punto {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  will-change: transform;
+}
+
+.g-cursor {
+  width: 80px;
+  height: 80px;
+  overflow: visible;
+}
+
+.g-cursor-aro {
+  fill: none;
+  stroke: rgba(223, 165, 46, 0.6);
+  stroke-width: 1.2;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease, fill 0.3s ease;
+}
+
+.g-cursor.encima .g-cursor-aro {
+  stroke: var(--g-oro);
+  stroke-width: 1;
+  fill: rgba(223, 165, 46, 0.08);
+}
+
+/* El punto se mueve sin transición (va pegado al mouse); solo su forma interna cambia de escala. */
+.g-cursor-punto {
+  width: 0;
+  height: 0;
+}
+
+.g-cursor-punto i {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--g-oro);
+  box-shadow: 0 0 10px rgba(223, 165, 46, 0.5);
+  transition: transform 0.18s ease-out;
+}
+
+.g-cursor.oculto,
+.g-cursor-punto.oculto {
+  opacity: 0;
+}
