@@ -1,0 +1,54 @@
+name: Deploy gobernatech.com
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gobernatech-vps2
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Verify build
+        run: test -s dist/index.html && test -d dist/assets
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goberna-tech-dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, linux, x64, vps2-goberna-tech]
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: goberna-tech-dist
+          path: site-dist
+      - name: Publish website
+        run: |
+          set -euo pipefail
+          test -s site-dist/index.html
+          test -d site-dist/assets
+          rsync -rlt --no-perms --omit-dir-times --delay-updates --delete-delay site-dist/ /srv/tenants/gobernatech/public/
+      - name: Check origin
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --resolve gobernatech.com:443:75.119.138.200 https://gobernatech.com/ -o "$RUNNER_TEMP/gobernatech-ci-check.html"
+          cmp site-dist/index.html "$RUNNER_TEMP/gobernatech-ci-check.html"
