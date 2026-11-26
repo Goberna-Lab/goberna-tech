@@ -17,6 +17,7 @@ import { ponerEsquemas, activarExploradores, sinMovimiento, revelar, beneficios 
 import { montarGlobo3D } from "./globo3d.js";
 import { montarRedFondo } from "./red-fondo.js";
 import { montarNiveles } from "./niveles.js";
+import { montarCarrusel } from "./carrusel.js";
 import { montarLegado3D } from "./legado3d.js";
 import { montarCursor } from "./cursor.js";
 import { montarCredo } from "./credo.js";
@@ -86,6 +87,8 @@ pestanas.forEach((t, i) => {
   });
 });
 elegirEje(pestanas[0]);
+// Cada eje, un carrusel de tarjetas (carrusel.js).
+document.querySelectorAll(".g-svc-panel").forEach((p) => montarCarrusel(p, { quieto: sinMovimiento }));
 // Un enlace a un eje (#eje-gobierno) o a un servicio (#editorial) abre su pestaña antes de bajar hasta él.
 function abrirServicio(hash) {
   const el = hash.length > 1 && document.getElementById(hash.slice(1));

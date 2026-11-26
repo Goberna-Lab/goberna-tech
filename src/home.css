@@ -1485,7 +1485,6 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   border-radius: clamp(12px, 1.2vw, 22px);
   background: linear-gradient(180deg, rgba(31, 59, 115, 0.3), rgba(9, 17, 32, 0.65));
   scroll-margin-top: calc(var(--bar-h) + 100px);
-  transition: border-color 0.4s ease;
 }
 
 /* Al llegar desde el menú (Editorial, Cursos), el servicio se marca con un borde dorado. */
@@ -1525,22 +1524,246 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   line-height: 1.55;
 }
 
-.g-svc-item .g-btn {
-  align-self: flex-start;
-}
-
-.g-svc-item .g-btn-linea-oro {
-  color: var(--g-oro);
-}
-
-.g-svc-item .g-btn-linea-oro:hover {
-  color: #1b2030;
+/* La acción de cada tarjeta: un enlace dorado al pie, separado por una línea fina (todas a la misma altura). */
+.g-svc-item > .g-svc-acciones {
+  flex: none;
 }
 
 .g-svc-acciones {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px 26px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.g-svc-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+  color: var(--g-oro);
+  font: 600 clamp(0.74rem, 0.8vw, 0.92rem) / 1.2 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.g-svc-cta::after {
+  content: "→";
+  font-weight: 400;
+  transition: translate 0.3s ease;
+}
+
+.g-svc-cta:hover::after {
+  translate: 5px 0;
+}
+
+.g-svc-cta-2 {
+  color: #dfe4ee;
+}
+
+.g-svc-cta:focus-visible {
+  outline: 2px solid var(--g-oro);
+  outline-offset: 3px;
+}
+
+.g-svc-item {
+  transition: border-color 0.4s ease, translate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.g-svc-item:hover {
+  border-color: rgba(223, 165, 46, 0.3);
+  translate: 0 -4px;
+}
+
+.g-svc-n {
+  font-family: var(--mono);
+  font-weight: 400;
+}
+
+/* ── Carrusel (src/carrusel.js): la lista es una pista horizontal con encaje. En escritorio, 3 tarjetas por vista;
+   si el eje tiene más, asoma la 4.ª (invita a deslizar). En tableta 1,6; en el celular 1,1. ── */
+.js .g-svc-lista {
+  --hueco: clamp(14px, 1.4vw, 28px);
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 2 * var(--hueco)) / 3);
+  gap: var(--hueco);
+  padding: 8px 0 6px; /* aire para que la tarjeta suba al pasar el mouse sin recortarse */
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.js .g-svc-lista::-webkit-scrollbar {
+  display: none;
+}
+
+.js .g-svc-lista:has(> li:nth-child(4)) {
+  grid-auto-columns: calc((100% - 3 * var(--hueco)) / 3.28);
+}
+
+.js .g-svc-item {
+  scroll-snap-align: start;
+}
+
+.js .g-svc-lista:focus-visible {
+  outline: 2px solid var(--g-oro);
+  outline-offset: 6px;
+}
+
+/* Mientras quedan tarjetas por ver, el borde derecho se funde. */
+.js .g-svc-lista.g-car-hay-mas {
+  -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
+  mask-image: linear-gradient(to right, #000 88%, transparent);
+}
+
+.g-car-desliza .g-svc-lista {
+  cursor: grab;
+}
+
+.g-svc-lista.g-car-arrastrando {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.g-svc-lista.g-car-arrastrando .g-svc-item {
+  translate: none;
+}
+
+.g-car-cab {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 28px;
+  margin-bottom: clamp(16px, 1.8vw, 32px);
+}
+
+.g-car-cab .g-svc-intro {
+  margin-bottom: 0;
+}
+
+.g-car-nav {
+  display: none;
+  align-items: center;
   gap: 12px;
+  margin-left: auto;
+}
+
+.g-car-desliza .g-car-nav {
+  display: flex;
+}
+
+.g-car-cuenta {
+  margin-right: 6px;
+  color: #8f9bb3;
+  font: 400 clamp(0.7rem, 0.76vw, 0.86rem) / 1 var(--mono);
+  letter-spacing: 0.12em;
+}
+
+.g-car-cuenta b {
+  color: var(--g-oro);
+  font-weight: 400;
+}
+
+.g-car-btn {
+  display: grid;
+  place-items: center;
+  width: clamp(42px, 3vw, 52px);
+  height: clamp(42px, 3vw, 52px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, opacity 0.25s ease;
+}
+
+.g-car-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.g-car-btn:hover:not(:disabled) {
+  border-color: var(--g-oro);
+  background: rgba(223, 165, 46, 0.08);
+  color: var(--g-oro);
+}
+
+.g-car-btn:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+
+.g-car-btn:focus-visible {
+  outline: 2px solid var(--g-oro);
+  outline-offset: 3px;
+}
+
+/* Barra de progreso: qué parte de la pista se ve y dónde. */
+.g-car-barra {
+  position: relative;
+  display: none;
+  height: 2px;
+  margin-top: clamp(18px, 2vw, 30px);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.g-car-desliza .g-car-barra {
+  display: block;
+}
+
+.g-car-barra span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 2px;
+  background: var(--g-oro);
+  box-shadow: 0 0 8px rgba(223, 165, 46, 0.6);
+}
+
+@media (max-width: 1100px) {
+  .js .g-svc-lista,
+  .js .g-svc-lista:has(> li:nth-child(4)) {
+    grid-auto-columns: calc((100% - var(--hueco)) / 1.6);
+  }
+}
+
+@media (max-width: 640px) {
+  .js .g-svc-lista,
+  .js .g-svc-lista:has(> li:nth-child(4)) {
+    grid-auto-columns: 88%;
+  }
+
+  .g-car-cab {
+    flex-wrap: wrap;
+  }
+
+  .g-car-cuenta {
+    margin-right: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .g-svc-item,
+  .g-svc-cta::after {
+    transition: none;
+  }
+
+  .g-svc-item:hover {
+    translate: none;
+  }
 }
 
 /* ───────── 4. Servicios premium ───────── */

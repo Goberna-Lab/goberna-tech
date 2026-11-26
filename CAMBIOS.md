@@ -1,5 +1,24 @@
 # Cambios
 
+## Servicios: cada eje, un carrusel (26/11/2026)
+
+Pedido: un carrusel mejor para las tarjetas de servicios.
+
+- **Antes**: grilla de tarjetas; en "Gobierno y gestión" la 5.ª quedaba sola en una segunda fila, las alturas y los
+  botones no calzaban (la 02 traía dos botones apilados) y cada tarjeta repetía un botón con borde.
+- **Ahora** (`src/carrusel.js`, `index.html`, `src/home.css`): cada pestaña es una pista horizontal con encaje. En
+  escritorio se ven 3 tarjetas y, si hay más, asoma la 4.ª (invita a deslizar); en tableta 1,6; en el celular 1,1.
+  Con 3 servicios entran exactas y no hay controles.
+  - Cabecera: contador en mono ("03 / 05", la última tarjeta que se ve entera) y flechas circulares que se apagan en
+    los extremos. Debajo, una barra de progreso dorada.
+  - Arrastre con el mouse que encaja en la tarjeta más cercana (y no dispara el enlace que quedó debajo); en
+    táctiles, el deslizamiento propio; con el foco en la pista, las flechas del teclado. Fundido en el borde
+    derecho mientras quedan tarjetas por ver.
+  - Tarjetas del mismo alto, con la acción al pie como enlace dorado ("Agenda una reunión →", "Inscríbete →",
+    "Cotiza el servicio →"…) tras una línea fina, todas a la misma altura. Suben un poco al pasar el mouse.
+- Sin JavaScript se ve la grilla de antes. Los enlaces a un servicio (#editorial, #escuela-de-gobierno) siguen
+  abriendo su pestaña y llevándolo a la vista.
+
 ## Portada: red de inteligencia de fondo (26/11/2026)
 
 Pedido: darle al fondo de la portada una red de inteligencia sutil (referencia: nodos dorados y azules unidos por
