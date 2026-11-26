@@ -25,8 +25,8 @@ Pedido: quitar el capitolio sobre el chip (3D) y poner algo relevante en su luga
 Pedido: rediseñar el hero tomando como referencia el de vercel.com, sin perder la paleta de Goberna, y que el mapa
 no sea solo el Perú sino el mundo: un globo al que se le pueda hacer clic y se mueva sutilmente con un efecto.
 
-- **Composición** (`index.html`, `src/home.css`, "1. Portada"): rótulo en píldora dorada con un punto que late,
-  el nombre, la frase y los dos botones. Unas guías verticales finas enmarcan la columna y
+- **Composición** (`index.html`, `src/home.css`, "1. Portada"): el nombre, la frase y los dos botones (el rótulo
+  "Inteligencia estratégica" se quitó). Unas guías verticales finas enmarcan la columna y
   abajo va la fila de los tres ejes (Gobierno y gestión, Escuela y formación, Estrategia electoral) en vidrio oscuro,
   con cruces doradas en las esquinas; cada eje lleva a su pestaña de Servicios. Se fue "Desliza para explorar".
 - **Portada partida**: el texto a la izquierda y el mundo a la derecha. El nombre va en **Montserrat Bold**
