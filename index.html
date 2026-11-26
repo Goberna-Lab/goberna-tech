@@ -249,156 +249,176 @@
     <!-- Munitech (Edición Perú): noticias, artículos y normas para la gestión municipal, según el documento
          "GOBERNA TECH - Información". Las tres secciones esperan su contenido: cuando lo haya, reemplazar cada
          .g-mt-vacio por la lista de entradas. -->
-    <!-- Servicios: página aparte (#nuestros-servicios). Un enlace a un eje (#eje-gobierno) o a un servicio (#editorial)
-         la abre en su pestaña. Estuvo en el inicio hasta el 26/11/2026; allá quedaron las tres tarjetas de ejes. -->
-    <main id="nuestros-servicios" class="g-pag g-svcp" hidden>
-      <div class="g-wrap">
-        <p class="g-kicker">Servicios</p>
-        <h1 class="g-titulo g-izq">Cómo te <em>acompañamos</em></h1>
-        <p class="g-pag-p">
-          Doce servicios en tres ejes: gobierno y gestión, escuela y formación, y estrategia electoral. Elige un eje y
-          recorre sus servicios.
-        </p>
-        <!-- Los 12 servicios, por eje (texto del documento "GOBERNA TECH - Información"). Con JavaScript se ven como
-             pestañas (src/home.js) y cada eje como un carrusel (src/carrusel.js); sin él, uno debajo del otro. -->
-        <div class="g-svc" id="servicios-detalle">
-          <div class="g-svc-tabs" role="tablist" aria-label="Ejes de servicio">
-            <button class="g-svc-tab" type="button" role="tab" id="tab-gobierno" aria-controls="eje-gobierno" aria-selected="true"><span>01</span>Gobierno y gestión</button>
-            <button class="g-svc-tab" type="button" role="tab" id="tab-escuela" aria-controls="eje-escuela" aria-selected="false" tabindex="-1"><span>02</span>Escuela y formación</button>
-            <button class="g-svc-tab" type="button" role="tab" id="tab-electoral" aria-controls="eje-electoral" aria-selected="false" tabindex="-1"><span>03</span>Estrategia electoral</button>
-          </div>
-          <div class="g-svc-panel" role="tabpanel" id="eje-gobierno" aria-labelledby="tab-gobierno">
-            <h3 class="g-svc-eje">Gobierno y gestión</h3>
-            <p class="g-svc-intro">Estrategias para una gestión moderna, eficiente y orientada a resultados.</p>
-            <ol class="g-svc-lista">
-              <li class="g-svc-item" id="asesoria-legal">
-                <span class="g-svc-n" aria-hidden="true">01</span>
-                <div>
-                  <h3>Asesoría y defensa legal</h3>
-                  <p>Brindamos asesoría, representación y defensa legal a autoridades, funcionarios y servidores públicos frente a los desafíos jurídicos derivados del ejercicio de sus funciones.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Gobierno y gestión: Asesoría y defensa legal">Agenda una reunión</a></div>
-              </li>
-              <li class="g-svc-item" id="transformacion-digital">
-                <span class="g-svc-n" aria-hidden="true">02</span>
-                <div>
-                  <h3>Innovación y transformación digital</h3>
-                  <p class="g-svc-gancho">Tecnología e inteligencia artificial para transformar la gestión pública.</p>
-                  <p>Desarrollamos soluciones tecnológicas personalizadas que permiten modernizar los servicios públicos, optimizar procesos institucionales y fortalecer la capacidad de gestión de las entidades gubernamentales.</p>
-                </div>
-                <div class="g-svc-acciones">
-                  <a class="g-svc-cta" href="#contacto" data-interes="Gobierno y gestión: Innovación y transformación digital">Agenda una reunión</a>
-                  <a class="g-svc-cta g-svc-cta-2" href="#plataformas">Ver plataformas</a>
-                </div>
-              </li>
-              <li class="g-svc-item" id="comunicacion-de-gestion">
-                <span class="g-svc-n" aria-hidden="true">03</span>
-                <div>
-                  <h3>Comunicación y posicionamiento de gestión</h3>
-                  <p class="g-svc-gancho">Comunicar resultados también es parte de una buena gestión.</p>
-                  <p>Diseñamos estrategias integrales de comunicación gubernamental que permiten a las autoridades informar sobre sus acciones, proyectos y resultados, fortaleciendo la transparencia y el vínculo con la ciudadanía.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Gobierno y gestión: Comunicación y posicionamiento de gestión">Agenda una reunión</a></div>
-              </li>
-              <li class="g-svc-item" id="cooperacion-internacional">
-                <span class="g-svc-n" aria-hidden="true">04</span>
-                <div>
-                  <h3>Cooperación internacional</h3>
-                  <p class="g-svc-gancho">Conectamos tu gestión con oportunidades globales de desarrollo y financiamiento.</p>
-                  <p>Facilitamos la vinculación de autoridades e instituciones públicas con organismos internacionales, gobiernos, entidades de cooperación y potenciales fuentes de financiamiento para impulsar proyectos de desarrollo local y regional.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Gobierno y gestión: Cooperación internacional">Agenda una reunión</a></div>
-              </li>
-              <li class="g-svc-item" id="encuestas-y-focus-groups">
-                <span class="g-svc-n" aria-hidden="true">05</span>
-                <div>
-                  <h3>Encuestas y focus groups</h3>
-                  <p class="g-svc-gancho">Conoce las necesidades de tu ciudadanía y toma decisiones con información.</p>
-                  <p>Realizamos estudios de opinión pública, encuestas de percepción ciudadana y focus groups que permiten a las autoridades conocer las principales necesidades, preocupaciones y expectativas de la población.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Gobierno y gestión: Encuestas y focus groups">Agenda una reunión</a></div>
-              </li>
-            </ol>
-          </div>
-          <div class="g-svc-panel" role="tabpanel" id="eje-escuela" aria-labelledby="tab-escuela">
-            <h3 class="g-svc-eje">Escuela y formación</h3>
-            <ol class="g-svc-lista">
-              <li class="g-svc-item" id="escuela-de-gobierno">
-                <span class="g-svc-n" aria-hidden="true">06</span>
-                <div>
-                  <h3>Escuela de Gobierno y Gestión</h3>
-                  <p class="g-svc-gancho">Formamos líderes preparados para los desafíos del gobierno.</p>
-                  <p>Cursos, diplomados y especializaciones con docentes expertos, cátedras de alto impacto y certificaciones con universidades de alto nivel.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Escuela y formación: Escuela de Gobierno y Gestión">Inscríbete</a></div>
-              </li>
-              <li class="g-svc-item" id="capacitacion-de-equipos">
-                <span class="g-svc-n" aria-hidden="true">07</span>
-                <div>
-                  <h3>Capacitación de equipos</h3>
-                  <p class="g-svc-gancho">Fortalecemos las capacidades de tu equipo.</p>
-                  <p>Diseñamos programas de capacitación a medida para autoridades, funcionarios, servidores públicos y equipos institucionales, considerando los objetivos, desafíos y responsabilidades de cada organización.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Escuela y formación: Capacitación de equipos">Agenda una reunión</a></div>
-              </li>
-              <li class="g-svc-item" id="editorial">
-                <span class="g-svc-n" aria-hidden="true">08</span>
-                <div>
-                  <h3>Editorial</h3>
-                  <p>Nuestra línea editorial está dirigida a autoridades, altos funcionarios, líderes políticos, consultores y profesionales que buscan acceder a conocimientos, experiencias y herramientas que fortalezcan su capacidad de análisis, liderazgo y toma de decisiones.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Escuela y formación: Editorial">Revisa nuestro catálogo</a></div>
-              </li>
-            </ol>
-          </div>
-          <div class="g-svc-panel" role="tabpanel" id="eje-electoral" aria-labelledby="tab-electoral">
-            <h3 class="g-svc-eje">Estrategia electoral</h3>
-            <ol class="g-svc-lista">
-              <li class="g-svc-item" id="campana-360">
-                <span class="g-svc-n" aria-hidden="true">09</span>
-                <div>
-                  <h3>Campaña 360</h3>
-                  <p class="g-svc-gancho">Estrategia integral.</p>
-                  <p>Diseñamos, planificamos y ejecutamos campañas políticas integrales que articulan inteligencia electoral, estrategia política, comunicación, tecnología y organización territorial. Nuestro modelo de Campaña 360° contempla el análisis del escenario político, la planificación estratégica, el desarrollo de propuestas, la comunicación digital, la producción audiovisual, las relaciones con medios y la coordinación de actividades territoriales.</p>
-                  <p>Integramos metodologías de estrategia política como STRATPOL, herramientas de análisis de datos y soluciones tecnológicas para facilitar la organización, el seguimiento y la evaluación de las acciones de campaña.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Estrategia electoral: Campaña 360">Agenda una reunión</a></div>
-              </li>
-              <li class="g-svc-item" id="encuestas-electorales">
-                <span class="g-svc-n" aria-hidden="true">10</span>
-                <div>
-                  <h3>Encuestas</h3>
-                  <p class="g-svc-gancho">Información electoral para comprender el escenario político.</p>
-                  <p>Desarrollamos encuestas de opinión pública e intención de voto que permiten conocer las percepciones ciudadanas, identificar los principales problemas de interés público y analizar las tendencias del escenario electoral.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Estrategia electoral: Encuestas">Cotiza el servicio</a></div>
-              </li>
-              <li class="g-svc-item" id="focus-groups-electorales">
-                <span class="g-svc-n" aria-hidden="true">11</span>
-                <div>
-                  <h3>Focus groups</h3>
-                  <p class="g-svc-gancho">Comprende las percepciones, preocupaciones y expectativas ciudadanas.</p>
-                  <p>Realizamos estudios cualitativos mediante grupos focales que permiten profundizar en las opiniones, experiencias y valoraciones de la ciudadanía sobre temas de interés político y electoral.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Estrategia electoral: Focus groups">Cotiza el servicio</a></div>
-              </li>
-              <li class="g-svc-item" id="media-training">
-                <span class="g-svc-n" aria-hidden="true">12</span>
-                <div>
-                  <h3>Media training para candidatos</h3>
-                  <p class="g-svc-gancho">Preparamos líderes para comunicar con seguridad, claridad y liderazgo.</p>
-                  <p>Brindamos entrenamiento especializado en comunicación política, oratoria, vocería pública, entrevistas, debates y manejo de medios para candidatos y líderes políticos.</p>
-                </div>
-                <div class="g-svc-acciones"><a class="g-svc-cta" href="#contacto" data-interes="Estrategia electoral: Media training para candidatos">Agenda una reunión</a></div>
-              </li>
-            </ol>
-          </div>
+    <!-- Servicios: página aparte (#nuestros-servicios), según el diseño de Adobe XD de la interna (25/11/2026): un banner,
+         un bloque por eje (claro, claro, oscuro) con un servicio a la vez y una foto por servicio (src/ejes.js), y los
+         servicios premium en tarjetas de foto. Un enlace a un eje (#eje-gobierno) o a un servicio (#editorial) abre la
+         página en ese eje y en ese servicio. Las fotos vienen del diseño (public/img/sv-*.webp). -->
+    <main id="nuestros-servicios" class="g-svcp" hidden>
+      <header class="g-svcp-banner" style="--fondo: url('/img/sv-banner.webp')">
+        <div class="g-wrap">
+          <p class="g-kicker">Servicios</p>
+          <h1>Cómo te <em>acompañamos</em></h1>
+          <p class="g-svcp-banner-p">Doce servicios en tres ejes, para autoridades, líderes e instituciones de cualquier nivel de gobierno.</p>
+          <nav class="g-svcp-ejes" aria-label="Ejes de servicio">
+            <a href="#eje-gobierno"><span>01</span>Gobierno y gestión</a>
+            <a href="#eje-escuela"><span>02</span>Escuela y formación</a>
+            <a href="#eje-electoral"><span>03</span>Estrategia electoral</a>
+          </nav>
         </div>
-        <div class="g-nos-cta">
-          <p>¿Qué necesita tu gestión o tu campaña?</p>
-          <a class="g-btn g-btn-oro" href="#contacto">Agenda una reunión</a>
+      </header>
+
+      <section class="g-ejed g-ejed-claro" id="eje-gobierno" data-eje aria-labelledby="eje-gobierno-t">
+        <div class="g-wrap g-ejed-in">
+          <div class="g-ejed-txt">
+            <p class="g-ejed-rot"><span>Eje 1.</span>Gobierno y gestión</p>
+            <span class="g-ejed-icono" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 41h34"/><path d="M13 35v-8M21 35V21M29 35v-9M37 35V17"/><path d="M9 21l11-9 8 5 13-10"/><path d="M34 7h7v7"/></svg></span>
+            <h2 id="eje-gobierno-t">Gobierno y <em>gestión</em></h2>
+            <p class="g-ejed-intro">Estrategias para una gestión moderna, eficiente y orientada a resultados.</p>
+            <ol class="g-ejed-lista">
+              <li class="g-ejed-svc" id="asesoria-legal">
+                <h3><span>01.</span> Asesoría y defensa legal</h3>
+                <p>Brindamos asesoría, representación y defensa legal a autoridades, funcionarios y servidores públicos frente a los desafíos jurídicos derivados del ejercicio de sus funciones.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Gobierno y gestión: Asesoría y defensa legal">Agenda una reunión</a></div>
+              </li>
+              <li class="g-ejed-svc" id="transformacion-digital">
+                <h3><span>02.</span> Innovación y transformación digital</h3>
+                <p class="g-ejed-gancho">Tecnología e inteligencia artificial para transformar la gestión pública.</p>
+                <p>Desarrollamos soluciones tecnológicas personalizadas que permiten modernizar los servicios públicos, optimizar procesos institucionales y fortalecer la capacidad de gestión de las entidades gubernamentales.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Gobierno y gestión: Innovación y transformación digital">Agenda una reunión</a><a class="g-ejed-cta g-ejed-cta-2" href="#plataformas">Ver plataformas</a></div>
+              </li>
+              <li class="g-ejed-svc" id="comunicacion-de-gestion">
+                <h3><span>03.</span> Comunicación y posicionamiento de gestión</h3>
+                <p class="g-ejed-gancho">Comunicar resultados también es parte de una buena gestión.</p>
+                <p>Diseñamos estrategias integrales de comunicación gubernamental que permiten a las autoridades informar sobre sus acciones, proyectos y resultados, fortaleciendo la transparencia y el vínculo con la ciudadanía.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Gobierno y gestión: Comunicación y posicionamiento de gestión">Agenda una reunión</a></div>
+              </li>
+              <li class="g-ejed-svc" id="cooperacion-internacional">
+                <h3><span>04.</span> Cooperación internacional</h3>
+                <p class="g-ejed-gancho">Conectamos tu gestión con oportunidades globales de desarrollo y financiamiento.</p>
+                <p>Facilitamos la vinculación de autoridades e instituciones públicas con organismos internacionales, gobiernos, entidades de cooperación y potenciales fuentes de financiamiento para impulsar proyectos de desarrollo local y regional.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Gobierno y gestión: Cooperación internacional">Agenda una reunión</a></div>
+              </li>
+              <li class="g-ejed-svc" id="encuestas-y-focus-groups">
+                <h3><span>05.</span> Encuestas y focus groups</h3>
+                <p class="g-ejed-gancho">Conoce las necesidades de tu ciudadanía y toma decisiones con información.</p>
+                <p>Realizamos estudios de opinión pública, encuestas de percepción ciudadana y focus groups que permiten a las autoridades conocer las principales necesidades, preocupaciones y expectativas de la población.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Gobierno y gestión: Encuestas y focus groups">Agenda una reunión</a></div>
+              </li>
+            </ol>
+          </div>
+          <figure class="g-ejed-foto" aria-hidden="true">
+              <img src="/img/sv-asesoria-legal.webp" alt="" width="1000" height="1000" loading="lazy" data-i="0" />
+              <img src="/img/sv-transformacion-digital.webp" alt="" width="1000" height="1000" loading="lazy" data-i="1" />
+              <img src="/img/sv-comunicacion.webp" alt="" width="1000" height="1000" loading="lazy" data-i="2" />
+              <img src="/img/sv-cooperacion.webp" alt="" width="1000" height="1000" loading="lazy" data-i="3" />
+              <img src="/img/sv-encuestas-gestion.webp" alt="" width="1000" height="1000" loading="lazy" data-i="4" />
+            <figcaption>Goberna Tech <span>/</span> <b>01</b></figcaption>
+          </figure>
+          <span class="g-ejed-n" aria-hidden="true">01</span>
         </div>
-      </div>
+      </section>
+      <section class="g-ejed g-ejed-claro-2" id="eje-escuela" data-eje aria-labelledby="eje-escuela-t">
+        <div class="g-wrap g-ejed-in">
+          <div class="g-ejed-txt">
+            <p class="g-ejed-rot"><span>Eje 2.</span>Escuela y formación</p>
+            <span class="g-ejed-icono" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="7" y="9" width="34" height="23" rx="2"/><path d="M13 16h22M13 22h13"/><circle cx="33" cy="31" r="5"/><path d="M30 35l-2 7 5-3 5 3-2-7"/></svg></span>
+            <h2 id="eje-escuela-t">Escuela y <em>formación</em></h2>
+            <p class="g-ejed-intro">Conocimiento especializado para equipos y liderazgos públicos.</p>
+            <ol class="g-ejed-lista">
+              <li class="g-ejed-svc" id="escuela-de-gobierno">
+                <h3><span>01.</span> Escuela de Gobierno y Gestión</h3>
+                <p class="g-ejed-gancho">Formamos líderes preparados para los desafíos del gobierno.</p>
+                <p>Cursos, diplomados y especializaciones con docentes expertos, cátedras de alto impacto y certificaciones con universidades de alto nivel.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Escuela y formación: Escuela de Gobierno y Gestión">Inscríbete</a></div>
+              </li>
+              <li class="g-ejed-svc" id="capacitacion-de-equipos">
+                <h3><span>02.</span> Capacitación de equipos</h3>
+                <p class="g-ejed-gancho">Fortalecemos las capacidades de tu equipo.</p>
+                <p>Diseñamos programas de capacitación a medida para autoridades, funcionarios, servidores públicos y equipos institucionales, considerando los objetivos, desafíos y responsabilidades de cada organización.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Escuela y formación: Capacitación de equipos">Agenda una reunión</a></div>
+              </li>
+              <li class="g-ejed-svc" id="editorial">
+                <h3><span>03.</span> Editorial</h3>
+                <p>Nuestra línea editorial está dirigida a autoridades, altos funcionarios, líderes políticos, consultores y profesionales que buscan acceder a conocimientos, experiencias y herramientas que fortalezcan su capacidad de análisis, liderazgo y toma de decisiones.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Escuela y formación: Editorial">Revisa nuestro catálogo</a></div>
+              </li>
+            </ol>
+          </div>
+          <figure class="g-ejed-foto" aria-hidden="true">
+              <img src="/img/sv-escuela.webp" alt="" width="1000" height="1000" loading="lazy" data-i="0" />
+              <img src="/img/sv-capacitacion.webp" alt="" width="1000" height="1000" loading="lazy" data-i="1" />
+              <img src="/img/sv-editorial.webp" alt="" width="1000" height="1000" loading="lazy" data-i="2" />
+            <figcaption>Goberna Tech <span>/</span> <b>01</b></figcaption>
+          </figure>
+          <span class="g-ejed-n" aria-hidden="true">02</span>
+        </div>
+      </section>
+      <section class="g-ejed g-ejed-oscuro" id="eje-electoral" data-eje aria-labelledby="eje-electoral-t">
+        <div class="g-wrap g-ejed-in">
+          <div class="g-ejed-txt">
+            <p class="g-ejed-rot"><span>Eje 3.</span>Estrategia electoral</p>
+            <span class="g-ejed-icono" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 23h30v18H9z"/><path d="M7 23h34"/><path d="M17 23V7h14v16"/><path d="M20 15l3 3 5-6"/><path d="M19 32h10"/></svg></span>
+            <h2 id="eje-electoral-t">Estrategia <em>electoral</em></h2>
+            <p class="g-ejed-intro">Inteligencia estratégica, escucha activa y planificación para cada etapa de la campaña.</p>
+            <ol class="g-ejed-lista">
+              <li class="g-ejed-svc" id="campana-360">
+                <h3><span>01.</span> Campaña 360</h3>
+                <p class="g-ejed-gancho">Estrategia integral.</p>
+                <p>Diseñamos, planificamos y ejecutamos campañas políticas integrales que articulan inteligencia electoral, estrategia política, comunicación, tecnología y organización territorial. Nuestro modelo de Campaña 360° contempla el análisis del escenario político, la planificación estratégica, el desarrollo de propuestas, la comunicación digital, la producción audiovisual, las relaciones con medios y la coordinación de actividades territoriales.</p>
+                <p>Integramos metodologías de estrategia política como STRATPOL, herramientas de análisis de datos y soluciones tecnológicas para facilitar la organización, el seguimiento y la evaluación de las acciones de campaña.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Estrategia electoral: Campaña 360">Agenda una reunión</a></div>
+              </li>
+              <li class="g-ejed-svc" id="encuestas-electorales">
+                <h3><span>02.</span> Encuestas</h3>
+                <p class="g-ejed-gancho">Información electoral para comprender el escenario político.</p>
+                <p>Desarrollamos encuestas de opinión pública e intención de voto que permiten conocer las percepciones ciudadanas, identificar los principales problemas de interés público y analizar las tendencias del escenario electoral.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Estrategia electoral: Encuestas">Cotiza el servicio</a></div>
+              </li>
+              <li class="g-ejed-svc" id="focus-groups-electorales">
+                <h3><span>03.</span> Focus groups</h3>
+                <p class="g-ejed-gancho">Comprende las percepciones, preocupaciones y expectativas ciudadanas.</p>
+                <p>Realizamos estudios cualitativos mediante grupos focales que permiten profundizar en las opiniones, experiencias y valoraciones de la ciudadanía sobre temas de interés político y electoral.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Estrategia electoral: Focus groups">Cotiza el servicio</a></div>
+              </li>
+              <li class="g-ejed-svc" id="media-training">
+                <h3><span>04.</span> Media training para candidatos</h3>
+                <p class="g-ejed-gancho">Preparamos líderes para comunicar con seguridad, claridad y liderazgo.</p>
+                <p>Brindamos entrenamiento especializado en comunicación política, oratoria, vocería pública, entrevistas, debates y manejo de medios para candidatos y líderes políticos.</p>
+                <div class="g-ejed-acciones"><a class="g-ejed-cta" href="#contacto" data-interes="Estrategia electoral: Media training para candidatos">Agenda una reunión</a></div>
+              </li>
+            </ol>
+          </div>
+          <figure class="g-ejed-foto" aria-hidden="true">
+              <img src="/img/sv-campana-360.webp" alt="" width="1000" height="1000" loading="lazy" data-i="0" />
+              <img src="/img/sv-encuestas-electorales.webp" alt="" width="1000" height="1000" loading="lazy" data-i="1" />
+              <img src="/img/sv-focus-groups.webp" alt="" width="1000" height="1000" loading="lazy" data-i="2" />
+              <img src="/img/sv-media-training-candidatos.webp" alt="" width="1000" height="1000" loading="lazy" data-i="3" />
+            <figcaption>Goberna Tech <span>/</span> <b>01</b></figcaption>
+          </figure>
+          <span class="g-ejed-n" aria-hidden="true">03</span>
+        </div>
+      </section>
+
+      <section class="g-svcp-prem" aria-labelledby="g-svcp-prem-t">
+        <div class="g-wrap">
+          <h2 class="g-svcp-prem-t" id="g-svcp-prem-t">Servicios <em>Premium</em></h2>
+          <article class="g-pcard" style="--foto: url('/img/sv-premium-legado.webp')">
+            <div class="g-pcard-txt">
+              <h3>Legado</h3>
+              <p class="g-pcard-lema">Tu gestión termina.<br />Tu legado permanece.</p>
+              <p>Servicio exclusivo para autoridades y exautoridades que buscan preservar, documentar y proyectar los resultados de su gestión, consolidando su trayectoria y legado público.</p>
+              <a class="g-btn g-btn-oro" href="#contacto" data-interes="Servicios premium: Legado">Quiero ver todo</a>
+            </div>
+          </article>
+          <article class="g-pcard" style="--foto: url('/img/sv-premium-media-training.webp')">
+            <div class="g-pcard-txt">
+              <h3>Media Training<br />Presidencial</h3>
+              <p>Programa exclusivo de comunicación estratégica, oratoria y manejo de medios para candidatos presidenciales y líderes políticos, con preparación personalizada según su perfil y objetivos.</p>
+              <a class="g-btn g-btn-oro" href="#contacto" data-interes="Servicios premium: Media Training Presidencial">Quiero ver todo</a>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
 
     <!-- Nosotros: página aparte (#quienes-somos; #mision y #vision bajan a su tarjeta). Misión y visión vivían en el

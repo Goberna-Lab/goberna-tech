@@ -17,7 +17,7 @@ import { ponerEsquemas, activarExploradores, sinMovimiento, revelar, beneficios 
 import { montarGlobo3D } from "./globo3d.js";
 import { montarRedFondo } from "./red-fondo.js";
 import { montarNiveles } from "./niveles.js";
-import { montarCarrusel } from "./carrusel.js";
+import { montarEjes } from "./ejes.js";
 import { montarCursor } from "./cursor.js";
 import { montarCredo } from "./credo.js";
 import { montarEfectos } from "./efectos.js";
@@ -63,41 +63,19 @@ montarCursor();
 /* ---------- Misión y visión: las frases se encienden palabra por palabra al bajar ---------- */
 montarCredo($(".g-credo"), { quieto: sinMovimiento });
 
-/* ---------- Servicios: un eje a la vez, en pestañas ---------- */
-// Sin JavaScript los tres ejes se ven uno debajo del otro. Con él, pestañas accesibles (flechas, Inicio, Fin).
-const pestanas = [...document.querySelectorAll(".g-svc-tab")];
-function elegirEje(tab, enfocar = false) {
-  for (const t of pestanas) {
-    const si = t === tab;
-    t.setAttribute("aria-selected", String(si));
-    t.tabIndex = si ? 0 : -1;
-    $("#" + t.getAttribute("aria-controls")).hidden = !si;
-  }
-  if (enfocar) tab.focus();
-}
-pestanas.forEach((t, i) => {
-  t.addEventListener("click", () => elegirEje(t));
-  t.addEventListener("keydown", (e) => {
-    const n = pestanas.length;
-    const j = { ArrowRight: i + 1, ArrowLeft: i - 1 + n, Home: 0, End: n - 1 }[e.key];
-    if (j === undefined) return;
-    e.preventDefault();
-    elegirEje(pestanas[j % n], true);
-  });
-});
-elegirEje(pestanas[0]);
-// Cada eje, un carrusel de tarjetas (carrusel.js).
-document.querySelectorAll(".g-svc-panel").forEach((p) => montarCarrusel(p, { quieto: sinMovimiento }));
-// Un enlace a un eje (#eje-gobierno) o a un servicio (#editorial) abre la página de servicios en su pestaña y
-// baja hasta él (si es un servicio, además lo trae a la vista dentro del carrusel).
+/* ---------- Servicios: su página, un bloque por eje con un servicio a la vez (ejes.js) ---------- */
+// Las pestañas con carrusel de tarjetas (carrusel.js) quedaron guardadas sin usar.
+montarEjes(paginas.servicios);
+// Un enlace a un eje (#eje-gobierno) o a un servicio (#editorial) abre la página de servicios, baja hasta su eje y,
+// si es un servicio, lo muestra en el carrusel del eje.
 function abrirServicio(hash) {
   const el = hash.length > 1 && document.getElementById(hash.slice(1));
-  const panel = el?.closest?.(".g-svc-panel");
-  if (!panel) return false;
+  const eje = el?.closest?.("[data-eje]");
+  if (!eje) return false;
   const venia = paginas.servicios.hidden;
   mostrar("servicios");
-  elegirEje($("#" + panel.getAttribute("aria-labelledby")));
-  requestAnimationFrame(() => el.scrollIntoView({ behavior: venia || sinMovimiento ? "instant" : "smooth", block: el === panel ? "start" : "center", inline: "start" }));
+  if (el !== eje) eje.irA?.([...eje.querySelectorAll(".g-ejed-svc")].indexOf(el));
+  requestAnimationFrame(() => eje.scrollIntoView({ behavior: venia || sinMovimiento ? "instant" : "smooth", block: "start" }));
   return true;
 }
 

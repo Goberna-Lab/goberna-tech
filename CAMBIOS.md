@@ -1,5 +1,34 @@
 # Cambios
 
+## La página de servicios, según el diseño de la interna en Adobe XD (26/11/2026)
+
+Pedido: trabajar las internas con el contenido del prototipo de Adobe XD ("GOBERNA-TECH-1920X1080", pantalla 2 de 2).
+
+- **Fuente**: la pantalla interna del XD (banner, un bloque por eje con un servicio a la vez y foto, servicios
+  premium en tarjetas de foto, pie con filete dorado) y dos capturas de variantes del carrusel que trae el mismo
+  XD (barra segmentada por servicio, "Fin de este eje" en el último). Las fotos se tomaron de los recursos del XD
+  (las de los ejes 1 y 3, recortadas de esas capturas) y se guardaron optimizadas en `public/img/sv-*.webp`
+  (~1 MB en total).
+- **Página** `#nuestros-servicios` (`index.html`, `src/ejes.js`, `src/home.css`, "Página de servicios"):
+  - Banner (en el XD estaba vacío): el chip de luz azul del diseño de fondo, "Cómo te acompañamos", una línea y
+    accesos a los tres ejes.
+  - Un bloque por eje, a lo ancho: claro (Gobierno y gestión), claro más oscuro (Escuela y formación) y oscuro
+    (Estrategia electoral). Rótulo "Eje 1. Gobierno y gestión", ícono dorado subrayado, título grande, intro y un
+    servicio a la vez con su acción subrayada en oro ("Agenda una reunión ↗"). Debajo, la barra segmentada, el
+    contador ("01 / 05"), "Siguiente: …" y las flechas redondas (blanca y dorada). A la derecha, la foto del
+    servicio (se funden al cambiar) con "Goberna Tech / 01" al pie y el número del eje gigante de marca de agua.
+    Flechas del teclado y deslizamiento del dedo.
+  - Servicios Premium en fondo blanco: dos tarjetas de foto a lo ancho (Legado: "Tu gestión termina. Tu legado
+    permanece."; Media Training Presidencial) con "Quiero ver todo".
+- Los textos de los 12 servicios son los de siempre (el XD trae textos de relleno en algunos lugares).
+- Los enlaces a un eje (#eje-gobierno…) o a un servicio (#editorial, #escuela-de-gobierno, #media-training…) abren
+  la página en ese eje y en ese servicio. Las pestañas con carrusel de tarjetas (`src/carrusel.js`) quedaron
+  guardadas sin usar.
+- El pie del sitio lleva el filete dorado arriba, como en el diseño.
+- Fotos por servicio: varias son imágenes de apoyo del XD (tecnología, datos) y algunas se repiten entre un
+  servicio y los premium (auditorio, conferencia). Conviene reemplazarlas por fotos propias de cada servicio.
+- `goberna-tech.html` pasa de ~2,9 MB a ~4,2 MB por las fotos incrustadas.
+
 ## Montserrat Bold en todos los títulos (26/11/2026)
 
 Pedido: usar Montserrat Bold (antes solo estaba en el título de la portada y en algunos títulos nuevos).
