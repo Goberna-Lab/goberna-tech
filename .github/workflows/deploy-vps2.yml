@@ -22,7 +22,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Las etiquetas para compartir (index.html) usan esta dirección; el archivo .env no se sube al repo.
       - run: npm run build
+        env:
+          VITE_SITIO: https://gobernatech.com/
       - name: Verify build
         run: test -s dist/index.html && test -d dist/assets
       - uses: actions/upload-artifact@v4

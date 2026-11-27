@@ -1,5 +1,50 @@
 # Cambios
 
+## Botones en el amarillo del logo (27/11/2026)
+
+Pedido: que los botones usen la misma paleta que el logo y "TECH" de la portada.
+
+- **Nuevo color** (`src/home.css`): `--g-amarillo: #fcc506`, el amarillo del logotipo.
+- **Botón principal** (`.g-btn-oro`, en toda la web: "Conoce Goberna Tech", "Regístrate", "Ver servicios",
+  "Quiero ver todo", "Agenda una reunión", "Cotiza tu estrategia digital"…): fondo amarillo con texto azul oscuro;
+  al pasar el mouse, un amarillo apenas más hondo.
+- **Botón de borde dorado** (`.g-btn-linea-oro`, "Ver todo" del blog): borde amarillo; el texto, un amarillo
+  oscurecido para que se lea sobre el fondo claro.
+- **Portada**: el borde de "Agenda una reunión" pasa del blanco al amarillo.
+- El resto de los dorados de la web (`--g-oro`: acentos, la red y los arcos del globo) no cambió.
+
+## Etiquetas para compartir completas (27/11/2026)
+
+Pedido: "el meta dato y meta imagen agrégalo también, no tiene".
+
+- **Arriba del todo** (`index.html`): las etiquetas para compartir van justo después del título y la descripción,
+  antes de los íconos. En la versión de un solo archivo (GitHub Pages) quedaban detrás del ícono incrustado y del
+  CSS; algunos lectores de enlaces solo leen el comienzo de la página.
+- **Agregadas**: `canonical`, `robots`, `og:image:secure_url`, `twitter:title`, `twitter:description`,
+  `twitter:image`, `twitter:image:alt` y el ícono para celulares (`public/apple-touch-icon.png`, el isotipo amarillo
+  sobre el azul del logo).
+- **Cada sitio con su dirección**: antes gobernatech.com decía que su página y su imagen estaban en github.io. Ahora
+  las direcciones salen de `VITE_SITIO`: `https://gobernatech.com/` por defecto (archivo `.env`) y la de github.io
+  en `.github/workflows/deploy.yml`, que además copia `apple-touch-icon.png` junto a `og-imagen.jpg`.
+  El despliegue a gobernatech.com (`.github/workflows/deploy-vps2.yml`) la recibe también como variable, porque
+  `.env` no se sube al repo.
+- **La imagen lleva `?v=2`**: WhatsApp y Facebook guardan la vista previa por dirección; con la nueva bajan la
+  imagen con el logo actual. Subir el número cada vez que se reemplace `public/og-imagen.jpg`.
+- **Ícono de la pestaña** (`public/isotipo.svg`): ahora es el isotipo del archivo vectorial del equipo.
+
+## El nombre de la portada con las letras del logo (27/11/2026)
+
+Pedido: "el mismo logo de goberna tech el del header debe ser el mismo que está en el hero".
+
+- **Portada** (`index.html`): el título "GOBERNA / TECH" ya no es texto en Montserrat sino las letras del logotipo,
+  en dos SVG sacados del archivo vectorial del equipo (`LOGO-GOBERNA-TECH-.ai` de la carpeta de Drive):
+  "GOBERNA" en blanco y "TECH" en el amarillo del logo (`#FCC506`), con su "E" y su "H" cortadas. Cada SVG lleva
+  `role="img"` y `aria-label`, así que el h1 se sigue leyendo "Goberna Tech".
+- **Tamaño** (`src/home.css`): igual que antes; el tamaño de letra del h1 da la escala y cada palabra mide lo que
+  medían sus mayúsculas. Se quitó el degradado plateado de "GOBERNA" y el dorado de "TECH".
+- **El mundo** (`src/globo3d.js`): para ubicarse a la derecha medía el texto de la portada; ahora mide también los
+  dos SVG del nombre.
+
 ## Logo sin dorado (27/11/2026)
 
 Pedido: "usa estos logos (carpeta de Drive del equipo), no uses el dorado, no usamos logo dorado".

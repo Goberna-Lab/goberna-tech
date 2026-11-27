@@ -25,8 +25,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Las etiquetas para compartir (index.html) apuntan a esta dirección y no a gobernatech.com (.env).
       - run: npm run standalone
-      - run: mkdir _site && cp goberna-tech.html _site/index.html && cp public/og-imagen.jpg _site/
+        env:
+          VITE_SITIO: https://goberna-lab.github.io/goberna-tech/
+      - run: mkdir _site && cp goberna-tech.html _site/index.html && cp public/og-imagen.jpg public/apple-touch-icon.png _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

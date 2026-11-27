@@ -5,6 +5,7 @@
   --g-fondo: #020617;
   --g-fondo-2: #091120;
   --g-oro: #c9a46e;
+  --g-amarillo: #fcc506; /* el amarillo del logotipo: botones principales y "TECH" */
   --g-azul: #1f3b73;
   --g-claro: #f3f5f9;
   /* Fondo con aura (según el mockup): noche casi negra, dos azules apagados que se funden entre sí,
@@ -51,13 +52,14 @@ body.g {
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* El botón principal va en el amarillo del logo, como "TECH" en la portada. */
 .g-btn-oro {
-  background: var(--g-oro);
-  color: #1b2030;
+  background: var(--g-amarillo);
+  color: #0b1530;
 }
 
 .g-btn-oro:hover {
-  background: #b9924a;
+  background: #e3b100;
 }
 
 .g-btn-linea {
@@ -71,13 +73,23 @@ body.g {
 }
 
 .g-btn-linea-oro {
-  color: #b7801a;
-  box-shadow: inset 0 0 0 1.5px var(--g-oro);
+  color: #8a6700; /* el amarillo, oscurecido para leerse sobre fondo claro */
+  box-shadow: inset 0 0 0 1.5px var(--g-amarillo);
 }
 
 .g-btn-linea-oro:hover {
-  background: var(--g-oro);
-  color: #1b2030;
+  background: var(--g-amarillo);
+  color: #0b1530;
+}
+
+/* En la portada, el segundo botón también lleva el amarillo del logo, en el borde. */
+.g-hero .g-btn-linea {
+  box-shadow: inset 0 0 0 1.5px var(--g-amarillo);
+}
+
+.g-hero .g-btn-linea:hover {
+  background: var(--g-amarillo);
+  color: #0b1530;
 }
 
 .g-btn:focus-visible,
@@ -649,30 +661,24 @@ body.g {
   pointer-events: auto;
 }
 
-/* El nombre es el título, en Montserrat Bold y en dos renglones: "Goberna" en blanco (con un degradado leve hacia
-   abajo, como el titular de la referencia) y "Tech" en dorado, como en el logotipo. */
+/* El nombre es el título, con las letras del logotipo (dos SVG sacados del .ai del equipo, en index.html):
+   "GOBERNA" en blanco y "TECH" en el amarillo del logo, en dos renglones. El tamaño de letra del h1 solo da la
+   escala: cada palabra mide de alto lo que medirían sus mayúsculas en Montserrat a ese tamaño. */
 .g-hero h1 {
-  font-family: "Montserrat", var(--sans);
   font-size: clamp(2.8rem, min(6.6vw, 13vh), 8rem);
-  font-weight: 700;
-  line-height: 0.98;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
+  line-height: 1;
 }
 
-.g-hero h1 span {
+.g-hero h1 svg {
   display: block;
+  width: auto;
+  height: 0.72em; /* "GOBERNA": la G y la O asoman apenas sobre la línea, como en el logo */
+  overflow: visible;
 }
 
-.g-hero h1 span:first-child {
-  background: linear-gradient(to bottom, #fff 35%, #b9c5dc);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.g-hero h1 span:last-child {
-  color: var(--g-oro);
+.g-hero h1 .g-marca-tech {
+  height: 0.706em; /* misma escala que "GOBERNA" (sus letras no asoman) */
+  margin-top: 0.24em;
 }
 
 .g-hero-p {

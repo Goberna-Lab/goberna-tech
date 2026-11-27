@@ -945,7 +945,8 @@ export function montarGlobo3D(seccion, canvas, { quieto = false } = {}) {
       rango.selectNodeContents(letras.currentNode);
       sumar(rango.getBoundingClientRect());
     }
-    seccion.querySelectorAll(".g-acciones > *").forEach((el) => sumar(el.getBoundingClientRect()));
+    // El nombre son dos SVG (las letras del logo), sin texto: se miden aparte.
+    seccion.querySelectorAll(".g-hero-in h1 svg, .g-acciones > *").forEach((el) => sumar(el.getBoundingClientRect()));
     if (derecha) uFundido.uTexto.value.set(izquierda / w, derecha / w, arriba / h, abajo / h);
     const tira = seccion.querySelector(".g-hero-ejes");
     const tiraArriba = tira ? (tira.getBoundingClientRect().top - caja.top) / h : 1;
