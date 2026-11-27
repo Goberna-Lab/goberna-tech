@@ -1,5 +1,13 @@
 # Cambios
 
+## "Del Grupo Goberna" en el pie (27/11/2026)
+
+Pedido: agregar abajo "Del Grupo Goberna", enlazado a https://grupogoberna.com/.
+
+- **Pie** (`index.html`, `src/home.css`): fila centrada bajo el menú, con el texto "Del Grupo" y el logo blanco de
+  Grupo Goberna (`public/img/logo-grupo-goberna.webp`, tomado de su web). Todo es un solo enlace que abre
+  grupogoberna.com en otra pestaña.
+
 ## Foto en la tarjeta del primer artículo del blog (27/11/2026)
 
 Pedido: agregar a la tarjeta del 51% una imagen coherente con el tema, que no parezca hecha con IA.
