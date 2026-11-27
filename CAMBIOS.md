@@ -1,5 +1,13 @@
 # Cambios
 
+## Los botones vuelven al dorado (27/11/2026)
+
+Pedido: "solo quería cambiar lo de TECH del logo principal"; los botones, con la paleta anterior.
+
+- **Botones** (`src/home.css`): `.g-btn-oro` (fondo `--g-oro` #c9a46e, hover #b9924a), `.g-btn-linea-oro` y el
+  borde blanco del segundo botón de la portada vuelven a como estaban. Se quitó `--g-amarillo`, que solo usaban ellos.
+- Sigue en el amarillo del logo (#FCC506) solo "TECH" del título de la portada (el color va en el propio SVG).
+
 ## "GOBERNA TECH" en un renglón (27/11/2026)
 
 Pedido: que "GOBERNA" y "TECH" no vayan uno sobre otro sino juntos, como en el header, y un poco más chicos.

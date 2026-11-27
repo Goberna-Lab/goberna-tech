@@ -5,7 +5,6 @@
   --g-fondo: #020617;
   --g-fondo-2: #091120;
   --g-oro: #c9a46e;
-  --g-amarillo: #fcc506; /* el amarillo del logotipo: botones principales y "TECH" */
   --g-azul: #1f3b73;
   --g-claro: #f3f5f9;
   /* Fondo con aura (según el mockup): noche casi negra, dos azules apagados que se funden entre sí,
@@ -52,14 +51,13 @@ body.g {
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* El botón principal va en el amarillo del logo, como "TECH" en la portada. */
 .g-btn-oro {
-  background: var(--g-amarillo);
-  color: #0b1530;
+  background: var(--g-oro);
+  color: #1b2030;
 }
 
 .g-btn-oro:hover {
-  background: #e3b100;
+  background: #b9924a;
 }
 
 .g-btn-linea {
@@ -73,23 +71,13 @@ body.g {
 }
 
 .g-btn-linea-oro {
-  color: #8a6700; /* el amarillo, oscurecido para leerse sobre fondo claro */
-  box-shadow: inset 0 0 0 1.5px var(--g-amarillo);
+  color: #b7801a;
+  box-shadow: inset 0 0 0 1.5px var(--g-oro);
 }
 
 .g-btn-linea-oro:hover {
-  background: var(--g-amarillo);
-  color: #0b1530;
-}
-
-/* En la portada, el segundo botón también lleva el amarillo del logo, en el borde. */
-.g-hero .g-btn-linea {
-  box-shadow: inset 0 0 0 1.5px var(--g-amarillo);
-}
-
-.g-hero .g-btn-linea:hover {
-  background: var(--g-amarillo);
-  color: #0b1530;
+  background: var(--g-oro);
+  color: #1b2030;
 }
 
 .g-btn:focus-visible,
