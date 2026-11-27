@@ -2280,9 +2280,9 @@ body:not([data-pagina="home"]) .g-cupula {
   display: flex;
   align-items: center;
   gap: 14px;
-  color: #8d96a8;
-  font: 400 clamp(0.7rem, 0.78vw, 0.9rem) / 1 var(--mono);
-  letter-spacing: 0.16em;
+  color: #c9d3e6;
+  font: 700 clamp(0.95rem, 1.1vw, 1.3rem) / 1 "Montserrat", var(--sans);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
   transition: color 0.2s ease;

@@ -1,5 +1,10 @@
 # Cambios
 
+## "Del Grupo" más grande, en Montserrat Bold (27/11/2026)
+
+- **`src/home.css`** (`.g-grupo`): el texto pasa de la tipografía mono pequeña a Montserrat 700, más grande
+  (0.95 a 1.3rem) y en un gris más claro (#c9d3e6).
+
 ## La imagen para compartir es solo el logo (27/11/2026)
 
 Pedido: "el metadato debe ser esto" (el logo del header sobre el fondo oscuro).
