@@ -1,5 +1,15 @@
 # Cambios
 
+## Logo original de Goberna Tech (27/11/2026)
+
+Pedido: usar los logos originales de la carpeta de Drive del equipo, no el `logo.svg` anterior.
+
+- **Header y pie** (`index.html`): ahora usan `public/img/logo-goberna-tech.webp`, la versión horizontal dorada
+  (carpeta "Dorado", `08-GOBERNA TECH@3x.png`), con el lema "Consultoría | Gubernamental | Inteligencia". Se eligió
+  la dorada con degradado y no la amarilla plana porque combina con el dorado menos saturado del sitio.
+- **Imagen para compartir** (`public/og-imagen.jpg`): regenerada con el mismo logo.
+- `public/logo.svg` queda en el proyecto pero ya no lo usa la portada.
+
 ## El formulario pasa al final de la portada (26/11/2026)
 
 Pedido: que el formulario no esté en una página aparte sino abajo, justo antes del pie.
