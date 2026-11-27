@@ -662,10 +662,14 @@ body.g {
 }
 
 /* El nombre es el título, con las letras del logotipo (dos SVG sacados del .ai del equipo, en index.html):
-   "GOBERNA" en blanco y "TECH" en el amarillo del logo, en dos renglones. El tamaño de letra del h1 solo da la
-   escala: cada palabra mide de alto lo que medirían sus mayúsculas en Montserrat a ese tamaño. */
+   "GOBERNA" en blanco y "TECH" en el amarillo del logo, juntos en un renglón como en el header. El tamaño de letra
+   del h1 solo da la escala: cada palabra mide de alto lo que medirían sus mayúsculas en Montserrat a ese tamaño, y
+   el nombre completo mide unos 8.2em de ancho. */
 .g-hero h1 {
-  font-size: clamp(2.8rem, min(6.6vw, 13vh), 8rem);
+  display: flex;
+  align-items: flex-start; /* en el .ai las dos palabras arrancan a la misma altura */
+  gap: 0.157em; /* el espacio entre "GOBERNA" y "TECH" del logo, a la misma escala */
+  font-size: clamp(2rem, min(5vw, 10vh), 6.2rem);
   line-height: 1;
 }
 
@@ -678,7 +682,6 @@ body.g {
 
 .g-hero h1 .g-marca-tech {
   height: 0.706em; /* misma escala que "GOBERNA" (sus letras no asoman) */
-  margin-top: 0.24em;
 }
 
 .g-hero-p {
@@ -2604,7 +2607,7 @@ body[data-pagina="modulo"] {
   }
 }
 
-/* En pantallas angostas el nombre crece. */
+/* En pantallas angostas el nombre crece hasta casi el ancho disponible (en un renglón mide ~8.2em). */
 @media (max-width: 900px) {
   .g-hero-in {
     justify-content: flex-start;
@@ -2612,13 +2615,13 @@ body[data-pagina="modulo"] {
   }
 
   .g-hero h1 {
-    font-size: clamp(2.6rem, min(12vw, 11vh), 9.6rem);
+    font-size: clamp(1.6rem, min(9vw, 9vh), 6rem);
   }
 }
 
 @media (max-width: 600px) {
   .g-hero h1 {
-    font-size: clamp(2.4rem, min(15vw, 10vh), 9.6rem);
+    font-size: clamp(1.6rem, min(10.2vw, 9vh), 6rem);
   }
 }
 

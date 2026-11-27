@@ -1,5 +1,13 @@
 # Cambios
 
+## "GOBERNA TECH" en un renglón (27/11/2026)
+
+Pedido: que "GOBERNA" y "TECH" no vayan uno sobre otro sino juntos, como en el header, y un poco más chicos.
+
+- **Portada** (`src/home.css`): el título va en un solo renglón, con el mismo espacio entre palabras que el logo
+  (0.157em) y las dos palabras alineadas arriba, como en el .ai. Es un 25% más bajo que antes en escritorio; en
+  celular ocupa casi todo el ancho sin desbordar (revisado a 1440, 820, 390 y 320 px).
+
 ## Botones en el amarillo del logo (27/11/2026)
 
 Pedido: que los botones usen la misma paleta que el logo y "TECH" de la portada.
