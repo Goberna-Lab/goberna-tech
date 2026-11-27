@@ -1,5 +1,13 @@
 # Cambios
 
+## La imagen para compartir es solo el logo (27/11/2026)
+
+Pedido: "el metadato debe ser esto" (el logo del header sobre el fondo oscuro).
+
+- **`public/og-imagen.jpg`**: ahora es solo el logo de Goberna Tech (`public/img/logo-goberna.webp`, el del header),
+  grande y centrado sobre el fondo oscuro con estrellas de la portada. Sin lema ni globo.
+- **`index.html`**: la dirección de la imagen pasa a `?v=4` para que las redes bajen la nueva.
+
 ## Imagen para compartir con el logo del header (27/11/2026)
 
 Pedido: usar el logo real del header en el metadato.
