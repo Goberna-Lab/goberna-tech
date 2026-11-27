@@ -50,5 +50,12 @@ jobs:
       - name: Check origin
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --resolve gobernatech.com:443:75.119.138.200 https://gobernatech.com/ -o "$RUNNER_TEMP/gobernatech-ci-check.html"
-          cmp site-dist/index.html "$RUNNER_TEMP/gobernatech-ci-check.html"
+          # nginx puede conservar el archivo anterior en open_file_cache hasta 60 s.
+          for attempt in {1..16}; do
+            if curl --fail --silent --show-error --resolve gobernatech.com:443:75.119.138.200 https://gobernatech.com/ -o "$RUNNER_TEMP/gobernatech-ci-check.html" && cmp -s site-dist/index.html "$RUNNER_TEMP/gobernatech-ci-check.html"; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "El origen no sirve la versión desplegada" >&2
+          exit 1
