@@ -1,5 +1,5 @@
 // Página principal según el mockup (index.html): el menú del celular, el paso entre páginas
-// (inicio, Munitech, plataformas, contacto y la página de cada plataforma), el formulario y el movimiento:
+// (inicio, Munitech, plataformas y la página de cada plataforma), el formulario y el movimiento:
 // misión y visión que se encienden al leer, parallax, entrada de los textos y tarjetas que se apilan.
 // La versión anterior (escena 3D del palacio y demostraciones) sigue en index-3d.html + src/main.js.
 import "@fontsource/catamaran/latin-400.css";
@@ -27,7 +27,7 @@ document.documentElement.classList.add("js");
 $("#year").textContent = new Date().getFullYear();
 
 const bar = $("#bar");
-const paginas = { home: $("#home"), servicios: $("#nuestros-servicios"), nosotros: $("#quienes-somos"), munitech: $("#munitech"), plataformas: $("#plataformas"), contacto: $("#contacto"), articulo: $("#ganaste-ahora-que"), modulo: $("#modulo") };
+const paginas = { home: $("#home"), servicios: $("#nuestros-servicios"), nosotros: $("#quienes-somos"), munitech: $("#munitech"), plataformas: $("#plataformas"), articulo: $("#ganaste-ahora-que"), modulo: $("#modulo") };
 const modulo = paginas.modulo;
 const TITULO = document.title;
 let soltar = null; // limpieza del módulo abierto (relojes, observadores)
@@ -187,7 +187,7 @@ function ruta() {
     scrollTo({ top: 0, behavior: "instant" });
     return;
   }
-  if (hash === "#munitech" || hash === "#plataformas" || hash === "#contacto") {
+  if (hash === "#munitech" || hash === "#plataformas") {
     mostrar(hash.slice(1));
     scrollTo({ top: 0, behavior: "instant" });
     return;
@@ -243,12 +243,62 @@ document.addEventListener("click", (e) => {
   const a = e.target.closest("[data-interes]");
   if (a) $('#contact-form [name="interes"]').value = a.dataset.interes;
 });
-// TODO: conectar el formulario con el correo o el CRM de Goberna Tech. Hoy no envía nada.
-$("#contact-form").addEventListener("submit", (e) => {
+// Los datos van a Bravo, el panel de Goberna, igual que en el Foro de Estado. El tenant "goberna-tech" tiene que
+// existir en Bravo (npm run create-tenant -w @goberna/bravo-api -- goberna-tech "Goberna Tech"); si no, Bravo
+// responde 404 y la persona ve el aviso de error con el enlace a WhatsApp.
+const BRAVO_CONTACTO = "https://bravo.goberna.us/v1/public/contact";
+const BRAVO_TENANT = "goberna-tech";
+const WSP_VENTAS = "https://wa.me/51907772155";
+
+$("#contact-form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const nota = e.target.querySelector(".form-note");
-  nota.hidden = false;
-  nota.textContent = e.target.checkValidity()
-    ? "Formulario de demostración: el envío todavía no está conectado."
-    : "Completa tu nombre y un correo válido.";
+  const form = e.target;
+  const nota = form.querySelector(".form-note");
+  const boton = form.querySelector('button[type="submit"]');
+  const avisar = (html, error) => {
+    nota.hidden = false;
+    nota.classList.toggle("es-error", error);
+    nota.innerHTML = html;
+  };
+  if (!form.checkValidity()) {
+    avisar("Completa todos los campos con un correo válido.", true);
+    form.querySelector(":invalid")?.focus();
+    return;
+  }
+  const v = (nombre) => form.elements[nombre].value.trim();
+  const datos = {
+    tenant: BRAVO_TENANT,
+    name: `${v("nombre")} ${v("apellido")}`,
+    email: v("correo"),
+    phone: v("whatsapp"),
+    website: form.elements.website.value,
+    nombre: v("nombre"),
+    apellido: v("apellido"),
+    organizacion: v("organizacion"),
+    cargo: v("cargo"),
+    interes: v("interes"),
+  };
+  const texto = boton.textContent;
+  boton.disabled = true;
+  boton.textContent = "Enviando…";
+  try {
+    const res = await fetch(BRAVO_CONTACTO, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datos),
+    });
+    if (!res.ok) throw new Error(`Bravo respondió ${res.status}`);
+    form.reset();
+    form.elements.interes.value = "";
+    avisar(`Gracias, ${datos.nombre}. Recibimos tu solicitud y te escribiremos pronto.`, false);
+  } catch (err) {
+    console.warn("[contacto]", err);
+    avisar(
+      `No pudimos enviar tus datos. Intenta de nuevo en unos minutos o <a href="${WSP_VENTAS}" target="_blank" rel="noopener">escríbenos por WhatsApp</a>.`,
+      true,
+    );
+  } finally {
+    boton.disabled = false;
+    boton.textContent = texto;
+  }
 });

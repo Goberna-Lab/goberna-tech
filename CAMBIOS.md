@@ -1,5 +1,75 @@
 # Cambios
 
+## El formulario pasa al final de la portada (26/11/2026)
+
+Pedido: que el formulario no esté en una página aparte sino abajo, justo antes del pie.
+
+- **Dónde** (`index.html`): la página `#contacto` deja de existir; su contenido es ahora la última sección de la
+  portada (`<section class="g-contacto" id="contacto">`), después del blog. Fondo blanco para separarla del blog.
+- **La cúpula** que asoma sobre el pie se mudó del blog a esta sección (sigue siendo la última antes del pie); el
+  blog recupera un padding inferior normal.
+- **Enlaces** (`src/home.js`): todos los `#contacto` ("Agenda una reunión", los servicios, el artículo, las
+  plataformas) abren la portada y bajan al formulario; los de servicios siguen dejando elegido el interés.
+- **Diseño de tarjeta** (pedido después: "hay demasiado espacio sobrante"): el bloque es ahora una sola tarjeta
+  centrada (máx. 1180 px) sobre fondo gris claro. A la izquierda, un panel azul con "Contacto", el título, el texto,
+  tres pasos de qué pasa después (revisamos, te escribimos, coordinamos) y abajo el WhatsApp +51 907 772 155; a la
+  derecha, el formulario. Las dos mitades miden lo mismo, así que ya no queda el hueco bajo el título. En celular
+  y tablet angosta, el panel va arriba y el formulario debajo.
+- **Más corto** (pedido: "mucho texto", "no menciones municipalidad"): el panel queda en "Contacto",
+  "Conversemos", "Cuéntanos qué necesitas y te contactamos." y el WhatsApp; se quitaron los tres pasos. El hueco
+  del panel lo llena el escudo, grande y casi transparente (`isotipo.svg` como fondo).
+- **Formulario como el del Foro de Estado** (`Cta.astro` de foro-estado): seis campos en dos columnas con ícono
+  (Nombre, Apellido, WhatsApp, Correo, Organización, Cargo), todos obligatorios; botón redondeado "Agenda una
+  reunión →" en el dorado nuevo y la nota "Al enviar aceptas ser contactado por el equipo de Goberna Tech".
+  Salen "Qué te interesa", "Cuéntanos más" y la casilla de novedades. El interés que dejan los botones de
+  servicios sigue viajando, en un campo oculto. A Bravo van `name` (nombre y apellido), `email`, `phone` y, como
+  extras, nombre, apellido, organización, cargo e interés.
+- **Sin el WhatsApp en el panel** (pedido): se quitó "¿Prefieres WhatsApp? +51 907 772 155". El número sigue en el
+  botón flotante y en el aviso de error del formulario.
+- **`scripts/build-standalone.mjs`**: ahora también incrusta los SVG que el CSS usa de fondo (`url(/x.svg)`);
+  antes no hacía falta y en GitHub Pages el escudo de fondo habría salido roto.
+
+## Dorado menos saturado (26/11/2026)
+
+Pedido: Nat avisa que el amarillo se ve muy saturado en televisores grandes; propuso #C9A46E y #B9924A.
+
+- **Dorado principal → `#C9A46E`** (`--g-oro` en `src/home.css`, `--gold` en `src/style.css` y todos los
+  `rgba()` dorados de las dos hojas). Antes `#DFA52E` y `#F5AF31`. Los dos tonos de Nat tienen la misma saturación
+  (~45 %, contra 74–91 % de los anteriores); este es el más claro, así que sobre el azul noche se sigue leyendo bien
+  (contraste 8,5:1 contra 6,8:1 de `#B9924A`) y no se ve marrón en pantallas oscuras.
+- **`#B9924A` para el hover** de los botones dorados (antes se aclaraban a `#EFB94A`/`#FFC452`).
+- **Imagen para compartir** (`public/og-imagen.jpg`): "territorios" pasa al dorado nuevo.
+- **No cambia**: el logo (sigue con su `#F5AF31`) ni las luces del globo y de la red del fondo (`src/globo3d.js`,
+  `src/red-fondo.js`).
+
+## Botón flotante de WhatsApp y formulario conectado a Bravo (26/11/2026)
+
+Pedido: un botón flotante de WhatsApp al +51 907 772 155 y un formulario que funcione, como los que ya hay en Goberna.
+
+- **WhatsApp** (`index.html`, `.g-wsp` en `src/home.css`): círculo verde abajo a la derecha en todas las páginas,
+  con el ícono del Foro de Estado. Abre `wa.me/51907772155` con "Hola, quiero información sobre Goberna Tech".
+- **Formulario** (`#contacto`): mismo diseño, con dos campos nuevos: "Teléfono o WhatsApp" (obligatorio, como en
+  el Foro) y "Cuéntanos más" (opcional). Institución pasa a ocupar todo el ancho.
+- **Envío** (`src/home.js`): igual que el Foro, a Bravo (`POST https://bravo.goberna.us/v1/public/contact`) con
+  el tenant `goberna-tech`. Van nombre, correo, teléfono y mensaje; cargo, institución, interés y si quiere
+  novedades llegan como datos extra. Tiene la trampa para bots del Foro (campo `website` oculto). Si sale bien,
+  agradece y limpia el formulario; si falla, avisa y ofrece el enlace a WhatsApp.
+- **Pendiente**: el tenant `goberna-tech` hay que crearlo en Bravo
+  (`npm run create-tenant -w @goberna/bravo-api -- goberna-tech "Goberna Tech"`). Mientras no exista, Bravo
+  responde 404 y todo envío muestra el aviso de error.
+
+## Imagen para compartir el link (26/11/2026)
+
+Pedido: una "metaimagen", la que aparece al pegar el link en WhatsApp, LinkedIn, Facebook o X. Antes salía sin imagen.
+
+- **Imagen** (`public/og-imagen.jpg`, 1200×630, 83 KB): fondo y globo tomados de la portada real (captura del hero
+  sin textos), logo de Goberna Tech, "La estrategia transforma territorios" (el título de la página) en Montserrat
+  con "territorios" en el dorado de la web (`#f5af31`) y "Tecnología y consultoría para autoridades y líderes."
+- **Etiquetas** (`index.html`, en el `<head>`): Open Graph y `twitter:card`. Usan la dirección completa de GitHub
+  Pages; si la web pasa a otro dominio hay que cambiar `og:url` y `og:image`.
+- **Despliegue** (`.github/workflows/deploy.yml`): además de la página, copia `og-imagen.jpg` al sitio, porque la
+  versión de un solo archivo no la incluye y las redes necesitan pedirla por su dirección.
+
 ## Primer artículo del blog: "Ganaste, ¿ahora qué?" (26/11/2026)
 
 Pedido: publicar el primer artículo con el texto del documento de Google Docs "Ganaste, ¿ahora qué?".

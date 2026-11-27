@@ -4,7 +4,7 @@
 :root {
   --g-fondo: #020617;
   --g-fondo-2: #091120;
-  --g-oro: #dfa52e;
+  --g-oro: #c9a46e;
   --g-azul: #1f3b73;
   --g-claro: #f3f5f9;
   /* Fondo con aura (según el mockup): noche casi negra, dos azules apagados que se funden entre sí,
@@ -57,7 +57,7 @@ body.g {
 }
 
 .g-btn-oro:hover {
-  background: #efb94a;
+  background: #b9924a;
 }
 
 .g-btn-linea {
@@ -416,8 +416,8 @@ body.g {
 }
 
 .g-peru-luz {
-  fill: rgba(223, 165, 46, 0.1);
-  filter: drop-shadow(0 0 14px rgba(223, 165, 46, 0.35));
+  fill: rgba(201, 164, 110, 0.1);
+  filter: drop-shadow(0 0 14px rgba(201, 164, 110, 0.35));
   opacity: 0;
 }
 
@@ -432,7 +432,7 @@ body.g {
   stroke-linejoin: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  filter: drop-shadow(0 0 3px rgba(223, 165, 46, 0.8));
+  filter: drop-shadow(0 0 3px rgba(201, 164, 110, 0.8));
 }
 
 .listo .g-peru-borde {
@@ -493,12 +493,12 @@ body.g {
   fill: none;
   stroke: #ffe6ad;
   stroke-width: 1.2;
-  filter: drop-shadow(0 0 4px rgba(223, 165, 46, 0.9));
+  filter: drop-shadow(0 0 4px rgba(201, 164, 110, 0.9));
 }
 
 .g-peru-sede-centro {
   fill: #fff6e3;
-  filter: drop-shadow(0 0 6px rgba(223, 165, 46, 1));
+  filter: drop-shadow(0 0 6px rgba(201, 164, 110, 1));
 }
 
 /* En vertical el texto sube y deja abajo el Perú (la cámara lo baja, ver portada-mapa.js). */
@@ -574,7 +574,7 @@ body.g {
   0% {
     fill: #fff6e3;
     transform: scale(2);
-    filter: drop-shadow(0 0 4px rgba(223, 165, 46, 1));
+    filter: drop-shadow(0 0 4px rgba(201, 164, 110, 1));
   }
   25%,
   100% {
@@ -831,7 +831,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 
 .g-niv-cab {
   margin-bottom: clamp(18px, 2vw, 34px);
-  color: rgba(223, 165, 46, 0.85);
+  color: rgba(201, 164, 110, 0.85);
   font: 400 clamp(0.64rem, 0.7vw, 0.8rem) / 1.4 var(--mono);
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -892,14 +892,14 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   margin: -6px 0 0 -6px;
   border-radius: 50%;
   background: rgba(255, 214, 140, 0.55);
-  box-shadow: 0 0 10px rgba(223, 165, 46, 0.5);
+  box-shadow: 0 0 10px rgba(201, 164, 110, 0.5);
   transition: transform 0.5s ease, background 0.5s ease;
 }
 
 .g-niv-placa.es-activa {
   --alza: calc(var(--fila) * -0.12);
-  --linea: rgba(223, 165, 46, 0.32);
-  --borde: rgba(240, 190, 90, 0.95);
+  --linea: rgba(201, 164, 110, 0.32);
+  --borde: rgba(201, 164, 110, 0.95);
   --canto: 150, 104, 32;
   box-shadow:
     1px 1px 0 rgba(var(--canto), 0.95),
@@ -907,14 +907,14 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
     3px 3px 0 rgba(var(--canto), 0.85),
     4px 4px 0 rgba(var(--canto), 0.8),
     5px 5px 0 rgba(var(--canto), 0.75),
-    0 0 36px rgba(223, 165, 46, 0.35),
+    0 0 36px rgba(201, 164, 110, 0.35),
     30px 30px 50px rgba(0, 0, 0, 0.6);
 }
 
 .g-niv-placa.es-activa::after {
   background: #fff6e3;
   transform: scale(1.5);
-  box-shadow: 0 0 14px rgba(223, 165, 46, 1), 0 0 0 6px rgba(223, 165, 46, 0.18);
+  box-shadow: 0 0 14px rgba(201, 164, 110, 1), 0 0 0 6px rgba(201, 164, 110, 0.18);
 }
 
 /* El hilo: de la primera placa a la última, con un pulso de luz que baja. */
@@ -927,7 +927,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   width: 1.5px;
   translate: -50% 0;
   overflow: hidden;
-  background: linear-gradient(to bottom, rgba(223, 165, 46, 0.15), rgba(223, 165, 46, 0.6) 20%, rgba(223, 165, 46, 0.6) 80%, rgba(223, 165, 46, 0.15));
+  background: linear-gradient(to bottom, rgba(201, 164, 110, 0.15), rgba(201, 164, 110, 0.6) 20%, rgba(201, 164, 110, 0.6) 80%, rgba(201, 164, 110, 0.15));
   pointer-events: none;
 }
 
@@ -992,7 +992,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 }
 
 .g-niv-lista small {
-  color: rgba(223, 165, 46, 0.8);
+  color: rgba(201, 164, 110, 0.8);
   font: 400 clamp(0.6rem, 0.62vw, 0.74rem) / 1.4 var(--mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1073,12 +1073,12 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   width: clamp(40px, 3.6vw, 70px);
   height: 2px;
   background: var(--g-oro);
-  box-shadow: 0 0 12px rgba(223, 165, 46, 0.6);
+  box-shadow: 0 0 12px rgba(201, 164, 110, 0.6);
   transition: width 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .g-credo-b:hover {
-  border-color: rgba(223, 165, 46, 0.28);
+  border-color: rgba(201, 164, 110, 0.28);
   box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.8);
 }
 
@@ -1096,7 +1096,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 
 .g-credo-t::before {
   content: "0" counter(credo);
-  color: rgba(223, 165, 46, 0.85);
+  color: rgba(201, 164, 110, 0.85);
   font: 400 clamp(0.66rem, 0.7vw, 0.82rem) / 1 var(--mono);
   letter-spacing: 0.14em;
 }
@@ -1124,7 +1124,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 }
 
 .g-credo-txt em .p {
-  color: rgba(223, 165, 46, 0.3);
+  color: rgba(201, 164, 110, 0.3);
 }
 
 .g-credo-txt em .p.on {
@@ -1463,7 +1463,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 }
 
 .g-svc-item:hover {
-  border-color: rgba(223, 165, 46, 0.3);
+  border-color: rgba(201, 164, 110, 0.3);
   translate: 0 -4px;
 }
 
@@ -1594,7 +1594,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 
 .g-car-btn:hover:not(:disabled) {
   border-color: var(--g-oro);
-  background: rgba(223, 165, 46, 0.08);
+  background: rgba(201, 164, 110, 0.08);
   color: var(--g-oro);
 }
 
@@ -1629,7 +1629,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   bottom: 0;
   border-radius: 2px;
   background: var(--g-oro);
-  box-shadow: 0 0 8px rgba(223, 165, 46, 0.6);
+  box-shadow: 0 0 8px rgba(201, 164, 110, 0.6);
 }
 
 @media (max-width: 1100px) {
@@ -1709,7 +1709,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 }
 
 .g-premc:hover {
-  border-color: rgba(223, 165, 46, 0.32);
+  border-color: rgba(201, 164, 110, 0.32);
   translate: 0 -4px;
 }
 
@@ -1760,7 +1760,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 }
 
 .g-premc-rot {
-  color: rgba(223, 165, 46, 0.85);
+  color: rgba(201, 164, 110, 0.85);
   font: 400 clamp(0.62rem, 0.68vw, 0.78rem) / 1.4 var(--mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -1807,7 +1807,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   content: "";
   width: clamp(14px, 1.6vw, 30px);
   height: 1px;
-  background: rgba(223, 165, 46, 0.5);
+  background: rgba(201, 164, 110, 0.5);
 }
 
 .g-premc-pasos li:last-child {
@@ -1845,7 +1845,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
 
 .g-blog {
   position: relative;
-  padding: clamp(56px, 6vw, 116px) 0 clamp(80px, 11.6vw, 224px);
+  padding: clamp(56px, 6vw, 116px) 0;
   background: linear-gradient(180deg, #f6f7fa 0%, #f2f4f8 70%, #eaedf3 100%);
   color: var(--g-tinta);
 }
@@ -1966,7 +1966,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   padding: 0 clamp(16px, 1.8vw, 34px);
   overflow: hidden;
   background:
-    radial-gradient(70% 90% at 92% 10%, rgba(223, 165, 46, 0.2), transparent 70%),
+    radial-gradient(70% 90% at 92% 10%, rgba(201, 164, 110, 0.2), transparent 70%),
     radial-gradient(60% 80% at 10% 100%, rgba(var(--g-azul-b), 0.45), transparent 70%),
     var(--g-noche);
   color: #fff;
@@ -2145,7 +2145,7 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   margin-top: clamp(40px, 4vw, 64px);
   padding: clamp(22px, 2.2vw, 36px);
   border-left: 3px solid var(--g-oro);
-  background: rgba(223, 165, 46, 0.06);
+  background: rgba(201, 164, 110, 0.06);
 }
 
 .g-art-cta p {
@@ -2329,7 +2329,7 @@ body:not([data-pagina="home"]) .g-cupula {
 .g-mt .g-mt-vacio {
   margin-top: auto;
   padding: 12px 16px;
-  border: 1px dashed rgba(223, 165, 46, 0.5);
+  border: 1px dashed rgba(201, 164, 110, 0.5);
   border-radius: 10px;
   color: var(--g-oro);
   font-size: 0.9rem;
@@ -2414,20 +2414,86 @@ body:not([data-pagina="home"]) .g-cupula {
   color: var(--g-oro);
 }
 
-#contacto.g-pag {
+/* Contacto: última sección de la portada, sobre el pie. Abajo deja sitio a la cúpula.
+   Una sola tarjeta: a la izquierda un panel azul con el título, a la derecha el formulario.
+   Las dos mitades se estiran a la misma altura, así no queda espacio vacío bajo el título. */
+.g-contacto {
+  position: relative;
+  padding: clamp(56px, 6vw, 110px) 0 clamp(96px, 12vw, 230px);
   background: var(--g-claro);
   color: var(--g-tinta);
+  scroll-margin-top: var(--bar-h);
 }
 
 #contacto .contact {
+  max-width: 1180px;
+  margin: 0 auto;
   padding: 0;
-  background: none;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 0;
+  align-items: stretch;
+  background: #fff;
+  border-radius: clamp(12px, 1.2vw, 20px);
+  box-shadow: 0 24px 60px rgba(12, 20, 38, 0.12);
+  overflow: hidden;
+}
+
+#contacto .contact-copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(32px, 3.4vw, 56px);
+  background: radial-gradient(120% 80% at 0% 0%, #142447 0%, var(--g-fondo-2) 60%);
+  color: #fff;
+  overflow: hidden;
+}
+
+/* El escudo, grande y casi transparente, llena el panel sin agregar texto. */
+#contacto .contact-copy::after {
+  content: "";
+  position: absolute;
+  right: -18%;
+  bottom: 8%;
+  width: 78%;
+  aspect-ratio: 1;
+  background: url("/isotipo.svg") center / contain no-repeat;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+#contacto .contact-copy > * {
+  position: relative;
+  z-index: 1;
 }
 
 #contacto .contact h2 {
-  font-size: clamp(2rem, 3.4vw, 4.1rem);
+  font-size: clamp(2rem, 3vw, 3.4rem);
   font-weight: 700;
   line-height: 1.1;
+}
+
+#contacto .contact-copy > p:not(.g-ct-k) {
+  margin-top: 16px;
+  color: #c9d3e6;
+}
+
+#contacto .g-ct-k {
+  margin-bottom: 14px;
+  color: var(--g-oro);
+  font: 600 0.78rem var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+#contacto #contact-form {
+  align-content: start;
+  padding: clamp(28px, 3.4vw, 56px);
+}
+
+@media (max-width: 900px) {
+  #contacto .contact {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* Las páginas de plataforma conservan su diseño claro; solo cambia la barra. */
@@ -2671,7 +2737,7 @@ html.con-cursor body:has(.g-hero.g-sobre-globo, .g-hero.g-arrastrando) .g-cursor
 
 .g-cursor-aro {
   fill: none;
-  stroke: rgba(223, 165, 46, 0.6);
+  stroke: rgba(201, 164, 110, 0.6);
   stroke-width: 1.2;
   transition: stroke 0.3s ease, stroke-width 0.3s ease, fill 0.3s ease;
 }
@@ -2679,7 +2745,7 @@ html.con-cursor body:has(.g-hero.g-sobre-globo, .g-hero.g-arrastrando) .g-cursor
 .g-cursor.encima .g-cursor-aro {
   stroke: var(--g-oro);
   stroke-width: 1;
-  fill: rgba(223, 165, 46, 0.08);
+  fill: rgba(201, 164, 110, 0.08);
 }
 
 /* El punto se mueve sin transición (va pegado al mouse); solo su forma interna cambia de escala. */
@@ -2695,7 +2761,7 @@ html.con-cursor body:has(.g-hero.g-sobre-globo, .g-hero.g-arrastrando) .g-cursor
   margin: -3px 0 0 -3px;
   border-radius: 50%;
   background: var(--g-oro);
-  box-shadow: 0 0 10px rgba(223, 165, 46, 0.5);
+  box-shadow: 0 0 10px rgba(201, 164, 110, 0.5);
   transition: transform 0.18s ease-out;
 }
 
@@ -2785,7 +2851,7 @@ body.g :is(h1, h2, h3) > span:not(:only-child):first-child:not(.g-hero h1 span) 
 
 .g-svcp-ejes a:hover {
   border-color: var(--g-oro);
-  background: rgba(223, 165, 46, 0.12);
+  background: rgba(201, 164, 110, 0.12);
 }
 
 /* ── Un bloque por eje ── */
@@ -3285,4 +3351,193 @@ body.g :is(h1, h2, h3) > span:not(:only-child):first-child:not(.g-hero h1 span) 
 /* El pie lleva un filete dorado arriba (diseño de la interna). */
 .g-pie {
   border-top: 4px solid var(--g-oro);
+}
+
+/* ───────── Formulario (como el del Foro de Estado) ───────── */
+
+#contact-form {
+  gap: clamp(14px, 1.3vw, 20px);
+}
+
+.g-cf {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+#contact-form .g-cf label {
+  display: block;
+  color: #566076;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  font-weight: 500;
+}
+
+.g-cf-ctl {
+  position: relative;
+}
+
+.g-cf-ico {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  color: #8a93a6;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.g-cf-ico svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#contact-form .g-cf input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px 0 44px;
+  border: 1px solid #e0e4e7;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--g-tinta);
+  font: 400 max(16px, 1rem) var(--sans);
+}
+
+#contact-form .g-cf input::placeholder {
+  color: #8a93a6;
+}
+
+#contact-form .g-cf input:focus {
+  outline: none;
+  border-color: var(--g-oro);
+  box-shadow: 0 0 0 3px rgba(201, 164, 110, 0.25);
+}
+
+.g-cf-ctl:focus-within .g-cf-ico {
+  color: var(--g-oro);
+}
+
+#contact-form .g-cf-enviar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  justify-self: stretch;
+  height: 56px;
+  margin-top: clamp(8px, 1vw, 14px);
+  border: 0;
+  border-radius: 999px;
+  background: var(--g-oro);
+  color: #1b2030;
+  font: 600 clamp(0.95rem, 1.05vw, 1.1rem) "Montserrat", var(--sans);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 14px 30px -10px rgba(185, 146, 74, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+#contact-form .g-cf-enviar svg {
+  width: 20px;
+  height: 20px;
+}
+
+#contact-form .g-cf-enviar:hover {
+  background: #b9924a;
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px -10px rgba(185, 146, 74, 0.7);
+}
+
+#contact-form .g-cf-enviar:disabled {
+  opacity: 0.6;
+  cursor: progress;
+  transform: none;
+}
+
+.g-cf-nota {
+  margin: -4px 0 0;
+  color: #566076;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Trampa para bots: fuera de la vista, pero sin display:none (algunos bots lo detectan). */
+#contact-form .g-trampa {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+#contact-form .form-note.es-error {
+  border-left-color: #c2410c;
+}
+
+#contact-form .form-note a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #contact-form .g-cf-enviar {
+    transition: none;
+  }
+}
+
+/* ───────── Botón flotante de WhatsApp ───────── */
+
+.g-wsp {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 18;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.g-wsp svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+.g-wsp:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+}
+
+.g-wsp:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .g-wsp {
+    right: 14px;
+    bottom: 14px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .g-wsp svg {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .g-wsp {
+    transition: none;
+  }
 }

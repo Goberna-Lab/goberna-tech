@@ -25,12 +25,14 @@ html = html.replace(/<script type="module"[^>]*src="(\/assets\/[^"]+\.js)"[^>]*>
 });
 html = html.replace("</body>", () => `<script type="module">${script}</script>\n</body>`);
 html = html.replace(/"\/([\w-]+\.svg)"/g, (_, name) => `"${dataUri("public/" + name)}"`);
+// También los SVG que usa el CSS como fondo (Vite los deja como url(/nombre.svg), sin comillas).
+html = html.replace(/url\(\/([\w-]+\.svg)\)/g, (_, name) => `url(${dataUri("public/" + name)})`);
 // Imágenes: en el HTML y también dentro del JS de los módulos (src/modulos/img.js), con cualquier comilla.
 html = html.replace(/(["'`])\/(img\/[\w-]+\.webp)\1/g, (_, q, name) => {
   return `${q}data:image/webp;base64,${readFileSync("public/" + name).toString("base64")}${q}`;
 });
 if (/\/img\/[\w-]+\.webp/.test(html)) throw new Error("Quedaron imágenes sin incrustar");
 
-if (/(src|href)="\/[\w-]/.test(html) || /url\(\/assets\//.test(html) || !script) throw new Error("Quedaron referencias sin incrustar");
+if (/(src|href)="\/[\w-]/.test(html) || /url\(\/(assets\/|[\w-]+\.svg)/.test(html) || !script) throw new Error("Quedaron referencias sin incrustar");
 writeFileSync("goberna-tech.html", html);
 console.log("goberna-tech.html", (html.length / 1024).toFixed(0) + " KB");

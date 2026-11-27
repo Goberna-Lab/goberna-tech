@@ -8,7 +8,7 @@
 :root {
   --navy: #072e51;
   --navy-deep: #03142a;
-  --gold: #f5af31;
+  --gold: #c9a46e;
   --paper: #ffffff;
   --mist: #eef2f6;
   --grey: #56697d;
@@ -126,7 +126,7 @@ img {
 }
 
 .btn-gold:hover {
-  background: #ffc452;
+  background: #b9924a;
 }
 
 .btn-navy {
@@ -1007,7 +1007,7 @@ img {
 
 .sim-area.is-on {
   border-color: var(--gold);
-  background: rgba(245, 175, 49, 0.14);
+  background: rgba(201, 164, 110, 0.14);
 }
 
 .sim-ticket {
@@ -1040,7 +1040,7 @@ img {
 
 .sim-ticket.is-pref {
   border-color: #a06a05;
-  background: rgba(245, 175, 49, 0.14);
+  background: rgba(201, 164, 110, 0.14);
 }
 
 .sim-cola {
@@ -1060,7 +1060,7 @@ img {
 .sim-ficha.is-pref,
 .sim-leyenda .is-pref {
   border-color: #a06a05;
-  background: rgba(245, 175, 49, 0.3);
+  background: rgba(201, 164, 110, 0.3);
 }
 
 .sim-ficha.is-deriv,
@@ -1123,7 +1123,7 @@ img {
 
 .sim-vent.is-llamado {
   border-color: var(--gold);
-  background: rgba(245, 175, 49, 0.16);
+  background: rgba(201, 164, 110, 0.16);
 }
 
 .sim-vent.is-atendiendo {
@@ -1309,11 +1309,11 @@ img {
 
 .art .sel,
 .art .sg {
-  fill: rgba(245, 175, 49, 0.13);
+  fill: rgba(201, 164, 110, 0.13);
 }
 
 .art .ga {
-  fill: rgba(245, 175, 49, 0.16);
+  fill: rgba(201, 164, 110, 0.16);
 }
 
 .art .s1 {
@@ -1327,7 +1327,7 @@ img {
 }
 
 .art .s3 {
-  fill: rgba(245, 175, 49, 0.16);
+  fill: rgba(201, 164, 110, 0.16);
   stroke: var(--gold);
 }
 

@@ -26,7 +26,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run standalone
-      - run: mkdir _site && cp goberna-tech.html _site/index.html
+      - run: mkdir _site && cp goberna-tech.html _site/index.html && cp public/og-imagen.jpg _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
