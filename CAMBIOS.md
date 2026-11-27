@@ -1,5 +1,13 @@
 # Cambios
 
+## Foto del aviso del Foro menos "IA" (27/11/2026)
+
+Pedido: la imagen del podio parecía demasiado generada por IA; algo parecido pero más sutil.
+
+- **Foto** (`public/img/foro-podio.webp`): ahora es la otra foto del PDF del foro (página 10), un expositor frente al
+  público (foto real), con un tinte azul suave en vez del duotono marcado. Se conservan algo de color y textura.
+- `index.html`: dimensiones de la imagen ajustadas (1200×800).
+
 ## Los botones vuelven al dorado (27/11/2026)
 
 Pedido: "solo quería cambiar lo de TECH del logo principal"; los botones, con la paleta anterior.
