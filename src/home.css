@@ -3541,3 +3541,152 @@ body.g :is(h1, h2, h3) > span:not(:only-child):first-child:not(.g-hero h1 span) 
     transition: none;
   }
 }
+
+/* ───────── Aviso del Foro de Alcaldes y Gobernadores ─────────
+   Tarjeta entre la portada y "Conocimiento que acompaña": texto a la izquierda y la foto del podio
+   (en duotono azul, como el afiche del foro) a la derecha, fundida con el fondo. */
+
+.g-foro {
+  padding: clamp(36px, 4.4vw, 84px) 0 clamp(20px, 2vw, 40px);
+  background: var(--g-noche);
+}
+
+.g-foro-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  min-height: clamp(380px, 31vw, 560px);
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(150, 185, 255, 0.16);
+  border-radius: clamp(12px, 1.2vw, 20px);
+  background:
+    radial-gradient(70% 90% at 0% 100%, rgba(var(--g-azul-b), 0.32), transparent 70%),
+    linear-gradient(135deg, #07112e, #040a1d 60%);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.g-foro-foto {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 56%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 38%);
+  mask-image: linear-gradient(90deg, transparent, #000 38%);
+}
+
+.g-foro-txt {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(30px, 3.6vw, 68px);
+  color: #fff;
+}
+
+.g-foro-k {
+  font: 600 clamp(0.7rem, 0.78vw, 0.9rem) / 1.2 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--g-oro);
+}
+
+.g-foro h2 {
+  margin-top: clamp(12px, 1.2vw, 20px);
+  font: 800 clamp(1.9rem, 3.3vw, 3.6rem) / 1.02 "Montserrat", var(--sans);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.g-foro h2 span {
+  display: block;
+}
+
+.g-foro-p {
+  max-width: 46ch;
+  margin-top: clamp(14px, 1.4vw, 24px);
+  font-size: clamp(0.95rem, 1.05vw, 1.15rem);
+  line-height: 1.55;
+  color: #c9d3e6;
+}
+
+.g-foro-datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px clamp(18px, 2vw, 36px);
+  margin: clamp(20px, 2vw, 32px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.g-foro-datos li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(0.88rem, 0.95vw, 1.05rem);
+  color: #c9d3e6;
+}
+
+.g-foro-datos svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  color: var(--g-oro);
+}
+
+.g-foro-datos b {
+  font-weight: 600;
+  color: #fff;
+}
+
+.g-foro .g-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: clamp(24px, 2.4vw, 40px);
+}
+
+.g-foro-nota {
+  margin-top: 18px;
+  font-size: clamp(0.78rem, 0.82vw, 0.92rem);
+  color: #8a96b0;
+}
+
+@media (max-width: 900px) {
+  .g-foro-card {
+    grid-template-columns: 1fr;
+  }
+
+  .g-foro-foto {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 220px;
+    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent);
+    mask-image: linear-gradient(180deg, #000 55%, transparent);
+  }
+
+  .g-foro-txt {
+    margin-top: -40px;
+    padding-top: 0;
+  }
+
+  .g-foro .g-btn {
+    flex: 1 1 auto;
+  }
+
+  .g-foro-k {
+    letter-spacing: 0.1em;
+  }
+
+  .g-foro h2 {
+    font-size: clamp(1.6rem, 7.4vw, 2.4rem);
+  }
+
+  .g-foro h2 span {
+    display: inline;
+  }
+}

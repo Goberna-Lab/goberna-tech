@@ -124,6 +124,11 @@ if (!sinMovimiento) {
   });
 }
 
+/* Avisos con fecha de vencimiento (data-hasta, ISO con zona): el del Foro se quita solo pasado el evento. */
+document.querySelectorAll("[data-hasta]").forEach((el) => {
+  if (Date.now() >= Date.parse(el.dataset.hasta)) el.remove();
+});
+
 /* ---------- Páginas ---------- */
 function mostrar(cual) {
   for (const [nombre, el] of Object.entries(paginas)) el.hidden = nombre !== cual;

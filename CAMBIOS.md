@@ -1,5 +1,31 @@
 # Cambios
 
+## Logo sin dorado (27/11/2026)
+
+Pedido: "usa estos logos (carpeta de Drive del equipo), no uses el dorado, no usamos logo dorado".
+
+- **Header y pie** (`index.html`): ahora usan `public/img/logo-goberna.webp`, la versión horizontal plana de la raíz
+  de la carpeta (`02-TECH@3x.png`: "GOBERNA" en blanco, "TECH" y el isotipo en amarillo `#FCC506`, con el lema
+  "Consultoría | Gubernamental | Inteligencia"). Es la variante para fondo oscuro, que es el de la barra y el pie.
+- Se borró `public/img/logo-goberna-tech.webp` (la dorada con degradado). No usar la carpeta "Dorado" ni los PNG
+  de "V1" con degradado metálico.
+- **Imagen para compartir** (`public/og-imagen.jpg`): el logo dorado se reemplazó por el plano.
+- **Ícono de la pestaña** (`public/isotipo.svg`): del ámbar anterior al mismo amarillo del logo.
+- Para fondos claros, la carpeta trae la variante con "GOBERNA" en azul (`04-TECH@3x.png`); hoy no hace falta.
+
+## Aviso del Foro de Alcaldes y Gobernadores (27/11/2026)
+
+Pedido: llevar a la landing el Foro de Alcaldes y Gobernadores (PDF y afiche del evento).
+
+- **Dónde** (`index.html`): una tarjeta justo después de la portada (`<section class="g-foro" id="foro">`), con el
+  nombre del foro, los ejes, la fecha (sábado 12 de diciembre, 3:00 p. m.) y el lugar (Av. Rivera Navarrete 395, San Isidro).
+- **Botones**: "Regístrate" lleva a la página del foro que ya existe aparte
+  (gobernatech.com/foro-de-alcaldes-y-gobernadores/, con su propio formulario). "Más información" abre WhatsApp al
+  907 772 155 con un mensaje sobre el foro. No se duplicó la página del foro en este proyecto.
+- **Foto** (`public/img/foro-podio.webp`): la del podio del PDF (página 10), en duotono azul como el afiche.
+- **Se quita sola** (`src/home.js`): la sección lleva `data-hasta="2026-12-13T00:00:00-05:00"`; pasado ese
+  momento, el script la elimina. Sirve para cualquier aviso futuro con fecha de vencimiento.
+
 ## Logo original de Goberna Tech (27/11/2026)
 
 Pedido: usar los logos originales de la carpeta de Drive del equipo, no el `logo.svg` anterior.
