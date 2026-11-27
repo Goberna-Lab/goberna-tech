@@ -2271,18 +2271,15 @@ body:not([data-pagina="home"]) .g-cupula {
   color: var(--g-oro);
 }
 
-/* "Del Grupo Goberna": fila centrada bajo el menú del pie, con el logo del grupo. */
+/* "Del Grupo Goberna": al pie de la portada, a la izquierda, alineado con el texto del hero. */
 .g-grupo {
-  position: relative;
+  position: absolute;
+  left: var(--g-lado);
+  bottom: clamp(20px, 3.4vh, 44px);
+  z-index: 2;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 14px;
-  width: max-content;
-  max-width: 100%;
-  margin: clamp(32px, 3.6vw, 64px) auto 0;
-  padding-top: clamp(22px, 2.2vw, 36px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: #8d96a8;
   font: 400 clamp(0.7rem, 0.78vw, 0.9rem) / 1 var(--mono);
   letter-spacing: 0.16em;
@@ -2291,11 +2288,10 @@ body:not([data-pagina="home"]) .g-cupula {
   transition: color 0.2s ease;
 }
 
-
 .g-grupo img {
   display: block;
   width: auto;
-  height: clamp(30px, 2.8vw, 46px);
+  height: clamp(28px, 2.6vw, 42px);
   opacity: 0.85;
   transition: opacity 0.2s ease;
 }

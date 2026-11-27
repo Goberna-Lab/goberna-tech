@@ -9,11 +9,12 @@ Pedido: usar el logo real del header en el metadato.
 - **`index.html`**: la dirección de la imagen pasa a `?v=3` para que WhatsApp, Facebook y LinkedIn bajen la nueva en
   vez de mostrar la vista previa guardada.
 
-## "Del Grupo Goberna" en el pie (27/11/2026)
+## "Del Grupo Goberna" en la portada (27/11/2026)
 
 Pedido: agregar abajo "Del Grupo Goberna", enlazado a https://grupogoberna.com/.
 
-- **Pie** (`index.html`, `src/home.css`): fila centrada bajo el menú, con el texto "Del Grupo" y el logo blanco de
+- **Portada** (`index.html`, `src/home.css`): al pie del hero, a la izquierda y alineado con el título (antes estaba en el
+  pie de página), con el texto "Del Grupo" y el logo blanco de
   Grupo Goberna (`public/img/logo-grupo-goberna.webp`, tomado de su web). Todo es un solo enlace que abre
   grupogoberna.com en otra pestaña.
 
