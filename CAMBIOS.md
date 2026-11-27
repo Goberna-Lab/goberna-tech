@@ -1,5 +1,14 @@
 # Cambios
 
+## Imagen para compartir con el logo del header (27/11/2026)
+
+Pedido: usar el logo real del header en el metadato.
+
+- **`public/og-imagen.jpg`**: regenerada con el mismo archivo del header (`public/img/logo-goberna.webp`), un poco más
+  grande (112 px en vez de 96).
+- **`index.html`**: la dirección de la imagen pasa a `?v=3` para que WhatsApp, Facebook y LinkedIn bajen la nueva en
+  vez de mostrar la vista previa guardada.
+
 ## "Del Grupo Goberna" en el pie (27/11/2026)
 
 Pedido: agregar abajo "Del Grupo Goberna", enlazado a https://grupogoberna.com/.
