@@ -1,5 +1,13 @@
 # Cambios
 
+## Foto en la tarjeta del primer artículo del blog (27/11/2026)
+
+Pedido: agregar a la tarjeta del 51% una imagen coherente con el tema, que no parezca hecha con IA.
+
+- **Tarjeta** (`index.html`, `src/home.css`): el dato sigue igual, ahora sobre una foto de un público visto de espaldas
+  (`public/img/blog-100-dias.webp`, del PDF del foro), con un tinte azul suave y un velo oscuro a la izquierda para que
+  el 51% y el texto se lean. Va con la idea del artículo: no perder al electorado.
+
 ## Foto del aviso del Foro menos "IA" (27/11/2026)
 
 Pedido: la imagen del podio parecía demasiado generada por IA; algo parecido pero más sutil.

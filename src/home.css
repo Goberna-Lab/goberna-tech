@@ -1969,6 +1969,27 @@ body:has(.g-hero.g-arrastrando) .g-cursor .g-cursor-aro {
   color: #fff;
 }
 
+/* Foto de fondo (público de espaldas), bajo un velo azul para que el dato se lea. */
+.g-pp-foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+}
+
+.g-post-portada::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(3, 7, 22, 0.88), rgba(3, 7, 22, 0.35) 75%);
+}
+
+.g-post-portada > :not(.g-pp-foto) {
+  position: relative;
+}
+
 .g-pp-k {
   font: 400 clamp(0.6rem, 0.62vw, 0.76rem) / 1 var(--mono);
   letter-spacing: 0.16em;
